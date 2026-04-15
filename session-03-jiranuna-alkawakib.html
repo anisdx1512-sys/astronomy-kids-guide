@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ٣ – جيراننا الكواكب | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night:#04060f; --deep:#080d1f; --cosmos:#0d1535;
+    --gold:#f5c842; --amber:#e8a020;
+    --teal:#2dd4bf; --blue:#60a5fa;
+    --violet:#8b5cf6; --rose:#f472b6;
+    --white:#f0f4ff; --muted:#8899cc; --green:#34d399;
+    /* planet palette */
+    --p-mercury:#b5b5b5; --p-venus:#e8c97a;
+    --p-earth:#4a9eff;   --p-mars:#e05a2b;
+    --p-jupiter:#c8943a; --p-saturn:#d4b87a;
+    --p-uranus:#7dd3d0;  --p-neptune:#4a6fff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.2);transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:48px;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(45,212,191,.12);border:1px solid rgba(45,212,191,.35);
+    border-radius:50px;padding:6px 18px;
+    font-size:12px;color:#5eead4;letter-spacing:1px;margin-bottom:20px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,var(--teal) 40%,var(--blue) 75%,var(--violet) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.25;margin-bottom:14px;
+  }
+  .session-hero p.subtitle{color:var(--muted);font-size:15px;max-width:640px;line-height:1.8;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SECTION TITLE ── */
+  .sec-title{
+    font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:56px;}
+  .obj-card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:22px;transition:border-color .3s,transform .3s;
+  }
+  .obj-card:hover{border-color:rgba(45,212,191,.25);transform:translateY(-3px);}
+  .obj-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+  .obj-title{font-size:13px;font-weight:700;color:var(--teal);margin-bottom:6px;}
+  .obj-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{
+    content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;
+    background:linear-gradient(to bottom,rgba(45,212,191,.6),rgba(96,165,250,.2),transparent);
+  }
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--teal);background:var(--night);flex-shrink:0;}
+  .tl-dot.gold{border-color:var(--gold);}
+  .tl-dot.blue{border-color:var(--blue);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-time{font-size:11px;color:var(--teal);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.gold{color:var(--gold);}
+  .tl-time.blue{color:var(--blue);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-time.green{color:var(--green);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── SOLAR SYSTEM SVG ── */
+  .solar-wrap{overflow-x:auto;margin-bottom:20px;}
+  .solar-wrap svg{display:block;margin:0 auto;min-width:560px;}
+
+  /* ── PLANETS TABLE ── */
+  .planets-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px;}
+  .planets-table th{
+    font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;
+    padding:0 12px 10px;text-align:right;font-weight:600;
+  }
+  .planets-table tr.p-row{
+    background:rgba(255,255,255,.025);cursor:default;
+    transition:background .25s;
+  }
+  .planets-table tr.p-row:hover{background:rgba(45,212,191,.08);}
+  .planets-table td{
+    padding:11px 12px;
+    border-top:1px solid rgba(255,255,255,.04);
+    border-bottom:1px solid rgba(255,255,255,.04);
+    vertical-align:middle;
+  }
+  .planets-table td:first-child{border-radius:10px 0 0 10px;}
+  .planets-table td:last-child{border-radius:0 10px 10px 0;}
+  .planet-dot{display:inline-block;width:14px;height:14px;border-radius:50%;margin-left:8px;vertical-align:middle;flex-shrink:0;}
+  .p-name{font-weight:700;color:var(--white);display:flex;align-items:center;}
+  .p-type{
+    display:inline-block;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700;
+  }
+  .p-type.rocky{background:rgba(224,90,43,.15);color:#fb8c6a;}
+  .p-type.gas{background:rgba(200,148,58,.15);color:#e8c97a;}
+  .p-type.ice{background:rgba(125,211,208,.15);color:#7dd3d0;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-section{margin-bottom:56px;}
+  .content-block{
+    background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;padding:28px 32px;margin-bottom:16px;
+  }
+  .content-block h3{font-size:17px;font-weight:700;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .highlight{
+    background:rgba(45,212,191,.07);border-right:3px solid var(--teal);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;
+    font-size:14px;color:#99f6e4;line-height:1.8;
+  }
+  .highlight-gold{
+    background:rgba(245,200,66,.08);border-right:3px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;
+    font-size:14px;color:#d4c07a;line-height:1.8;
+  }
+
+  /* ── PLANET CARDS ── */
+  .planets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:20px;}
+  .planet-card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:18px;
+    transition:transform .3s,border-color .3s;
+  }
+  .planet-card:hover{transform:translateY(-4px);}
+  .pc-top{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .pc-circle{
+    width:36px;height:36px;border-radius:50%;flex-shrink:0;
+    display:flex;align-items:center;justify-content:center;font-size:1rem;
+    box-shadow:0 0 12px rgba(0,0,0,.4);
+  }
+  .pc-name{font-size:14px;font-weight:700;}
+  .pc-arabic{font-size:11px;color:var(--muted);}
+  .pc-fact{font-size:12px;color:var(--muted);line-height:1.65;}
+  .pc-stat{
+    margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05);
+    font-size:11px;color:var(--muted);display:flex;justify-content:space-between;
+  }
+  .pc-stat span{color:var(--white);font-weight:700;}
+
+  /* ── WORKSHOP BOX ── */
+  .workshop-box{
+    background:linear-gradient(135deg,rgba(45,212,191,.07),rgba(96,165,250,.04));
+    border:1px solid rgba(45,212,191,.22);border-radius:20px;padding:32px;
+    margin-bottom:56px;
+  }
+  .ws-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .ws-badge{
+    background:rgba(45,212,191,.18);border:1px solid rgba(45,212,191,.4);
+    border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:#5eead4;letter-spacing:1px;
+  }
+  .ws-title{font-size:18px;font-weight:700;}
+  .ws-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* Color palette strip */
+  .clay-palette{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;}
+  .clay-chip{
+    display:flex;flex-direction:column;align-items:center;gap:5px;
+    font-size:11px;color:var(--muted);
+  }
+  .clay-dot{width:32px;height:32px;border-radius:50%;box-shadow:0 2px 8px rgba(0,0,0,.35);}
+
+  /* materials */
+  .materials-box{
+    background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);
+    border-radius:14px;padding:18px 22px;margin-bottom:22px;
+  }
+  .mat-title{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:10px;}
+  .materials-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .mat-tag{
+    background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);
+    border-radius:50px;padding:5px 13px;font-size:12px;color:var(--muted);
+  }
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:rgba(45,212,191,.15);border:1px solid rgba(45,212,191,.35);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;color:#5eead4;
+  }
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{
+    background:rgba(245,200,66,.07);border-right:3px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:9px 13px;
+    font-size:12px;color:#d4c07a;line-height:1.65;margin-top:8px;
+  }
+
+  /* scale guide */
+  .scale-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px;}
+  .scale-table th{
+    font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;
+    padding:6px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07);
+  }
+  .scale-table td{
+    padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);
+    color:var(--muted);vertical-align:middle;
+  }
+  .scale-table td:first-child{color:var(--white);font-weight:700;}
+  .size-bar-wrap{width:100%;background:rgba(255,255,255,.06);border-radius:50px;height:8px;overflow:hidden;}
+  .size-bar{height:8px;border-radius:50px;}
+
+  /* ── ASSESSMENT ── */
+  .qa-list{list-style:none;}
+  .qa-item{
+    border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0;
+    display:flex;gap:14px;align-items:flex-start;
+  }
+  .qa-item:last-child{border-bottom:none;}
+  .q-num{
+    width:28px;height:28px;border-radius:50%;flex-shrink:0;
+    background:rgba(45,212,191,.1);border:1px solid rgba(45,212,191,.25);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;color:var(--teal);
+  }
+  .qa-item p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:2px;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+    border-radius:12px;padding:14px 20px;transition:border-color .3s;
+  }
+  .tool-pill:hover{border-color:rgba(45,212,191,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  /* ── PROMPT ── */
+  .prompt-box{
+    background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
+    border-radius:12px;padding:18px;
+    font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;
+  }
+  .copy-btn{
+    margin-top:14px;background:rgba(45,212,191,.14);
+    border:1px solid rgba(45,212,191,.35);border-radius:10px;
+    padding:9px 20px;color:#5eead4;font-family:'Cairo',sans-serif;
+    font-size:13px;font-weight:700;cursor:pointer;
+  }
+  .copy-btn:hover{background:rgba(45,212,191,.26);}
+
+  /* ── HOMEWORK ── */
+  .homework-box{
+    background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.2);
+    border-radius:16px;padding:24px 28px;margin-bottom:56px;
+    display:flex;gap:20px;align-items:flex-start;
+  }
+  .hw-icon{font-size:2rem;flex-shrink:0;}
+  .hw-content h3{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .hw-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+
+  /* ── NAV ── */
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{
+    display:flex;justify-content:space-between;align-items:center;
+    border-top:1px solid rgba(255,255,255,.06);padding-top:32px;
+    flex-wrap:wrap;gap:12px;
+  }
+  .nav-btn{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);
+    border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);
+    cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;
+  }
+  .nav-btn:hover{background:rgba(45,212,191,.1);color:var(--teal);}
+  .nav-btn.primary{background:rgba(45,212,191,.14);border-color:rgba(45,212,191,.35);color:#5eead4;}
+  .nav-btn.primary:hover{background:rgba(45,212,191,.28);color:#99f6e4;}
+  .nav-btn.home{color:var(--muted);}
+
+  /* ══════════════════════════════════
+     PRINT STYLESHEET
+  ══════════════════════════════════ */
+  @media print{
+    @page{size:A4 portrait;margin:15mm 14mm 15mm 14mm;}
+    @page:first{margin-top:10mm;}
+    *,*::before,*::after{
+      box-sizing:border-box!important;
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{
+      font-family:'Cairo','Arial',sans-serif!important;
+      background:white!important;color:#1a1a1a!important;
+      margin:0!important;padding:0!important;overflow:visible!important;min-height:unset!important;width:100%!important;
+    }
+    #stars,.breadcrumb,.bottom-nav,.print-bar,.copy-btn{display:none!important;}
+    .page{position:static!important;z-index:auto!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;}
+
+    /* hero */
+    .session-hero{padding:8px 0 14px!important;border-bottom:2px solid #2dd4bf!important;margin-bottom:18px!important;background:none!important;}
+    .session-hero h1{font-size:20pt!important;font-weight:700!important;color:#0f5c55!important;-webkit-text-fill-color:#0f5c55!important;background:none!important;line-height:1.2!important;margin-bottom:8px!important;}
+    .session-num-badge{background:#e8faf8!important;border:1px solid #2dd4bf!important;color:#0f5c55!important;font-size:9pt!important;padding:4px 12px!important;border-radius:20px!important;margin-bottom:10px!important;display:inline-block!important;}
+    .session-hero p.subtitle{color:#444!important;font-size:10pt!important;line-height:1.6!important;}
+    .meta-row{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-top:10px!important;}
+    .meta-item{color:#555!important;font-size:9pt!important;}
+    .meta-dot{background:#bbb!important;}
+
+    /* section titles */
+    .sec-title{font-size:8.5pt!important;color:#0f5c55!important;letter-spacing:2px!important;border-bottom:1.5px solid #2dd4bf!important;padding-bottom:4px!important;margin-bottom:12px!important;break-after:avoid!important;}
+    .sec-title::after{display:none!important;}
+
+    /* objectives */
+    .objectives-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;margin-bottom:18px!important;}
+    .obj-card{background:#f0faf9!important;border:1px solid #ccc!important;border-right:3px solid #2dd4bf!important;border-radius:6px!important;padding:10px 12px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .obj-icon{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .obj-title{color:#0f5c55!important;font-size:9.5pt!important;margin-bottom:3px!important;}
+    .obj-desc{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+
+    /* timeline */
+    .timeline{margin-bottom:18px!important;}
+    .timeline::before{background:#ccc!important;width:1px!important;}
+    .tl-item{margin-bottom:9px!important;break-inside:avoid!important;page-break-inside:avoid!important;padding-right:38px!important;}
+    .tl-dot{width:13px!important;height:13px!important;right:14px!important;top:12px!important;border-color:#aaa!important;background:white!important;}
+    .tl-time{color:#0f5c55!important;font-size:8.5pt!important;width:52px!important;}
+    .tl-content{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:9px 13px!important;}
+    .tl-content h3{color:#222!important;font-size:10pt!important;margin-bottom:5px!important;}
+    .tl-content p,.tl-content li{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .tl-content li::before{color:#aaa!important;}
+    .tl-item{margin-bottom:10px!important;}
+
+    /* solar svg */
+    .solar-wrap{overflow:visible!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .solar-wrap svg{min-width:unset!important;width:100%!important;max-width:700px!important;}
+
+    /* planet table */
+    .planets-table{font-size:8.5pt!important;border-collapse:collapse!important;}
+    .planets-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f5f5f5!important;}
+    .planets-table td{padding:7px 8px!important;color:#444!important;border-bottom:1px solid #eee!important;background:white!important;}
+    .planets-table tr.p-row{background:white!important;}
+    .p-name{color:#222!important;}
+    .planet-dot{width:11px!important;height:11px!important;}
+    .p-type{font-size:8pt!important;}
+    .p-type.rocky{background:#fde8e8!important;color:#b94040!important;}
+    .p-type.gas{background:#fef3d0!important;color:#7a5c00!important;}
+    .p-type.ice{background:#e0f7f5!important;color:#0f5c55!important;}
+
+    /* content blocks */
+    .content-section{margin-bottom:18px!important;}
+    .content-block{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .content-block h3{color:#0f5c55!important;font-size:11pt!important;margin-bottom:8px!important;}
+    .content-block h3 .icon{font-size:1rem!important;}
+    .content-block p{color:#444!important;font-size:9.5pt!important;line-height:1.65!important;margin-bottom:8px!important;}
+    .highlight{background:#e8faf8!important;border-right:3px solid #2dd4bf!important;color:#0a3d38!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .highlight-gold{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+
+    /* planet cards */
+    .planets-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important;margin-top:12px!important;}
+    .planet-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .pc-top{gap:7px!important;margin-bottom:6px!important;}
+    .pc-circle{width:26px!important;height:26px!important;font-size:.8rem!important;}
+    .pc-name{font-size:9.5pt!important;color:#222!important;}
+    .pc-arabic{font-size:8pt!important;color:#555!important;}
+    .pc-fact{font-size:8pt!important;color:#555!important;line-height:1.5!important;}
+    .pc-stat{font-size:8pt!important;color:#555!important;padding-top:7px!important;}
+    .pc-stat span{color:#222!important;}
+
+    /* workshop */
+    .workshop-box{background:#f0faf9!important;border:1.5px solid #2dd4bf!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:18px!important;}
+    .ws-badge{background:#e8faf8!important;border:1px solid #2dd4bf!important;color:#0f5c55!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .ws-title{color:#1a1a1a!important;font-size:12pt!important;}
+    .ws-subtitle{color:#444!important;font-size:9pt!important;line-height:1.6!important;margin-bottom:12px!important;}
+    .clay-palette{gap:8px!important;margin-bottom:14px!important;}
+    .clay-dot{width:24px!important;height:24px!important;}
+    .clay-chip{font-size:8pt!important;color:#555!important;}
+    .materials-box{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:9px 13px!important;margin-bottom:14px!important;break-inside:avoid!important;}
+    .mat-title{color:#555!important;font-size:8pt!important;margin-bottom:7px!important;}
+    .mat-tag{background:#ececec!important;border:1px solid #ccc!important;color:#333!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .step-item{break-inside:avoid!important;page-break-inside:avoid!important;margin-bottom:10px!important;gap:10px!important;}
+    .step-num{width:24px!important;height:24px!important;background:#e8faf8!important;border:1px solid #2dd4bf!important;color:#0f5c55!important;font-size:9pt!important;}
+    .step-content h4{color:#1a1a1a!important;font-size:10pt!important;margin-bottom:2px!important;}
+    .step-content p{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .step-tip{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:6px!important;border-radius:0 5px 5px 0!important;}
+    .scale-table{font-size:8.5pt!important;}
+    .scale-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;}
+    .scale-table td{color:#444!important;padding:7px 8px!important;border-bottom:1px solid #eee!important;}
+    .scale-table td:first-child{color:#222!important;}
+    .size-bar-wrap{background:#e0e0e0!important;}
+
+    /* assessment */
+    .qa-item{border-bottom:1px solid #eee!important;padding:10px 0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .q-num{width:24px!important;height:24px!important;background:#e8faf8!important;border:1px solid #2dd4bf!important;color:#0f5c55!important;font-size:9pt!important;}
+    .qa-item p{color:#444!important;font-size:9.5pt!important;line-height:1.55!important;}
+
+    /* tools */
+    .tools-row{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .tool-pill{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 12px!important;break-inside:avoid!important;}
+    .t-name{color:#222!important;font-size:9.5pt!important;}
+    .t-use{color:#555!important;font-size:8.5pt!important;}
+    .prompt-box{background:#f5f5f5!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;line-height:1.6!important;white-space:pre-wrap!important;word-break:break-word!important;padding:12px!important;border-radius:6px!important;}
+
+    /* homework */
+    .homework-box{background:#fffbea!important;border:1.5px solid #d4a820!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .hw-icon{font-size:1.6rem!important;}
+    .hw-content h3{color:#7a5800!important;font-size:10.5pt!important;margin-bottom:5px!important;}
+    .hw-content p{color:#444!important;font-size:9pt!important;line-height:1.6!important;}
+
+    /* page breaks */
+    h2,h3,.sec-title{break-after:avoid!important;page-break-after:avoid!important;}
+    section:has(.workshop-box){break-before:page!important;page-break-before:always!important;}
+    .content-section{break-before:auto!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة الثالثة</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🪐 الحصة الثالثة من ١٢</div>
+    <h1>جيراننا الكواكب</h1>
+    <p class="subtitle">
+      ثمانية عوالم مختلفة تدور حول نفس النجم — شمسنا. اليوم نتعرف على كل واحد منها: ما حجمه، من أين يأتي لونه، وما الذي يجعله فريداً من نوعه في هذا الجوار الكوني العجيب.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--teal)"></div>المدة: ٨٠ دقيقة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--blue)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>النوع: مفهوم + ورشة يدوية</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>المكان: القاعة — طاولات عمل</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🔢</span>
+        <div class="obj-title">أرتّب الكواكب</div>
+        <div class="obj-desc">يذكر الطفل الكواكب الثمانية بترتيبها الصحيح من الشمس، مستعيناً بجملة تذكيرية.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">⚖️</span>
+        <div class="obj-title">أقارن الأحجام</div>
+        <div class="obj-desc">يصف الطفل الفرق في الحجم بين الكواكب الصخرية والغازية بأمثلة ملموسة.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🌍</span>
+        <div class="obj-title">أعرف مميزة كل كوكب</div>
+        <div class="obj-desc">يذكر الطفل ميزة واحدة على الأقل تميّز كل كوكب عن غيره.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🎨</span>
+        <div class="obj-title">أصنع نموذجاً بيدي</div>
+        <div class="obj-desc">يصنع الطفل نموذجاً مصغراً للمجموعة الشمسية بالعجين الملوّن محترماً التناسب النسبي.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🚀 مقدمة التشويق</h3>
+          <p>يسأل المدرّب: <em style="color:var(--white)">"لو استطعت العيش على أي كوكب غير الأرض — أي كوكب ستختار؟ ولماذا؟"</em></p>
+          <ul>
+            <li>جولة سريعة للإجابات — تدوين الكواكب المذكورة</li>
+            <li>عرض صورة المجموعة الشمسية بالمقياس الصحيح — دهشة من الأحجام</li>
+            <li>مراجعة خاطفة: الشمس التي درسناها هي مركز هذا النظام</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--teal)"></div>
+        <div class="tl-time">١٠–٣٥ د</div>
+        <div class="tl-content">
+          <h3>📖 الشرح النظري: جولة بين الكواكب</h3>
+          <p>شرح كل كوكب بأسلوب قصصي — من الأقرب للشمس إلى الأبعد، مع ربط كل كوكب بحقيقة مدهشة.</p>
+          <ul>
+            <li>الجملة التذكيرية لترتيب الكواكب (سنتعلمها معاً)</li>
+            <li>الكواكب الصخرية الأربعة: عطارد، الزهرة، الأرض، المريخ</li>
+            <li>الكواكب الغازية الأربعة: المشتري، زحل، أورانوس، نبتون</li>
+            <li>حزام الكويكبات الفاصل بين المجموعتين</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot blue"></div>
+        <div class="tl-time blue">٣٥–٤٥ د</div>
+        <div class="tl-content">
+          <h3>📐 الأحجام والمسافات — مقارنة بالأشياء اليومية</h3>
+          <p>نجعل الأرقام المجردة ملموسة بتشبيهات ذكية تبقى في الذاكرة.</p>
+          <ul>
+            <li>لو الشمس كرة قدم: عطارد حبة رمل، المشتري حجم كرة غولف</li>
+            <li>جدول المقارنة بحجم الأرض = ١</li>
+            <li>لماذا المشتري وحده يساوي ١٣٠٠ أرض؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٤٥–٧٢ د</div>
+        <div class="tl-content">
+          <h3>🎨 ورشة العجين: نموذج المجموعة الشمسية</h3>
+          <p>كل طفل يصنع نموذجه الخاص — بعجين ملوّن بألوان تتناسب مع كل كوكب وبأحجام نسبية مبسّطة.</p>
+          <ul>
+            <li>توزيع كميات العجين حسب جدول الأحجام</li>
+            <li>تشكيل الكواكب والترتيب على خط الورق المقوى</li>
+            <li>إضافة التسميات والحلقات لزحل</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٧٢–٨٠ د</div>
+        <div class="tl-content">
+          <h3>✅ العرض والخلاصة</h3>
+          <p>كل مجموعة تعرض نموذجها وتسمّي الكواكب بالترتيب. تصويت جماعي على أجمل نموذج وأدق نموذج.</p>
+          <ul>
+            <li>أسئلة الخلاصة السريعة</li>
+            <li>ربط بالحصة القادمة: القمر — رفيق الأرض الأقرب</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOLAR SYSTEM DIAGRAM -->
+  <section class="content-section">
+    <div class="sec-title">🌌 مخطط المجموعة الشمسية</div>
+    <div class="solar-wrap">
+      <svg viewBox="0 0 780 160" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:780px">
+        <defs>
+          <radialGradient id="sunG" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fff7a0"/>
+            <stop offset="60%" stop-color="#f5c842"/>
+            <stop offset="100%" stop-color="#e8a020"/>
+          </radialGradient>
+          <radialGradient id="mercG" cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#d0d0d0"/><stop offset="100%" stop-color="#888"/></radialGradient>
+          <radialGradient id="venG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#f0dfa0"/><stop offset="100%" stop-color="#c8a838"/></radialGradient>
+          <radialGradient id="earG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#88bbff"/><stop offset="100%" stop-color="#2255aa"/></radialGradient>
+          <radialGradient id="marG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#f08060"/><stop offset="100%" stop-color="#a83010"/></radialGradient>
+          <radialGradient id="jupG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#e8c870"/><stop offset="100%" stop-color="#a87828"/></radialGradient>
+          <radialGradient id="satG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#e0d090"/><stop offset="100%" stop-color="#b8980a"/></radialGradient>
+          <radialGradient id="uraG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#a0eee8"/><stop offset="100%" stop-color="#3a9090"/></radialGradient>
+          <radialGradient id="nepG"  cx="40%" cy="35%" r="60%"><stop offset="0%" stop-color="#8090ff"/><stop offset="100%" stop-color="#1020aa"/></radialGradient>
+        </defs>
+
+        <!-- Sun -->
+        <circle cx="32" cy="80" r="28" fill="url(#sunG)" opacity=".95"/>
+        <text x="32" y="118" text-anchor="middle" font-family="Cairo,sans-serif" font-size="9" fill="#f5c842">الشمس</text>
+
+        <!-- Orbits (subtle arcs) -->
+        <ellipse cx="32" cy="80" rx="40"  ry="14" fill="none" stroke="rgba(255,255,255,.06)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="70"  ry="24" fill="none" stroke="rgba(255,255,255,.06)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="105" ry="36" fill="none" stroke="rgba(255,255,255,.06)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="148" ry="52" fill="none" stroke="rgba(255,255,255,.06)" stroke-width=".7"/>
+        <!-- asteroid belt -->
+        <ellipse cx="32" cy="80" rx="205" ry="72" fill="none" stroke="rgba(255,255,255,.04)" stroke-width="3" stroke-dasharray="2 4"/>
+        <ellipse cx="32" cy="80" rx="270" ry="96" fill="none" stroke="rgba(255,255,255,.05)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="350" ry="125" fill="none" stroke="rgba(255,255,255,.05)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="445" ry="158" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".7"/>
+        <ellipse cx="32" cy="80" rx="548" ry="195" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".7"/>
+
+        <!-- Mercury -->
+        <circle cx="72"  cy="80" r="3.5" fill="url(#mercG)"/>
+        <text x="72"  y="97"  text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#b5b5b5">عطارد</text>
+
+        <!-- Venus -->
+        <circle cx="102" cy="80" r="5.5" fill="url(#venG)"/>
+        <text x="102" y="99"  text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#e8c97a">الزهرة</text>
+
+        <!-- Earth -->
+        <circle cx="137" cy="80" r="6"   fill="url(#earG)"/>
+        <text x="137" y="101" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#60a5fa">الأرض</text>
+
+        <!-- Mars -->
+        <circle cx="180" cy="80" r="4.5" fill="url(#marG)"/>
+        <text x="180" y="97"  text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#e05a2b">المريخ</text>
+
+        <!-- Asteroid belt label -->
+        <text x="218" y="76" font-family="Cairo,sans-serif" font-size="7.5" fill="rgba(255,255,255,.25)" text-anchor="middle">حزام</text>
+        <text x="218" y="86" font-family="Cairo,sans-serif" font-size="7.5" fill="rgba(255,255,255,.25)" text-anchor="middle">الكويكبات</text>
+
+        <!-- Jupiter -->
+        <circle cx="302" cy="80" r="14"  fill="url(#jupG)"/>
+        <!-- Jupiter bands -->
+        <ellipse cx="302" cy="76" rx="14" ry="2.5" fill="none" stroke="rgba(140,80,10,.5)" stroke-width="1.5"/>
+        <ellipse cx="302" cy="83" rx="14" ry="2"   fill="none" stroke="rgba(140,80,10,.4)" stroke-width="1"/>
+        <text x="302" y="104" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#c8943a">المشتري</text>
+
+        <!-- Saturn + rings -->
+        <ellipse cx="392" cy="80" rx="20" ry="5" fill="none" stroke="rgba(212,184,122,.45)" stroke-width="3.5"/>
+        <circle cx="392" cy="80" r="11"  fill="url(#satG)"/>
+        <ellipse cx="392" cy="80" rx="20" ry="5" fill="none" stroke="rgba(212,184,122,.28)" stroke-width="1.5"/>
+        <text x="392" y="101" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#d4b87a">زحل</text>
+
+        <!-- Uranus -->
+        <circle cx="477" cy="80" r="8.5" fill="url(#uraG)"/>
+        <!-- Uranus vertical ring -->
+        <ellipse cx="477" cy="80" rx="3" ry="12" fill="none" stroke="rgba(125,211,208,.35)" stroke-width="1.2"/>
+        <text x="477" y="100" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#7dd3d0">أورانوس</text>
+
+        <!-- Neptune -->
+        <circle cx="580" cy="80" r="8"   fill="url(#nepG)"/>
+        <text x="580" y="100" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8.5" fill="#4a6fff">نبتون</text>
+
+        <!-- distance arrow -->
+        <line x1="72" y1="148" x2="580" y2="148" stroke="rgba(255,255,255,.1)" stroke-width=".8" marker-end="url(#arr)"/>
+        <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="1"/></marker></defs>
+        <text x="326" y="157" text-anchor="middle" font-family="Cairo,sans-serif" font-size="8" fill="rgba(255,255,255,.25)">المسافة ليست بالمقياس الحقيقي</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- PLANETS TABLE -->
+  <section class="content-section">
+    <div class="sec-title">🪐 الكواكب الثمانية — جدول مقارن</div>
+    <div style="overflow-x:auto">
+      <table class="planets-table" id="planets-tbl">
+        <thead>
+          <tr>
+            <th>الكوكب</th>
+            <th>النوع</th>
+            <th>القطر (× الأرض)</th>
+            <th>المدة المدارية</th>
+            <th>درجة الحرارة</th>
+            <th>الميزة الأبرز</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- PLANETS CARDS -->
+  <section class="content-section">
+    <div class="sec-title">🌍 جولة مفصّلة بين الكواكب</div>
+
+    <div class="content-block">
+      <h3><span class="icon">🪨</span> الكواكب الصخرية — الداخلية</h3>
+      <p>الكواكب الأربعة الأقرب للشمس مصنوعة أساساً من الصخور والمعادن. صغيرة الحجم نسبياً، كثيفة، ولديها أسطح صلبة يمكن نظرياً الوقوف عليها.</p>
+      <div class="highlight">
+        🔑 <strong>كيف نتذكر الترتيب؟</strong> — جملة "عُطارد الزهرة أرضنا المريخ | مشترٍ زحل أوران نبتون"<br>
+        أو بالأحرف الأولى: <strong style="color:var(--white);font-size:15px;letter-spacing:2px">ع — ز — أ — م — م — ز — أ — ن</strong>
+      </div>
+      <div class="planets-grid" id="rocky-cards"></div>
+    </div>
+
+    <div class="content-block" style="margin-top:16px">
+      <h3><span class="icon">🌀</span> الكواكب الغازية والجليدية — الخارجية</h3>
+      <p>الكواكب الأربعة البعيدة ضخمة جداً ومكوّنة أساساً من الغازات (هيدروجين وهيليوم) أو من الجليد والغاز. لا أسطح صلبة فيها — لو حاولت الهبوط ستغرق في الغاز!</p>
+      <div class="planets-grid" id="gas-cards"></div>
+    </div>
+
+    <div class="content-block" style="margin-top:16px">
+      <h3><span class="icon">☄️</span> حزام الكويكبات — الجيران الصغار</h3>
+      <p>
+        بين مدار المريخ والمشتري يوجد <strong style="color:var(--white)">حزام الكويكبات</strong> — آلاف الصخور الفضائية التي لم تتجمع لتكوّن كوكباً كاملاً بسبب الجاذبية الهائلة للمشتري. أكبر جسم فيه هو القزم <strong style="color:var(--teal)">سيريس</strong> بقطر ٩٤٥ كم.
+      </p>
+      <div class="highlight-gold">
+        🛡️ <strong>المشتري — حارس الأرض:</strong> الجاذبية الضخمة للمشتري تجذب كثيراً من الكويكبات والمذنبات الخطيرة نحوه، مما يحمي الأرض من الاصطدامات المتكررة. بدونه قد تكون الحياة على الأرض أصعب بكثير!
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎨 الورشة اليدوية</div>
+    <div class="workshop-box">
+
+      <div class="ws-header">
+        <div class="ws-badge">ورشة جماعية</div>
+        <div class="ws-title">🪐 نموذج المجموعة الشمسية بالعجين الملوّن</div>
+      </div>
+      <p class="ws-subtitle">
+        الهدف ليس الكمال الفني — بل أن يشعر الطفل بالفرق الحقيقي في الأحجام بيده. عندما يمسك كتلة عجين المشتري الكبيرة مقارنةً بحبة عطارد الصغيرة، تترسّخ المقارنة في عقله إلى الأبد.
+      </p>
+
+      <!-- Clay palette -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px">🎨 ألوان العجين المقترحة</div>
+      <div class="clay-palette" id="clay-palette"></div>
+
+      <!-- Materials -->
+      <div class="materials-box">
+        <div class="mat-title">📦 المواد اللازمة — لكل مجموعة (٣–٤ أطفال)</div>
+        <div class="materials-row">
+          <span class="mat-tag">🟡 عجين ملوّن (٨ ألوان)</span>
+          <span class="mat-tag">📏 ورق مقوى A2 أسود</span>
+          <span class="mat-tag">✏️ قلم أبيض للتسمية</span>
+          <span class="mat-tag">📐 مسطرة</span>
+          <span class="mat-tag">🔡 ملصقات الأسماء</span>
+          <span class="mat-tag">🔵 أسلاك رفيعة لحلقات زحل</span>
+          <span class="mat-tag">📋 بطاقة جدول الأحجام</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">⏱ إجمالي وقت الورشة: ٢٧ دقيقة &nbsp;|&nbsp; المجموعات: ٣–٤ أطفال</p>
+      </div>
+
+      <!-- Scale table -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:10px">📐 جدول الأحجام النسبية — كمية العجين</div>
+      <table class="scale-table" id="scale-tbl">
+        <thead>
+          <tr>
+            <th>الكوكب</th>
+            <th>القطر الحقيقي</th>
+            <th>الحجم النسبي</th>
+            <th>كمية العجين المقترحة</th>
+            <th>الحجم على الورقة</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px;line-height:1.6">* الشمس تُرسم فقط كدائرة جزئية على حافة الورقة (كبيرة جداً لتناسب النموذج كاملاً)</p>
+
+      <!-- Steps -->
+      <div style="margin-top:24px;font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:14px">🔢 خطوات التنفيذ</div>
+      <ol class="steps-list">
+
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>📋 التحضير والتوزيع (٣ دقائق)</h4>
+            <p>يوزّع المدرّب بطاقة جدول الأحجام على كل مجموعة. يطلب من الأطفال قراءة الجدول أولاً وتخمين: "أي الكواكب ستكون أكبر كمية عجين؟"</p>
+            <div class="step-tip">💡 اطلب من الأطفال ترتيب الكواكب من الأكبر للأصغر قبل البدء — هذا يبني التوقع ويزيد الدهشة عند التنفيذ.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>🎨 تشكيل الكواكب (١٥ دقيقة)</h4>
+            <p>كل طفل يصنع كوكبَين أو ثلاثة حسب توزيع المجموعة. يُشكّل الكوكب كرة بيده، ثم يضغط عليها قليلاً لتثبت على الورق. زحل يحتاج إضافة حلقة من السلك الرفيع ملفوف حوله.</p>
+            <div class="step-tip">🪐 لزحل: افرد قطعة عجين رفيعة وطويلة، لفّها حول الكرة مائلة قليلاً — الحلقات ليست أفقية تماماً بل مائلة بزاوية ٢٧ درجة!</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>📏 الترتيب على الورق (٥ دقائق)</h4>
+            <p>يُرتّب الأطفال الكواكب على الورق المقوى الأسود من اليمين (الشمس) إلى اليسار (نبتون). المسافات بين الكواكب لا تحتاج أن تكون دقيقة — الأهم هو الترتيب والحجم النسبي.</p>
+            <div class="step-tip">📌 ارسم الشمس كقوس ذهبي في الحافة اليمنى — فالشمس أكبر بكثير من أن تُوضع كاملةً في نفس الورقة.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>🏷️ التسمية والتزيين (٤ دقائق)</h4>
+            <p>يكتب الأطفال اسم كل كوكب تحته بالقلم الأبيض، ويضيفون رقم ترتيبه من الشمس. يمكن إضافة نقاط صغيرة بيضاء كنجوم في الخلفية.</p>
+          </div>
+        </div>
+
+      </ol>
+
+      <!-- Results -->
+      <div style="background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:14px;padding:18px 22px;margin-top:20px">
+        <div style="font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px">✅ ما يجب أن يلاحظه الأطفال</div>
+        <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px">
+          <span style="color:var(--green);font-size:14px;flex-shrink:0">✓</span>
+          <span style="font-size:13px;color:var(--muted);line-height:1.6">الفرق الهائل بين كمية عجين المشتري وعجين عطارد — يشعر الطفل بالفرق جسدياً في يده</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px">
+          <span style="color:var(--green);font-size:14px;flex-shrink:0">✓</span>
+          <span style="font-size:13px;color:var(--muted);line-height:1.6">الكواكب الأربعة الداخلية الصغيرة مجتمعة أصغر بكثير من المشتري وحده</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start;margin-bottom:10px">
+          <span style="color:var(--green);font-size:14px;flex-shrink:0">✓</span>
+          <span style="font-size:13px;color:var(--muted);line-height:1.6">الحلقات الجميلة لزحل تجعله مميزاً بصرياً عن بقية الكواكب</span>
+        </div>
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="color:var(--green);font-size:14px;flex-shrink:0">✓</span>
+          <span style="font-size:13px;color:var(--muted);line-height:1.6">اللون الأزرق الجميل لأورانوس ونبتون يعكس وجود الميثان في غلافهما الجوي</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong style="color:var(--white)">رتّب هذه الكواكب من الأقرب للشمس: المريخ، الأرض، المشتري، الزهرة.</strong><br>
+          الهدف: التحقق من حفظ الترتيب.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong style="color:var(--white)">ما الفرق بين الكوكب الصخري والكوكب الغازي؟ أعطِ مثالاً لكل نوع.</strong><br>
+          الهدف: تمييز التصنيف النوعي للكواكب.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong style="color:var(--white)">أي كوكب تعتقد أنه الأكثر ترحيباً للحياة بعد الأرض؟ لماذا؟</strong><br>
+          الهدف: التفكير النقدي والاستدلال العلمي.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong style="color:var(--white)">لماذا المشتري يُسمى أحياناً "حارس الأرض"؟</strong><br>
+          الهدف: استيعاب مفهوم الجاذبية وحماية حزام الكويكبات.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong style="color:var(--white)">في نموذجك، لماذا جعلت المشتري أكبر بكثير من باقي الكواكب؟</strong><br>
+          الهدف: ربط التجربة اليدوية بالحقيقة العلمية.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد صور واقعية لكل كوكب وإنتاج مقارنات بصرية بالحجم</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🎨 Canva AI</div>
+          <div class="t-use">تصميم بطاقات معلومات مصوّرة لكل كوكب قابلة للطباعة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌐 NASA Eyes on the Solar System</div>
+          <div class="t-use">محاكاة ثلاثية الأبعاد للمجموعة الشمسية بالمقياس الحقيقي</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">توليد ألغاز وأسئلة متدرجة الصعوبة عن الكواكب</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(45,212,191,.2)">
+      <h3><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد بطاقة معلومات مفصّلة عن أي كوكب:</p>
+      <div class="prompt-box" id="ready-prompt">أنت معلم فلك متخصص في تبسيط العلوم للأطفال.
+
+اكتب لي بطاقة معلومات كاملة عن كوكب المشتري بالعربية، مناسبة للأطفال بين ٨–١٢ سنة.
+
+البطاقة تحتوي على:
+- اسم الكوكب بالعربية والإنجليزية
+- رقمه في المجموعة الشمسية
+- نوعه (صخري / غازي / جليدي)
+- ٣ أرقام مدهشة (حجم، مسافة، حرارة) مع تشبيه يومي لكل رقم
+- ميزة واحدة لا يشاركه فيها أي كوكب آخر
+- سؤال تحدٍّ للتفكير في النهاية
+
+الأسلوب: بسيط، ممتع، مع تشبيهات من الحياة اليومية في الجزائر.</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🔭</div>
+    <div class="hw-content">
+      <h3>واجب البيت — مراقب الكواكب</h3>
+      <p>
+        الليلة بعد الغروب بساعة، ابحث في السماء عن نقطة مضيئة لا تومض (تذكّر من الحصة الأولى: الكوكب لا يومض والنجم يومض). إذا وجدت واحدة، سجّل: وقت رؤيتها، موقعها في السماء (شمال / جنوب / شرق / غرب)، ولونها.
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🌟 <strong>تلميح:</strong> في هذا الوقت من السنة يمكنك رؤية المشتري أو الزهرة بالعين المجردة — هما من أكثر الأجسام سطوعاً في السماء بعد القمر. استخدم تطبيق Stellarium على الهاتف لمعرفة أسماء ما تراه!
+      </p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()">🖨️ طباعة الحصة</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-02-shamsuna-alraiea.html'">← الحصة الثانية</button>
+    <button class="nav-btn home" onclick="window.location.href='astronomy-kids-guide.html'">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn primary" onclick="window.location.href='session-04-alqamar-rafiq-allayl.html'">الحصة الرابعة: القمر رفيق الليل ←</button>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ── STARS ── */
+(function(){
+  var c=document.getElementById('stars');
+  for(var i=0;i<150;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2+.4;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px','top:'+Math.random()*100+'%','left:'+Math.random()*100+'%','--dur:'+(2+Math.random()*4)+'s','--delay:'+(-Math.random()*5)+'s','--min-op:'+(0.1+Math.random()*.3)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+/* ── DATA ── */
+var planets=[
+  {name:'عطارد',en:'Mercury',color:'#b5b5b5',type:'rocky',
+   diam:.38,period:'٨٨ يوماً',temp:'-180 إلى +430 °م',
+   fact:'لا غلاف جوي — الفرق بين النهار والليل مذهل',
+   emoji:'⬛',dough:'كرة صغيرة جداً (٥ غ)',displayR:4,
+   clayColor:'#a0a0a0',clayLabel:'رمادي'},
+  {name:'الزهرة',en:'Venus',color:'#e8c97a',type:'rocky',
+   diam:.95,period:'٢٢٥ يوماً',temp:'+465 °م دائماً',
+   fact:'أسخن كوكب رغم أنه ليس الأقرب للشمس — سببه الغلاف الجوي الكثيف',
+   emoji:'🟡',dough:'كرة صغيرة (٤٥ غ)',displayR:9,
+   clayColor:'#d4a830',clayLabel:'ذهبي فاتح'},
+  {name:'الأرض',en:'Earth',color:'#4a9eff',type:'rocky',
+   diam:1,period:'٣٦٥ يوماً',temp:'+15 °م (معدل)',
+   fact:'الكوكب الوحيد المعروف بوجود الحياة والمياه السائلة',
+   emoji:'🔵',dough:'كرة متوسطة (٥٠ غ)',displayR:10,
+   clayColor:'#3a88dd',clayLabel:'أزرق'},
+  {name:'المريخ',en:'Mars',color:'#e05a2b',type:'rocky',
+   diam:.53,period:'٦٨٧ يوماً',temp:'-60 °م (معدل)',
+   fact:'جبل أوليمبوس أعلى جبل في المجموعة الشمسية — ضعف إيفرست',
+   emoji:'🔴',dough:'كرة صغيرة (٢٠ غ)',displayR:5,
+   clayColor:'#cc4010',clayLabel:'أحمر'},
+  {name:'المشتري',en:'Jupiter',color:'#c8943a',type:'gas',
+   diam:11.2,period:'١٢ سنة',temp:'-110 °م',
+   fact:'البقعة الحمراء الكبرى عاصفة مستمرة منذ ٣٥٠ سنة على الأقل',
+   emoji:'🟠',dough:'كرة كبيرة جداً (٥٠٠ غ)',displayR:38,
+   clayColor:'#d4a030',clayLabel:'بني ذهبي'},
+  {name:'زحل',en:'Saturn',color:'#d4b87a',type:'gas',
+   diam:9.5,period:'٢٩ سنة',temp:'-140 °م',
+   fact:'حلقاته مصنوعة من جليد وصخور — يطفو على الماء لو وجد محيط بحجمه',
+   emoji:'🪐',dough:'كرة كبيرة (٣٠٠ غ) + حلقة',displayR:32,
+   clayColor:'#c8a020',clayLabel:'أصفر كريمي'},
+  {name:'أورانوس',en:'Uranus',color:'#7dd3d0',type:'ice',
+   diam:4,period:'٨٤ سنة',temp:'-195 °م',
+   fact:'يدور على جانبه — محوره مائل تقريباً ٩٨ درجة!',
+   emoji:'🩵',dough:'كرة متوسطة (٨٠ غ)',displayR:16,
+   clayColor:'#60c8c5',clayLabel:'أزرق مخضرّ'},
+  {name:'نبتون',en:'Neptune',color:'#4a6fff',type:'ice',
+   diam:3.9,period:'١٦٥ سنة',temp:'-200 °م',
+   fact:'أعنف عواصف في المجموعة الشمسية — رياح تصل ٢١٠٠ كم/ساعة',
+   emoji:'💙',dough:'كرة متوسطة (٧٠ غ)',displayR:15,
+   clayColor:'#2040cc',clayLabel:'أزرق داكن'},
+];
+
+var typeLabel={rocky:'صخري',gas:'غازي',ice:'جليدي'};
+var typeClass={rocky:'rocky',gas:'gas',ice:'ice'};
+
+/* max radius for bar */
+var maxR=planets.reduce(function(m,p){return Math.max(m,p.displayR);},0);
+
+/* ── PLANETS TABLE ── */
+var tbody=document.querySelector('#planets-tbl tbody');
+planets.forEach(function(p){
+  var pct=Math.round(p.displayR/maxR*100);
+  var tr=document.createElement('tr');tr.className='p-row';
+  tr.innerHTML=
+    '<td><div class="p-name"><span class="planet-dot" style="background:'+p.color+'"></span>'+p.name+'</div></td>'+
+    '<td><span class="p-type '+typeClass[p.type]+'">'+typeLabel[p.type]+'</span></td>'+
+    '<td style="color:var(--white);font-weight:700">'+p.diam+'×</td>'+
+    '<td>'+p.period+'</td>'+
+    '<td>'+p.temp+'</td>'+
+    '<td style="font-size:12px;color:var(--muted);max-width:220px;line-height:1.5">'+p.fact+'</td>';
+  tbody.appendChild(tr);
+});
+
+/* ── PLANET CARDS ── */
+function buildCards(ids,container){
+  var el=document.getElementById(container);
+  ids.forEach(function(i){
+    var p=planets[i];
+    var div=document.createElement('div');
+    div.className='planet-card';
+    div.style.borderColor=p.color.replace(/[^,]+\)$/,'0.25)');
+    div.innerHTML=
+      '<div class="pc-top">'+
+        '<div class="pc-circle" style="background:'+p.color+'20;border:1px solid '+p.color+'55">'+p.emoji+'</div>'+
+        '<div><div class="pc-name" style="color:'+p.color+'">'+p.name+'</div><div class="pc-arabic">'+p.en+'</div></div>'+
+      '</div>'+
+      '<div class="pc-fact">'+p.fact+'</div>'+
+      '<div class="pc-stat">المدة المدارية: <span>'+p.period+'</span></div>'+
+      '<div class="pc-stat">الحرارة: <span>'+p.temp+'</span></div>';
+    el.appendChild(div);
+  });
+}
+buildCards([0,1,2,3],'rocky-cards');
+buildCards([4,5,6,7],'gas-cards');
+
+/* ── CLAY PALETTE ── */
+var palette=document.getElementById('clay-palette');
+planets.forEach(function(p){
+  var chip=document.createElement('div');chip.className='clay-chip';
+  chip.innerHTML='<div class="clay-dot" style="background:'+p.clayColor+'"></div>'+p.name;
+  palette.appendChild(chip);
+});
+
+/* ── SCALE TABLE ── */
+var stbody=document.querySelector('#scale-tbl tbody');
+planets.forEach(function(p){
+  var pct=Math.round(p.displayR/maxR*100);
+  var tr=document.createElement('tr');
+  tr.innerHTML=
+    '<td><span class="planet-dot" style="background:'+p.color+';width:10px;height:10px;margin-left:6px"></span>'+p.name+'</td>'+
+    '<td style="color:var(--muted)">'+p.diam+'× الأرض</td>'+
+    '<td><div class="size-bar-wrap"><div class="size-bar" style="width:'+pct+'%;background:'+p.color+'"></div></div></td>'+
+    '<td style="color:var(--teal)">'+p.dough+'</td>'+
+    '<td style="color:var(--muted)">⌀ '+p.displayR+' مم</td>';
+  stbody.appendChild(tr);
+});
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');
+    b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>

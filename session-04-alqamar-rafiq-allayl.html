@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ٤ – القمر رفيق الليل | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#04060f; --deep:#080d1f; --cosmos:#0d1535;
+    --gold:#f5c842; --amber:#e8a020;
+    --silver:#c8d4e8; --silver-bright:#e8f0ff;
+    --blue:#60a5fa; --indigo:#818cf8;
+    --violet:#8b5cf6; --rose:#f472b6;
+    --white:#f0f4ff; --muted:#8899cc; --green:#34d399;
+    --moon:#d0daf0;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS + MOON GLOW ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;background:white;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.2);transform:scale(1);}50%{opacity:1;transform:scale(1.4);}}
+  #moon-glow{
+    position:fixed;top:-80px;right:-80px;width:360px;height:360px;border-radius:50%;
+    background:radial-gradient(circle,rgba(200,212,232,.11) 0%,rgba(180,195,220,.05) 40%,transparent 70%);
+    pointer-events:none;z-index:0;
+    animation:moon-pulse 7s ease-in-out infinite;
+  }
+  @keyframes moon-pulse{0%,100%{transform:scale(1);opacity:.9;}50%{transform:scale(1.06);opacity:.6;}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:48px;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(200,212,232,.1);border:1px solid rgba(200,212,232,.3);
+    border-radius:50px;padding:6px 18px;font-size:12px;color:var(--silver);letter-spacing:1px;margin-bottom:20px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,var(--silver) 40%,var(--indigo) 80%,var(--violet) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.25;margin-bottom:14px;
+  }
+  .session-hero p.subtitle{color:var(--muted);font-size:15px;max-width:640px;line-height:1.8;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SECTION TITLE ── */
+  .sec-title{
+    font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:56px;}
+  .obj-card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:22px;transition:border-color .3s,transform .3s;
+  }
+  .obj-card:hover{border-color:rgba(200,212,232,.3);transform:translateY(-3px);}
+  .obj-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+  .obj-title{font-size:13px;font-weight:700;color:var(--silver);margin-bottom:6px;}
+  .obj-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{
+    content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;
+    background:linear-gradient(to bottom,rgba(200,212,232,.5),rgba(129,140,248,.2),transparent);
+  }
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--silver);background:var(--night);flex-shrink:0;}
+  .tl-dot.gold{border-color:var(--gold);}
+  .tl-dot.indigo{border-color:var(--indigo);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-time{font-size:11px;color:var(--silver);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.gold{color:var(--gold);}
+  .tl-time.indigo{color:var(--indigo);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-time.green{color:var(--green);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── MOON PHASES SVG ── */
+  .phases-wrap{overflow-x:auto;margin-bottom:24px;}
+  .phases-wrap svg{display:block;margin:0 auto;min-width:600px;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-section{margin-bottom:56px;}
+  .content-block{
+    background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);
+    border-radius:18px;padding:28px 32px;margin-bottom:16px;
+  }
+  .content-block h3{font-size:17px;font-weight:700;color:var(--silver);margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .highlight{
+    background:rgba(200,212,232,.07);border-right:3px solid var(--silver);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;
+    font-size:14px;color:#c8d8f0;line-height:1.8;
+  }
+  .highlight-gold{
+    background:rgba(245,200,66,.08);border-right:3px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;
+    font-size:14px;color:#d4c07a;line-height:1.8;
+  }
+  .highlight-indigo{
+    background:rgba(129,140,248,.08);border-right:3px solid var(--indigo);
+    border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;
+    font-size:14px;color:#a5b4fc;line-height:1.8;
+  }
+
+  /* ── MOON PHASES CARDS ── */
+  .phases-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:12px;margin-top:20px;}
+  .phase-card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+    border-radius:14px;padding:16px;text-align:center;
+    transition:transform .3s,border-color .3s;
+  }
+  .phase-card:hover{transform:translateY(-3px);border-color:rgba(200,212,232,.25);}
+  .phase-svg{margin:0 auto 10px;}
+  .phase-name{font-size:13px;font-weight:700;color:var(--silver-bright);margin-bottom:4px;}
+  .phase-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+  .phase-days{font-size:10px;color:var(--indigo);font-weight:700;margin-top:5px;letter-spacing:.5px;}
+
+  /* ── APOLLO TABLE ── */
+  .apollo-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px;}
+  .apollo-table th{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600;}
+  .apollo-table tr.a-row{background:rgba(255,255,255,.025);transition:background .25s;}
+  .apollo-table tr.a-row:hover{background:rgba(129,140,248,.08);}
+  .apollo-table td{padding:11px 12px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:middle;color:var(--muted);font-size:13px;}
+  .apollo-table td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--white);}
+  .apollo-table td:last-child{border-radius:0 10px 10px 0;}
+  .mission-badge{display:inline-block;padding:3px 10px;border-radius:50px;font-size:10px;font-weight:700;}
+  .badge-success{background:rgba(52,211,153,.15);color:#34d399;}
+  .badge-fail{background:rgba(239,68,68,.13);color:#f87171;}
+
+  /* ── FACTS STRIP ── */
+  .facts-strip{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .fact-card{flex:1;min-width:190px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;}
+  .fact-emoji{font-size:1.5rem;display:block;margin-bottom:8px;}
+  .fact-text{font-size:13px;color:var(--muted);line-height:1.7;}
+  .fact-text strong{color:var(--gold);}
+
+  /* ── OBSERVATION ACTIVITY ── */
+  .obs-box{
+    background:linear-gradient(135deg,rgba(200,212,232,.07),rgba(129,140,248,.04));
+    border:1px solid rgba(200,212,232,.2);border-radius:20px;padding:32px;margin-bottom:56px;
+  }
+  .obs-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .obs-badge{
+    background:rgba(200,212,232,.15);border:1px solid rgba(200,212,232,.35);
+    border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--silver);letter-spacing:1px;
+  }
+  .obs-title{font-size:18px;font-weight:700;}
+  .obs-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* tracker sheet preview */
+  .tracker-preview{
+    background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;padding:20px;margin-bottom:22px;
+    overflow-x:auto;
+  }
+  .tracker-title{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:14px;}
+  .tracker-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;min-width:440px;}
+  .tracker-day{
+    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
+    border-radius:10px;padding:10px 6px;text-align:center;
+  }
+  .tracker-day-label{font-size:9px;color:var(--muted);margin-bottom:8px;font-weight:700;letter-spacing:.5px;}
+  .tracker-moon-circle{
+    width:38px;height:38px;border-radius:50%;
+    background:rgba(255,255,255,.06);border:1px dashed rgba(200,212,232,.25);
+    margin:0 auto 6px;
+  }
+  .tracker-lines{display:flex;flex-direction:column;gap:3px;margin-top:6px;}
+  .tracker-line{height:1px;background:rgba(255,255,255,.1);border-radius:1px;}
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{
+    width:32px;height:32px;border-radius:50%;flex-shrink:0;
+    background:rgba(200,212,232,.12);border:1px solid rgba(200,212,232,.3);
+    display:flex;align-items:center;justify-content:center;
+    font-size:12px;font-weight:700;color:var(--silver);
+  }
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{
+    background:rgba(245,200,66,.07);border-right:3px solid var(--gold);
+    border-radius:0 8px 8px 0;padding:9px 13px;
+    font-size:12px;color:#d4c07a;line-height:1.65;margin-top:8px;
+  }
+
+  /* observation log */
+  .obs-log{
+    background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.07);
+    border-radius:12px;overflow:hidden;margin-top:22px;
+  }
+  .obs-log-header{
+    display:grid;grid-template-columns:90px 1fr 1fr 1fr;
+    background:rgba(255,255,255,.04);padding:10px 14px;
+    font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);
+  }
+  .obs-log-row{
+    display:grid;grid-template-columns:90px 1fr 1fr 1fr;
+    padding:10px 14px;border-top:1px solid rgba(255,255,255,.04);
+    font-size:12px;color:var(--muted);align-items:center;
+  }
+  .obs-log-row .day-label{color:var(--silver-bright);font-weight:700;font-size:13px;}
+  .moon-mini{display:inline-block;width:20px;height:20px;border-radius:50%;border:1px solid rgba(255,255,255,.2);vertical-align:middle;margin-left:6px;}
+  .obs-field{
+    background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.1);
+    border-radius:6px;height:22px;
+  }
+
+  /* ── ASSESSMENT ── */
+  .qa-list{list-style:none;}
+  .qa-item{border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .qa-item:last-child{border-bottom:none;}
+  .q-num{
+    width:28px;height:28px;border-radius:50%;flex-shrink:0;
+    background:rgba(200,212,232,.09);border:1px solid rgba(200,212,232,.22);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;color:var(--silver);
+  }
+  .qa-item p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:2px;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 20px;transition:border-color .3s;}
+  .tool-pill:hover{border-color:rgba(200,212,232,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  /* ── PROMPT ── */
+  .prompt-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;}
+  .copy-btn{margin-top:14px;background:rgba(200,212,232,.12);border:1px solid rgba(200,212,232,.3);border-radius:10px;padding:9px 20px;color:var(--silver);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .copy-btn:hover{background:rgba(200,212,232,.24);}
+
+  /* ── HOMEWORK ── */
+  .homework-box{
+    background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.2);
+    border-radius:16px;padding:24px 28px;margin-bottom:56px;
+    display:flex;gap:20px;align-items:flex-start;
+  }
+  .hw-icon{font-size:2rem;flex-shrink:0;}
+  .hw-content h3{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .hw-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+
+  /* ── NAV ── */
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:32px;flex-wrap:wrap;gap:12px;}
+  .nav-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;}
+  .nav-btn:hover{background:rgba(200,212,232,.1);color:var(--silver);}
+  .nav-btn.primary{background:rgba(200,212,232,.12);border-color:rgba(200,212,232,.3);color:var(--silver);}
+  .nav-btn.primary:hover{background:rgba(200,212,232,.26);color:var(--silver-bright);}
+
+  /* ══════════════════════════════════
+     PRINT STYLESHEET
+  ══════════════════════════════════ */
+  @media print{
+    @page{size:A4 portrait;margin:15mm 14mm 15mm 14mm;}
+    @page:first{margin-top:10mm;}
+    *,*::before,*::after{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{font-family:'Cairo','Arial',sans-serif!important;background:white!important;color:#1a1a1a!important;margin:0!important;padding:0!important;overflow:visible!important;min-height:unset!important;width:100%!important;}
+    #stars,#moon-glow,.breadcrumb,.bottom-nav,.print-bar,.copy-btn{display:none!important;}
+    .page{position:static!important;z-index:auto!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;}
+    /* hero */
+    .session-hero{padding:8px 0 14px!important;border-bottom:2px solid #8090c0!important;margin-bottom:18px!important;background:none!important;}
+    .session-hero h1{font-size:20pt!important;font-weight:700!important;color:#1a2060!important;-webkit-text-fill-color:#1a2060!important;background:none!important;line-height:1.2!important;margin-bottom:8px!important;}
+    .session-num-badge{background:#eef0f8!important;border:1px solid #8090c0!important;color:#2a3480!important;font-size:9pt!important;padding:4px 12px!important;border-radius:20px!important;margin-bottom:10px!important;display:inline-block!important;}
+    .session-hero p.subtitle{color:#444!important;font-size:10pt!important;line-height:1.6!important;}
+    .meta-row{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-top:10px!important;}
+    .meta-item{color:#555!important;font-size:9pt!important;}
+    .meta-dot{background:#bbb!important;}
+    /* sec titles */
+    .sec-title{font-size:8.5pt!important;color:#2a3480!important;letter-spacing:2px!important;border-bottom:1.5px solid #8090c0!important;padding-bottom:4px!important;margin-bottom:12px!important;break-after:avoid!important;}
+    .sec-title::after{display:none!important;}
+    /* objectives */
+    .objectives-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;margin-bottom:18px!important;}
+    .obj-card{background:#f0f1f8!important;border:1px solid #ccc!important;border-right:3px solid #8090c0!important;border-radius:6px!important;padding:10px 12px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .obj-icon{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .obj-title{color:#2a3480!important;font-size:9.5pt!important;}
+    .obj-desc{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    /* timeline */
+    .timeline{margin-bottom:18px!important;}
+    .timeline::before{background:#ccc!important;width:1px!important;}
+    .tl-item{margin-bottom:9px!important;break-inside:avoid!important;page-break-inside:avoid!important;padding-right:38px!important;}
+    .tl-dot{width:13px!important;height:13px!important;right:14px!important;top:12px!important;border-color:#aaa!important;background:white!important;}
+    .tl-time{color:#2a3480!important;font-size:8.5pt!important;width:52px!important;}
+    .tl-content{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:9px 13px!important;}
+    .tl-content h3{color:#222!important;font-size:10pt!important;margin-bottom:5px!important;}
+    .tl-content p,.tl-content li{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .tl-content li::before{color:#aaa!important;}
+    /* phases svg */
+    .phases-wrap{overflow:visible!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .phases-wrap svg{min-width:unset!important;width:100%!important;}
+    /* phase cards */
+    .phases-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important;margin-top:12px!important;}
+    .phase-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .phase-name{color:#222!important;font-size:9pt!important;}
+    .phase-desc{color:#555!important;font-size:8pt!important;}
+    .phase-days{color:#444!important;font-size:7.5pt!important;}
+    /* content blocks */
+    .content-section{margin-bottom:18px!important;}
+    .content-block{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .content-block h3{color:#2a3480!important;font-size:11pt!important;margin-bottom:8px!important;}
+    .content-block p{color:#444!important;font-size:9.5pt!important;line-height:1.65!important;margin-bottom:8px!important;}
+    .highlight{background:#eef0f8!important;border-right:3px solid #8090c0!important;color:#1a2060!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .highlight-gold{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .highlight-indigo{background:#eef0f8!important;border-right:3px solid #6070c0!important;color:#1a2060!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    /* facts */
+    .facts-strip{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;}
+    .fact-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .fact-emoji{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .fact-text{color:#444!important;font-size:8.5pt!important;line-height:1.5!important;}
+    .fact-text strong{color:#333!important;}
+    /* apollo table */
+    .apollo-table{font-size:8.5pt!important;border-collapse:collapse!important;}
+    .apollo-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f5f5f5!important;}
+    .apollo-table td{color:#444!important;border-bottom:1px solid #eee!important;background:white!important;padding:7px 8px!important;border-radius:0!important;}
+    .apollo-table td:first-child{color:#222!important;}
+    .mission-badge{font-size:7.5pt!important;}
+    .badge-success{background:#e0f5ec!important;color:#1a6a3a!important;}
+    .badge-fail{background:#fde8e8!important;color:#a02020!important;}
+    /* observation box */
+    .obs-box{background:#f0f1f8!important;border:1.5px solid #8090c0!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:18px!important;}
+    .obs-badge{background:#eef0f8!important;border:1px solid #8090c0!important;color:#2a3480!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .obs-title{color:#1a1a1a!important;font-size:12pt!important;}
+    .obs-subtitle{color:#444!important;font-size:9pt!important;line-height:1.6!important;margin-bottom:12px!important;}
+    /* tracker */
+    .tracker-preview{background:#fafafa!important;border:1px solid #ddd!important;border-radius:8px!important;padding:14px!important;margin-bottom:14px!important;overflow:visible!important;}
+    .tracker-title{color:#555!important;font-size:8pt!important;}
+    .tracker-grid{min-width:unset!important;}
+    .tracker-day{background:#f0f0f0!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 4px!important;}
+    .tracker-day-label{color:#555!important;}
+    .tracker-moon-circle{background:#e8e8e8!important;border:1px dashed #bbb!important;}
+    .tracker-line{background:#ddd!important;}
+    /* steps */
+    .step-item{break-inside:avoid!important;page-break-inside:avoid!important;margin-bottom:10px!important;gap:10px!important;}
+    .step-num{width:26px!important;height:26px!important;background:#eef0f8!important;border:1px solid #8090c0!important;color:#2a3480!important;font-size:9pt!important;}
+    .step-content h4{color:#1a1a1a!important;font-size:10pt!important;margin-bottom:2px!important;}
+    .step-content p{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .step-tip{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:6px!important;border-radius:0 5px 5px 0!important;}
+    /* obs log */
+    .obs-log{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;overflow:visible!important;}
+    .obs-log-header{background:#f0f0f0!important;color:#555!important;font-size:8pt!important;padding:7px 10px!important;}
+    .obs-log-row{padding:8px 10px!important;border-top:1px solid #eee!important;font-size:8.5pt!important;}
+    .obs-log-row .day-label{color:#222!important;}
+    .obs-field{background:#f5f5f5!important;border:1px dashed #ccc!important;}
+    /* assessment */
+    .qa-item{border-bottom:1px solid #eee!important;padding:10px 0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .q-num{width:24px!important;height:24px!important;background:#eef0f8!important;border:1px solid #8090c0!important;color:#2a3480!important;font-size:9pt!important;}
+    .qa-item p{color:#444!important;font-size:9.5pt!important;line-height:1.55!important;}
+    /* tools */
+    .tools-row{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .tool-pill{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 12px!important;break-inside:avoid!important;}
+    .t-name{color:#222!important;font-size:9.5pt!important;}
+    .t-use{color:#555!important;font-size:8.5pt!important;}
+    .prompt-box{background:#f5f5f5!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;line-height:1.6!important;white-space:pre-wrap!important;word-break:break-word!important;padding:12px!important;border-radius:6px!important;}
+    /* homework */
+    .homework-box{background:#fffbea!important;border:1.5px solid #d4a820!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .hw-icon{font-size:1.6rem!important;}
+    .hw-content h3{color:#7a5800!important;font-size:10.5pt!important;margin-bottom:5px!important;}
+    .hw-content p{color:#444!important;font-size:9pt!important;line-height:1.6!important;}
+    /* page breaks */
+    h2,h3,.sec-title{break-after:avoid!important;page-break-after:avoid!important;}
+    section:has(.obs-box){break-before:page!important;page-break-before:always!important;}
+    .content-section{break-before:auto!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div id="moon-glow"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة الرابعة</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🌙 الحصة الرابعة من ١٢</div>
+    <h1>القمر — رفيق الليل</h1>
+    <p class="subtitle">
+      أقرب جسم فلكي إلى الأرض، وأول مكان في الفضاء وطأته قدم إنسان. نكتشف اليوم أطواره الثمانية، سر المد والجزر، وقصة أبطال أبولو — ثم نبدأ أسبوعاً من رصده بأعيننا.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--silver)"></div>المدة: ٨٠ دقيقة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--indigo)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>النوع: مفهوم + رصد + نشاط أسبوعي</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>المكان: القاعة + الخارج (ليلاً)</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🌑</span>
+        <div class="obj-title">أُسمّي أطوار القمر</div>
+        <div class="obj-desc">يُسمّي الطفل الأطوار الثمانية للقمر بالترتيب ويشرح سبب تغيّر شكله المرئي.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🌊</span>
+        <div class="obj-title">أفهم المد والجزر</div>
+        <div class="obj-desc">يشرح الطفل العلاقة بين جاذبية القمر وظاهرة المد والجزر في المحيطات.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🚀</span>
+        <div class="obj-title">أعرف بعثات أبولو</div>
+        <div class="obj-desc">يذكر الطفل اسم أول إنسان مشى على القمر والسنة، ويصف إنجاز برنامج أبولو.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">📓</span>
+        <div class="obj-title">أرصد وأسجّل</div>
+        <div class="obj-desc">ينجز الطفل بطاقة رصد القمر لأسبوع كامل ويستنتج الطور الذي مرّ به القمر.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🌙 مقدمة التشويق</h3>
+          <p>يسأل المدرّب: <em style="color:var(--white)">"لماذا يبدو القمر أحياناً دائرة كاملة وأحياناً هلالاً رفيعاً؟ هل تغيّر شكله الحقيقي؟"</em></p>
+          <ul>
+            <li>جولة للتخمينات — تدوين الأفكار على السبورة دون تصحيح</li>
+            <li>عرض صورة للقمر في طور البدر وصورة للهلال الدقيق</li>
+            <li>مراجعة خاطفة: القمر كوكب طبيعي للأرض، درسنا الأرض في الحصة السابقة</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--silver)"></div>
+        <div class="tl-time">١٠–٣٠ د</div>
+        <div class="tl-content">
+          <h3>📖 أطوار القمر الثمانية</h3>
+          <p>شرح دوري مرئي للأطوار مع تجربة المصباح والكرة لمحاكاة أطوار القمر حول الأرض.</p>
+          <ul>
+            <li>المحور: القمر لا يُضيء بنفسه — يعكس ضوء الشمس</li>
+            <li>الأطوار الثمانية بالترتيب من القمر الجديد للبدر والعودة</li>
+            <li>تجربة: طفل يمسك كرة والمصباح يمثّل الشمس — يدور ببطء ويلاحظ الظل</li>
+            <li>لماذا نرى دائماً نفس وجه القمر؟ الدوران المتزامن!</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot indigo"></div>
+        <div class="tl-time indigo">٣٠–٤٥ د</div>
+        <div class="tl-content">
+          <h3>🌊 المد والجزر ورحلات أبولو</h3>
+          <p>شرح ظاهرة المد والجزر بتشبيه بسيط، ثم قصة مثيرة عن بعثات أبولو.</p>
+          <ul>
+            <li>المد والجزر: القمر يشدّ مياه المحيطات كالمغناطيس — مدّان وجزران يومياً</li>
+            <li>قصة أبولو ١١: نيل أرمسترونغ، باز ألدرين، يوليو ١٩٦٩</li>
+            <li>ماذا حملوا معهم؟ وماذا تركوا على القمر؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٤٥–٧٠ د</div>
+        <div class="tl-content">
+          <h3>📓 نشاط: توزيع بطاقة رصد القمر</h3>
+          <p>توزيع بطاقة التتبع الأسبوعية وشرح طريقة ملء السجل كل ليلة لمدة ٧ ليالٍ.</p>
+          <ul>
+            <li>شرح كيفية رسم شكل القمر بدقة في الدائرة الصغيرة</li>
+            <li>تسجيل الوقت والمكان ودرجة السطوع (خفيف/متوسط/ساطع)</li>
+            <li>تحديد الاتجاه المُضاء (يمين/يسار/كامل/غائب)</li>
+            <li>تدريب: تخمين الطور المقابل من صور على السبورة</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٧٠–٨٠ د</div>
+        <div class="tl-content">
+          <h3>✅ الخلاصة والتحضير</h3>
+          <p>كل طفل يكمل: <em style="color:var(--white)">"القمر يُغيّر شكله لأن..."</em> ثم يُعلن التحدي الأسبوعي.</p>
+          <ul>
+            <li>أسئلة التقييم السريعة</li>
+            <li>إعلان الحصة القادمة: النجوم لا تُعدّ — الجمعة القادمة</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MOON PHASES DIAGRAM -->
+  <section class="content-section">
+    <div class="sec-title">🌙 أطوار القمر الثمانية — مخطط دوري</div>
+    <div class="phases-wrap">
+      <svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px">
+        <defs>
+          <radialGradient id="earth-g" cx="50%" cy="40%" r="55%">
+            <stop offset="0%" stop-color="#5090dd"/>
+            <stop offset="100%" stop-color="#1a4080"/>
+          </radialGradient>
+          <radialGradient id="moon-lit" cx="40%" cy="35%" r="60%">
+            <stop offset="0%" stop-color="#f0f4ff"/>
+            <stop offset="100%" stop-color="#9090b8"/>
+          </radialGradient>
+        </defs>
+
+        <!-- Sun ray hint -->
+        <defs>
+          <linearGradient id="sun-ray" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="#f5c842" stop-opacity="0"/>
+            <stop offset="100%" stop-color="#f5c842" stop-opacity="0.15"/>
+          </linearGradient>
+        </defs>
+        <rect x="0" y="0" width="700" height="200" fill="url(#sun-ray)"/>
+        <text x="8" y="18" font-family="Cairo,sans-serif" font-size="9" fill="rgba(245,200,66,.5)">← ضوء الشمس</text>
+
+        <!-- Earth centre -->
+        <circle cx="350" cy="100" r="18" fill="url(#earth-g)"/>
+        <text x="350" y="136" text-anchor="middle" font-family="Cairo,sans-serif" font-size="9" fill="#60a5fa">الأرض</text>
+
+        <!-- Orbit ring -->
+        <circle cx="350" cy="100" r="72" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1" stroke-dasharray="3 4"/>
+
+        <!-- 8 moon positions -->
+        <!-- angles: 0°=right(new), then 45° steps CCW for Arabic RTL display -->
+        <!-- pos: 0°=new(right), 45°=wax-crescent(upper-right), 90°=first-quarter(top), 135°=wax-gibbous(upper-left), 180°=full(left), 225°=wan-gibbous(lower-left), 270°=last-quarter(bottom), 315°=wan-crescent(lower-right) -->
+
+        <g id="moons"></g>
+
+        <!-- Labels placed outside orbit -->
+        <!-- Generated by JS below for clean placement -->
+      </svg>
+    </div>
+
+    <!-- Phase cards -->
+    <div class="phases-grid" id="phase-cards"></div>
+  </section>
+
+  <!-- CONTENT: PHASES EXPLAINED -->
+  <section class="content-section">
+    <div class="sec-title">📚 محتوى الشرح التفصيلي</div>
+
+    <div class="content-block">
+      <h3><span class="icon">🌑</span> لماذا يتغيّر شكل القمر؟</h3>
+      <p>
+        القمر لا يُضيء بنفسه — إنه يعكس ضوء الشمس تماماً كالمرآة. عندما يدور القمر حول الأرض (دورة كاملة كل <strong style="color:var(--silver)">٢٩.٥ يوماً</strong>)، نرى أجزاءً مختلفة من وجهه المُضاء، فيبدو لنا وكأنه يتغيّر.
+      </p>
+      <div class="highlight">
+        🪞 <strong>تشبيه ذكي:</strong> تخيّل كرة نصفها مطليّ بالأبيض والنصف الآخر أسود. إذا دُرت بها حولك ببطء وأنت تراقبها — ستبدو مختلفة في كل موضع، لكن الكرة نفسها لم تتغير!
+      </div>
+      <p>
+        كذلك، ندرة جديرة بالذكر: القمر يدور حول نفسه بنفس السرعة التي يدور بها حول الأرض، لهذا نرى دائماً <strong style="color:var(--white)">نفس الوجه</strong>. الوجه الخفي للقمر لم يره أحد بعينه المجردة قط!
+      </p>
+      <div class="highlight-gold">
+        👁️ <strong>حقيقة مدهشة:</strong> أول صورة للوجه الخفي من القمر التقطها المسبار السوفيتي لونا-٣ عام ١٩٥٩ — قبل أن يطأه أي إنسان. وجده العلماء مختلفاً تماماً عن الوجه المرئي!
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">🌊</span> المد والجزر — قوة القمر الخفية</h3>
+      <p>
+        جاذبية القمر قوية بما يكفي لشدّ مياه المحيطات نحوه. الجانب من الأرض المقابل للقمر تتراكم فيه المياه (مدّ)، والجانب البعيد يحدث فيه مدّ آخر بسبب قوة الطرد المركزية — والجانبان الجانبيان يعانيان جزراً.
+      </p>
+      <p>
+        نتيجةً لذلك، كل نقطة على سواحل الأرض تشهد <strong style="color:var(--silver)">مدَّين وجزرَين يومياً</strong> — كل ٦ ساعات تقريباً تتبادل المياه بين الصعود والانحسار.
+      </p>
+      <div class="highlight">
+        ⚓ <strong>تشبيه عملي:</strong> خيّل أن لديك وعاء ماء وتُقرّب مغناطيساً من جانب — الماء يتكوّر نحو المغناطيس. القمر يفعل هذا مع محيطات الأرض كل يوم على مدى مليارات السنين!
+      </div>
+      <div class="highlight-indigo">
+        🌍 <strong>الشمس أيضاً تُؤثّر!</strong> الشمس أكبر بكثير لكنها أبعد، فتأثيرها على المد والجزر نصف تأثير القمر تقريباً. عندما يتوافق القمر والشمس (بدر أو محاق) يحدث <strong>المد الكبير</strong> — أعلى مد في الشهر!
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">🚀</span> بعثات أبولو — حين وطأ الإنسان القمر</h3>
+      <p>
+        في ١٦ يوليو ١٩٦٩، انطلقت مركبة أبولو ١١ من كيب كانافيرال بأمريكا حاملةً ثلاثة رواد فضاء. بعد ٤ أيام، في <strong style="color:var(--gold)">٢٠ يوليو ١٩٦٩</strong>، هبط نيل أرمسترونغ وباز ألدرين على سطح القمر في منطقة "بحر الهدوء"، بينما ظل مايكل كولينز يدور في المدار فوقهم.
+      </p>
+      <div class="highlight-gold">
+        👣 <strong>أول كلمات على القمر:</strong> قال نيل أرمسترونغ لحظة لمس القمر: "هذه خطوة صغيرة لإنسان، لكنها قفزة عملاقة للبشرية." — جملة ستظل في التاريخ إلى الأبد.
+      </div>
+      <p>
+        قضى الرائدان ٢ ساعة و٣١ دقيقة خارج المركبة، جمعا ٢١ كيلوغراماً من صخور القمر، ونصبا العلم الأمريكي، وتركا لوحة كُتب عليها: <em style="color:var(--silver)">"جاء هنا رجال من الأرض. أقدامهم أول ما مسّت القمر. جاؤوا بسلام نيابةً عن البشرية جمعاء."</em>
+      </p>
+
+      <!-- Apollo Table -->
+      <div style="margin-top:18px;overflow-x:auto">
+        <table class="apollo-table" id="apollo-tbl">
+          <thead>
+            <tr>
+              <th>البعثة</th>
+              <th>التاريخ</th>
+              <th>أول مشيٍ على القمر</th>
+              <th>مدة الإقامة</th>
+              <th>الإنجاز البارز</th>
+              <th>الحالة</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Fun Facts -->
+    <div style="margin-top:24px">
+      <div class="sec-title">⚡ حقائق عن القمر لا يصدقها العقل</div>
+      <div class="facts-strip">
+        <div class="fact-card">
+          <span class="fact-emoji">🦶</span>
+          <div class="fact-text">آثار أقدام رواد أبولو لا تزال موجودة على القمر حتى الآن — لأنه لا يوجد هواء ولا ريح تمحوها. ستبقى هناك <strong>ملايين السنين</strong>!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">📏</span>
+          <div class="fact-text">القمر يبتعد عن الأرض بمعدل <strong>٣.٨ سنتيمترات</strong> سنوياً. قبل مليار سنة كان أقرب بكثير — والمد والجزر كانت أعنف!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">⚖️</span>
+          <div class="fact-text">وزنك على القمر يساوي <strong>سُدس وزنك</strong> على الأرض — لأن جاذبيته أضعف بكثير. لو وزنت ٦٠ كغ هنا، ستزن ١٠ كغ هناك!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🌡️</span>
+          <div class="fact-text">درجة الحرارة على القمر تتراوح بين <strong>-١٧٣ ليلاً</strong> و<strong>+١٢٧ نهاراً</strong> — لأنه بلا غلاف جوي يُنظّم الحرارة!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBSERVATION ACTIVITY -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🔭 نشاط الرصد الأسبوعي</div>
+    <div class="obs-box">
+
+      <div class="obs-header">
+        <div class="obs-badge">رصد أسبوعي</div>
+        <div class="obs-title">📓 تتبّع القمر لمدة ٧ ليالٍ ورسم أطواره</div>
+      </div>
+      <p class="obs-subtitle">
+        هذا النشاط يمتد خارج القاعة — كل ليلة لمدة أسبوع يُراقب الطفل القمر ويُسجّل ملاحظاته. في الحصة القادمة نقارن النتائج ونحدد الطور الذي مرّ به القمر.
+      </p>
+
+      <!-- Tracker sheet preview -->
+      <div class="tracker-preview">
+        <div class="tracker-title">📋 نموذج بطاقة الرصد — ليلة بليلة</div>
+        <div class="tracker-grid">
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ١</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٢</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٣</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٤</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٥</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٦</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+          <div class="tracker-day">
+            <div class="tracker-day-label">الليلة ٧</div>
+            <div class="tracker-moon-circle"></div>
+            <div class="tracker-lines"><div class="tracker-line"></div><div class="tracker-line"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps -->
+      <ol class="steps-list">
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>📋 تحضير البطاقة (في القاعة — ٥ دقائق)</h4>
+            <p>يُسجّل الطفل اسمه وتاريخ بداية الرصد. يكتب في الخانة الأولى الطور المتوقع بناءً على تطبيق Stellarium أو Moon Phase App.</p>
+            <div class="step-tip">💡 استخدموا تطبيق Moon Phase App مجاناً لمعرفة طور القمر الحالي — واطلبوا من الأطفال مقارنة التوقع بما سيرونه فعلاً.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>🌙 الرصد الليلي (كل ليلة — ٥ دقائق)</h4>
+            <p>كل ليلة بعد الغروب بساعة، يُراقب الطفل القمر لدقيقتين ويُسجّل: شكله الدقيق (يرسمه في الدائرة)، الجانب المُضاء، وتقديره للسطوع من ١ إلى ٣.</p>
+            <div class="step-tip">🌤️ إذا كانت السماء غائمة: يُكتب "غائم" في الخانة ويُستخدم التطبيق لرسم الطور المتوقع نظرياً.</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>📐 ملاحظة اتجاه الإضاءة (مهم!)</h4>
+            <p>لاحظ دائماً: هل الجانب المُضاء على اليمين أم اليسار؟ في نصف الكرة الشمالي، الهلال المُضاء من اليمين يعني قمراً متزايداً، ومن اليسار يعني متناقصاً.</p>
+            <div class="step-tip">🔍 قاعدة سهلة: القمر "D" شكله = متزايد. القمر "C" شكله = متناقص (كحرف C في كلمة "Crescent Decreasing").</div>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>📊 التحليل في الحصة القادمة</h4>
+            <p>في بداية الحصة الخامسة، يعرض كل طفل بطاقته. نقارن رسومات الأطفال مع بعضها ومع صور أطوار القمر الفعلية. من رصد أكثر دقة؟ من التزم كل ليلة؟</p>
+          </div>
+        </div>
+      </ol>
+
+      <!-- Observation Log -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin:20px 0 10px">📝 سجل الرصد التفصيلي (للطباعة)</div>
+      <div class="obs-log">
+        <div class="obs-log-header">
+          <span>الليلة</span>
+          <span>شكل القمر (الطور)</span>
+          <span>الجانب المضاء</span>
+          <span>السطوع (١-٣)</span>
+        </div>
+        <div id="obs-rows"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong style="color:var(--white)">لماذا نرى القمر أحياناً بدراً كاملاً وأحياناً لا نراه أصلاً؟</strong><br>الهدف: فهم الأطوار وعلاقتها بوضع القمر بين الأرض والشمس.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong style="color:var(--white)">اشرح بجملتين كيف يُسبّب القمر ظاهرة المد والجزر.</strong><br>الهدف: ربط الجاذبية بالأثر على المياه.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong style="color:var(--white)">من كان أول إنسان يمشي على القمر؟ وفي أي سنة؟</strong><br>الهدف: معرفة المعلومة التاريخية الأساسية.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong style="color:var(--white)">لماذا لا نرى الوجه الخفي للقمر أبداً من الأرض؟</strong><br>الهدف: فهم مفهوم الدوران المتزامن.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong style="color:var(--white)">لو وزنت ٦٠ كيلوغراماً — كم ستزن على القمر؟ ولماذا؟</strong><br>الهدف: تطبيق مفهوم فرق الجاذبية بالحساب البسيط.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌙 Moon Phase App / Stellarium</div>
+          <div class="t-use">معرفة الطور الحالي للقمر وجدول الأطوار للأسبوع القادم</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد قصة مصوّرة عن رحلة أبولو ١١ بأسلوب مناسب للأطفال</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📓 NotebookLM</div>
+          <div class="t-use">تلخيص وثائق NASA عن برنامج أبولو وإنتاج بودكاست للحصة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">توليد بطاقة رصد القمر جاهزة للطباعة وأسئلة مراجعة متدرجة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(200,212,232,.2)">
+      <h3><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد قصة درامية عن رحلة أبولو ١١:</p>
+      <div class="prompt-box" id="ready-prompt">أنت كاتب قصص علمية للأطفال ومتخصص في تاريخ الفضاء.
+
+اكتب قصة قصيرة (٢٥٠ كلمة) بالعربية الفصيحة المبسّطة عن رحلة أبولو ١١.
+
+القصة يجب أن:
+- تبدأ من لحظة الإطلاق في ١٦ يوليو ١٩٦٩ (وصف حي للهدير والاهتزاز)
+- تصف لحظة هبوط المركبة على القمر وشعور أرمسترونغ
+- تتضمن أول خطوة على القمر بالجملة التاريخية
+- تنتهي بعودة الأبطال الثلاثة والاستقبال الحاشد
+- تكون مناسبة للقراءة الجهرية أمام أطفال ٨-١٢ سنة
+- تستخدم وصفاً حسياً حياً (ما يرون، ما يسمعون، ما يشعرون)</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🌙</div>
+    <div class="hw-content">
+      <h3>الواجب الأسبوعي — راصد القمر</h3>
+      <p>
+        ابدأ الليلة! راقب القمر كل ليلة لمدة ٧ ليالٍ متتالية وسجّل شكله في البطاقة. في كل ليلة: ارسم شكل القمر في الدائرة بدقة، لاحظ من أين يأتي الضوء (يمين / يسار / من الأعلى)، وقدّر سطوعه.
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🏆 <strong>تحدي المراقب الذهبي:</strong> من يُسلّم بطاقة مكتملة الـ ٧ ليالٍ مع رسومات دقيقة يحصل على ميدالية "راصد القمر المحترف" في الحصة القادمة!
+      </p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()">🖨️ طباعة الحصة وبطاقة الرصد</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-03-jiranuna-alkawakib.html'">← الحصة الثالثة</button>
+    <button class="nav-btn" onclick="window.location.href='astronomy-kids-guide.html'" style="color:var(--muted)">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn primary" onclick="window.location.href='session-05-alnujum-la-tuadd.html'">الحصة الخامسة: النجوم لا تُعدّ ←</button>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+/* ── STARS ── */
+(function(){
+  var c=document.getElementById('stars');
+  for(var i=0;i<170;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2.2+.3;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px',
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(2+Math.random()*5)+'s',
+      '--delay:'+(-Math.random()*6)+'s',
+      '--min-op:'+(0.08+Math.random()*.35)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+/* ── MOON PHASES DATA ── */
+var phases=[
+  {name:'المحاق\n(القمر الجديد)',   en:'New Moon',         days:'اليوم ١',    lit:0,   side:'—',          desc:'لا يُرى — الجانب المُضاء في الخلف'},
+  {name:'الهلال\nالمتزايد',         en:'Waxing Crescent',  days:'اليوم ٣–٧',  lit:25,  side:'يمين',       desc:'شريحة صغيرة مضيئة على اليمين'},
+  {name:'التربيع\nالأول',           en:'First Quarter',    days:'اليوم ٧–٨',  lit:50,  side:'يمين',       desc:'نصف القمر الأيمن مضيء'},
+  {name:'الأحدب\nالمتزايد',         en:'Waxing Gibbous',   days:'اليوم ٩–١٣', lit:75,  side:'يمين+مركز',  desc:'أكثر من نصف مضيء'},
+  {name:'البدر',                    en:'Full Moon',        days:'اليوم ١٤–١٥',lit:100, side:'كامل',       desc:'القمر كامل الإضاءة — الأجمل!'},
+  {name:'الأحدب\nالمتناقص',         en:'Waning Gibbous',   days:'اليوم ١٦–٢٠',lit:75,  side:'يسار+مركز',  desc:'أكثر من نصف لكن ينقص'},
+  {name:'التربيع\nالأخير',          en:'Last Quarter',     days:'اليوم ٢١–٢٢',lit:50,  side:'يسار',       desc:'نصف القمر الأيسر مضيء'},
+  {name:'الهلال\nالمتناقص',         en:'Waning Crescent',  days:'اليوم ٢٣–٢٨',lit:25,  side:'يسار',       desc:'شريحة صغيرة مضيئة على اليسار'},
+];
+
+/* ── DRAW MOON PHASES IN SVG ── */
+(function(){
+  var svg=document.querySelector('#moons').closest('svg');
+  var cx=350,cy=100,orbitR=72,moonR=10;
+  var g=document.getElementById('moons');
+
+  phases.forEach(function(ph,i){
+    var angle=(i*45-90)*Math.PI/180; /* start top, go CW */
+    var mx=cx+orbitR*Math.cos(angle);
+    var my=cy+orbitR*Math.sin(angle);
+
+    /* Moon dark base */
+    var circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('cx',mx); circle.setAttribute('cy',my);
+    circle.setAttribute('r',moonR);
+    circle.setAttribute('fill','#2a2a3a');
+    circle.setAttribute('stroke','rgba(255,255,255,.12)');
+    circle.setAttribute('stroke-width','0.5');
+    g.appendChild(circle);
+
+    /* Lit portion using clip approach */
+    if(ph.lit>0 && ph.lit<100){
+      var litId='lit'+i;
+      var defs=svg.querySelector('defs');
+      var clip=document.createElementNS('http://www.w3.org/2000/svg','clipPath');
+      clip.setAttribute('id',litId);
+      var cr=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      cr.setAttribute('cx',mx); cr.setAttribute('cy',my); cr.setAttribute('r',moonR);
+      clip.appendChild(cr);
+      defs.appendChild(clip);
+
+      /* lit half — right for waxing (i<4), left for waning (i>4) */
+      var litCirc=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      litCirc.setAttribute('cx', i<4 ? mx+moonR*0.5 : mx-moonR*0.5);
+      litCirc.setAttribute('cy',my);
+      litCirc.setAttribute('r',moonR);
+      litCirc.setAttribute('fill','#d8e4f8');
+      litCirc.setAttribute('clip-path','url(#'+litId+')');
+      g.appendChild(litCirc);
+    } else if(ph.lit===100){
+      var full=document.createElementNS('http://www.w3.org/2000/svg','circle');
+      full.setAttribute('cx',mx); full.setAttribute('cy',my);
+      full.setAttribute('r',moonR);
+      full.setAttribute('fill','#d8e4f8');
+      g.appendChild(full);
+    }
+
+    /* Label line + text */
+    var lx=cx+(orbitR+20)*Math.cos(angle);
+    var ly=cy+(orbitR+20)*Math.sin(angle);
+    var line=document.createElementNS('http://www.w3.org/2000/svg','line');
+    line.setAttribute('x1',mx+moonR*Math.cos(angle));
+    line.setAttribute('y1',my+moonR*Math.sin(angle));
+    line.setAttribute('x2',lx); line.setAttribute('y2',ly);
+    line.setAttribute('stroke','rgba(255,255,255,.1)');
+    line.setAttribute('stroke-width','0.6');
+    g.appendChild(line);
+
+    /* tiny dot */
+    var dot=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    dot.setAttribute('cx',lx); dot.setAttribute('cy',ly);
+    dot.setAttribute('r','2');
+    dot.setAttribute('fill','rgba(200,212,232,.4)');
+    g.appendChild(dot);
+
+    /* text */
+    var lines=ph.name.split('\n');
+    var tx=cx+(orbitR+36)*Math.cos(angle);
+    var ty=cy+(orbitR+36)*Math.sin(angle);
+    lines.forEach(function(l,li){
+      var t=document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('x',tx);
+      t.setAttribute('y',ty+(li*10)-(lines.length-1)*5);
+      t.setAttribute('text-anchor','middle');
+      t.setAttribute('font-family','Cairo,sans-serif');
+      t.setAttribute('font-size','7.5');
+      t.setAttribute('fill','rgba(200,212,232,.7)');
+      t.textContent=l;
+      g.appendChild(t);
+    });
+  });
+})();
+
+/* ── PHASE CARDS ── */
+(function(){
+  var colors=['#3a3a5a','#3a3a5a','#3a4060','#3a3a5a','#4a5080','#3a3a5a','#3a4060','#3a3a5a'];
+  var el=document.getElementById('phase-cards');
+  phases.forEach(function(ph,i){
+    var div=document.createElement('div');
+    div.className='phase-card';
+    /* mini moon svg */
+    var r=22;
+    var svgStr='<svg width="44" height="44" viewBox="0 0 44 44" xmlns="http://www.w3.org/2000/svg" class="phase-svg">'+
+      '<circle cx="22" cy="22" r="'+r+'" fill="#1a1a2a" stroke="rgba(255,255,255,.1)" stroke-width="0.5"/>';
+    if(ph.lit===100){
+      svgStr+='<circle cx="22" cy="22" r="'+r+'" fill="#d8e4f8"/>';
+    } else if(ph.lit>0){
+      var ox=i<4?r*.5:-r*.5;
+      svgStr+='<clipPath id="pc'+i+'"><circle cx="22" cy="22" r="'+r+'"/></clipPath>'+
+              '<circle cx="'+(22+ox)+'" cy="22" r="'+r+'" fill="#d8e4f8" clip-path="url(#pc'+i+')"/>';
+    }
+    svgStr+='</svg>';
+    div.innerHTML=svgStr+
+      '<div class="phase-name">'+ph.name.replace('\n','<br>')+'</div>'+
+      '<div class="phase-desc">'+ph.desc+'</div>'+
+      '<div class="phase-days">'+ph.days+'</div>';
+    el.appendChild(div);
+  });
+})();
+
+/* ── APOLLO MISSIONS ── */
+var missions=[
+  {name:'أبولو ١١',date:'يوليو ١٩٦٩',   crew:'أرمسترونغ، ألدرين',  dur:'٢ س ٣١ د',achievement:'أول هبوط بشري على القمر',          ok:true},
+  {name:'أبولو ١٢',date:'نوفمبر ١٩٦٩',  crew:'كونراد، بيان',       dur:'٧ س ٤٥ د',achievement:'هبوط دقيق بجانب مسبار سيرفيور ٣',  ok:true},
+  {name:'أبولو ١٣',date:'أبريل ١٩٧٠',   crew:'لوفيل، سويغارت، هايس',dur:'—',        achievement:'نجاة معجزة بعد انفجار خزان الأكسجين',ok:false},
+  {name:'أبولو ١٤',date:'فبراير ١٩٧١',  crew:'شيبرد، ميتشل',       dur:'٩ س ٢٢ د',achievement:'أول لعب غولف على القمر!',           ok:true},
+  {name:'أبولو ١٥',date:'يوليو ١٩٧١',   crew:'سكوت، إيروين',       dur:'١٩ س ٨ د', achievement:'أول مركبة قمرية — ٢٧ كم بالسيارة',  ok:true},
+  {name:'أبولو ١٦',date:'أبريل ١٩٧٢',   crew:'يونغ، دوك',          dur:'٢٠ س ١٤ د',achievement:'المرتفعات القمرية لأول مرة',         ok:true},
+  {name:'أبولو ١٧',date:'ديسمبر ١٩٧٢',  crew:'سيرنان، شميت',       dur:'٢٢ س ٤ د', achievement:'آخر بعثة — أطول مشي على القمر',     ok:true},
+];
+var tb=document.querySelector('#apollo-tbl tbody');
+missions.forEach(function(m){
+  var tr=document.createElement('tr');tr.className='a-row';
+  tr.innerHTML='<td>'+m.name+'</td><td style="color:var(--muted)">'+m.date+'</td>'+
+    '<td style="color:var(--silver-bright)">'+m.crew+'</td>'+
+    '<td style="color:var(--muted)">'+m.dur+'</td>'+
+    '<td style="font-size:12px;color:var(--muted)">'+m.achievement+'</td>'+
+    '<td><span class="mission-badge '+(m.ok?'badge-success':'badge-fail')+'">'+
+    (m.ok?'✓ ناجحة':'✕ إنقاذ')+'</span></td>';
+  tb.appendChild(tr);
+});
+
+/* ── OBSERVATION LOG ROWS ── */
+var nights=['الليلة الأولى','الليلة الثانية','الليلة الثالثة','الليلة الرابعة','الليلة الخامسة','الليلة السادسة','الليلة السابعة'];
+var obsContainer=document.getElementById('obs-rows');
+nights.forEach(function(n){
+  var row=document.createElement('div');row.className='obs-log-row';
+  row.innerHTML=
+    '<span class="day-label">'+n+'</span>'+
+    '<div class="obs-field"></div>'+
+    '<div class="obs-field"></div>'+
+    '<div class="obs-field"></div>';
+  obsContainer.appendChild(row);
+});
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');
+    b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>

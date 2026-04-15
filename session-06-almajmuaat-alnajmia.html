@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ٦ – المجموعات النجمية | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#04060f;--deep:#080d1f;--cosmos:#0d1535;
+    --gold:#f5c842;--amber:#e8a020;
+    --cyan:#40d4e8;--violet:#8b5cf6;--rose:#f472b6;
+    --white:#f0f4ff;--muted:#8899cc;--green:#34d399;
+    --star-w:#e8f0ff;--star-y:#fff8c0;--star-b:#b0ccff;--star-r:#ffb090;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.15);transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:48px;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.35);
+    border-radius:50px;padding:6px 18px;font-size:12px;color:#c4b5fd;letter-spacing:1px;margin-bottom:20px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,#c4b5fd 35%,var(--cyan) 65%,var(--star-y) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.25;margin-bottom:14px;
+  }
+  .session-hero p.subtitle{color:var(--muted);font-size:15px;max-width:640px;line-height:1.8;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SECTION TITLE ── */
+  .sec-title{
+    font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:56px;}
+  .obj-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px;transition:border-color .3s,transform .3s;}
+  .obj-card:hover{border-color:rgba(139,92,246,.28);transform:translateY(-3px);}
+  .obj-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+  .obj-title{font-size:13px;font-weight:700;color:#c4b5fd;margin-bottom:6px;}
+  .obj-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(139,92,246,.55),rgba(64,212,232,.2),transparent);}
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--violet);background:var(--night);flex-shrink:0;}
+  .tl-dot.gold{border-color:var(--gold);}
+  .tl-dot.cyan{border-color:var(--cyan);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-time{font-size:11px;color:var(--violet);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.gold{color:var(--gold);}
+  .tl-time.cyan{color:var(--cyan);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-time.green{color:var(--green);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── CONSTELLATION MAPS ── */
+  .const-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:56px;}
+  .const-card{
+    background:rgba(4,6,20,.8);border:1px solid rgba(139,92,246,.2);
+    border-radius:18px;overflow:hidden;transition:border-color .3s,transform .3s;
+  }
+  .const-card:hover{border-color:rgba(139,92,246,.45);transform:translateY(-4px);}
+  .const-map{display:block;width:100%;padding:8px 0 0;}
+  .const-info{padding:16px 20px;}
+  .const-name{font-size:16px;font-weight:700;margin-bottom:3px;}
+  .const-latin{font-size:11px;color:var(--muted);letter-spacing:1px;margin-bottom:10px;}
+  .const-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+  .const-stars-list{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;}
+  .star-tag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:50px;padding:3px 10px;font-size:11px;color:var(--muted);}
+  .star-tag.bright{background:rgba(245,200,66,.1);border-color:rgba(245,200,66,.25);color:var(--gold);}
+  .const-season{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--violet);margin-top:10px;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-section{margin-bottom:56px;}
+  .content-block{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:28px 32px;margin-bottom:16px;}
+  .content-block h3{font-size:17px;font-weight:700;color:#c4b5fd;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .hl{background:rgba(139,92,246,.07);border-right:3px solid var(--violet);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#c4b5fd;line-height:1.8;}
+  .hl-gold{background:rgba(245,200,66,.08);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#d4c07a;line-height:1.8;}
+  .hl-cyan{background:rgba(64,212,232,.07);border-right:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:14px;color:#99eef8;line-height:1.8;}
+
+  /* ── MYTHS TABLE ── */
+  .myths-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px;}
+  .myths-table th{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600;}
+  .myths-table tr.m-row{background:rgba(255,255,255,.025);transition:background .25s;}
+  .myths-table tr.m-row:hover{background:rgba(139,92,246,.08);}
+  .myths-table td{padding:11px 12px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);font-size:13px;vertical-align:top;}
+  .myths-table td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--white);}
+  .myths-table td:last-child{border-radius:0 10px 10px 0;}
+
+  /* ── WORKSHOP BOX ── */
+  .workshop-box{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(64,212,232,.04));border:1px solid rgba(139,92,246,.22);border-radius:20px;padding:32px;margin-bottom:56px;}
+  .ws-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .ws-badge{background:rgba(139,92,246,.18);border:1px solid rgba(139,92,246,.4);border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:#c4b5fd;letter-spacing:1px;}
+  .ws-title{font-size:18px;font-weight:700;}
+  .ws-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* star map canvas preview */
+  .map-preview{background:#000005;border:1px solid rgba(139,92,246,.25);border-radius:14px;padding:16px;margin-bottom:22px;text-align:center;}
+  .map-preview-label{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px;}
+  .map-legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;justify-content:center;}
+  .legend-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
+  .legend-dot{border-radius:50%;}
+
+  /* materials */
+  .materials-box{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 22px;margin-bottom:22px;}
+  .mat-title{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:10px;}
+  .materials-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .mat-tag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:50px;padding:5px 13px;font-size:12px;color:var(--muted);}
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.35);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#c4b5fd;}
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{background:rgba(245,200,66,.07);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;color:#d4c07a;line-height:1.65;margin-top:8px;}
+
+  /* rubric */
+  .rubric-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:14px;}
+  .rubric-table th{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase;padding:6px 10px;text-align:right;border-bottom:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.03);}
+  .rubric-table td{padding:9px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);font-size:12px;vertical-align:top;}
+  .rubric-table td:first-child{color:var(--white);font-weight:700;}
+  .pts-badge{display:inline-block;background:rgba(245,200,66,.15);color:var(--gold);font-weight:700;padding:2px 8px;border-radius:50px;font-size:10px;}
+
+  /* ── FACTS ── */
+  .facts-strip{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .fact-card{flex:1;min-width:190px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;}
+  .fact-emoji{font-size:1.5rem;display:block;margin-bottom:8px;}
+  .fact-text{font-size:13px;color:var(--muted);line-height:1.7;}
+  .fact-text strong{color:var(--gold);}
+
+  /* ── ASSESSMENT ── */
+  .qa-list{list-style:none;}
+  .qa-item{border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .qa-item:last-child{border-bottom:none;}
+  .q-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:rgba(139,92,246,.09);border:1px solid rgba(139,92,246,.22);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#c4b5fd;}
+  .qa-item p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:2px;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 20px;transition:border-color .3s;}
+  .tool-pill:hover{border-color:rgba(139,92,246,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  .prompt-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;}
+  .copy-btn{margin-top:14px;background:rgba(139,92,246,.14);border:1px solid rgba(139,92,246,.35);border-radius:10px;padding:9px 20px;color:#c4b5fd;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .copy-btn:hover{background:rgba(139,92,246,.26);}
+
+  .homework-box{background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.2);border-radius:16px;padding:24px 28px;margin-bottom:56px;display:flex;gap:20px;align-items:flex-start;}
+  .hw-icon{font-size:2rem;flex-shrink:0;}
+  .hw-content h3{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .hw-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:32px;flex-wrap:wrap;gap:12px;}
+  .nav-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;}
+  .nav-btn:hover{background:rgba(139,92,246,.1);color:#c4b5fd;}
+  .nav-btn.primary{background:rgba(139,92,246,.14);border-color:rgba(139,92,246,.35);color:#c4b5fd;}
+  .nav-btn.primary:hover{background:rgba(139,92,246,.28);color:#e0d8ff;}
+
+  /* ══════════════ PRINT ══════════════ */
+  @media print{
+    @page{size:A4 portrait;margin:15mm 14mm 15mm 14mm;}
+    @page:first{margin-top:10mm;}
+    *,*::before,*::after{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{font-family:'Cairo','Arial',sans-serif!important;background:white!important;color:#1a1a1a!important;margin:0!important;padding:0!important;overflow:visible!important;min-height:unset!important;width:100%!important;}
+    #stars,.breadcrumb,.bottom-nav,.print-bar,.copy-btn{display:none!important;}
+    .page{position:static!important;z-index:auto!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;}
+    .session-hero{padding:8px 0 14px!important;border-bottom:2px solid #6040a0!important;margin-bottom:18px!important;background:none!important;}
+    .session-hero h1{font-size:20pt!important;font-weight:700!important;color:#2a1060!important;-webkit-text-fill-color:#2a1060!important;background:none!important;line-height:1.2!important;margin-bottom:8px!important;}
+    .session-num-badge{background:#f0eeff!important;border:1px solid #6040a0!important;color:#2a1060!important;font-size:9pt!important;padding:4px 12px!important;border-radius:20px!important;margin-bottom:10px!important;display:inline-block!important;}
+    .session-hero p.subtitle{color:#444!important;font-size:10pt!important;}
+    .meta-row{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-top:10px!important;}
+    .meta-item{color:#555!important;font-size:9pt!important;}
+    .meta-dot{background:#bbb!important;}
+    .sec-title{font-size:8.5pt!important;color:#2a1060!important;letter-spacing:2px!important;border-bottom:1.5px solid #6040a0!important;padding-bottom:4px!important;margin-bottom:12px!important;break-after:avoid!important;}
+    .sec-title::after{display:none!important;}
+    .objectives-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;margin-bottom:18px!important;}
+    .obj-card{background:#f0eeff!important;border:1px solid #ccc!important;border-right:3px solid #6040a0!important;border-radius:6px!important;padding:10px 12px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .obj-icon{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .obj-title{color:#2a1060!important;font-size:9.5pt!important;}
+    .obj-desc{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .timeline{margin-bottom:18px!important;}
+    .timeline::before{background:#ccc!important;width:1px!important;}
+    .tl-item{margin-bottom:9px!important;break-inside:avoid!important;page-break-inside:avoid!important;padding-right:38px!important;}
+    .tl-dot{width:13px!important;height:13px!important;right:14px!important;top:12px!important;border-color:#aaa!important;background:white!important;}
+    .tl-time{color:#2a1060!important;font-size:8.5pt!important;width:52px!important;}
+    .tl-content{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:9px 13px!important;}
+    .tl-content h3{color:#222!important;font-size:10pt!important;margin-bottom:5px!important;}
+    .tl-content p,.tl-content li{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .tl-content li::before{color:#aaa!important;}
+    /* constellation cards */
+    .const-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:10px!important;margin-bottom:18px!important;}
+    .const-card{background:#08090f!important;border:1px solid #555!important;border-radius:8px!important;overflow:visible!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .const-map{padding:4px 0 0!important;}
+    .const-info{padding:10px 12px!important;}
+    .const-name{color:#1a1060!important;font-size:10pt!important;}
+    .const-latin{color:#555!important;font-size:8pt!important;}
+    .const-desc{color:#444!important;font-size:8.5pt!important;}
+    .star-tag{background:#f0f0f0!important;border:1px solid #ccc!important;color:#444!important;font-size:8pt!important;}
+    .star-tag.bright{background:#fff9e0!important;border-color:#d4a820!important;color:#7a5000!important;}
+    .const-season{color:#444!important;font-size:8pt!important;}
+    /* content blocks */
+    .content-section{margin-bottom:18px!important;}
+    .content-block{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .content-block h3{color:#2a1060!important;font-size:11pt!important;margin-bottom:8px!important;}
+    .content-block p{color:#444!important;font-size:9.5pt!important;line-height:1.65!important;margin-bottom:8px!important;}
+    .hl{background:#f0eeff!important;border-right:3px solid #6040a0!important;color:#180840!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-gold{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-cyan{background:#e8fafc!important;border-right:3px solid #20a0b0!important;color:#003840!important;font-size:9pt!important;padding:9px 13px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .myths-table{font-size:8.5pt!important;border-collapse:collapse!important;}
+    .myths-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f5f5f5!important;}
+    .myths-table td{color:#444!important;border-bottom:1px solid #eee!important;background:white!important;padding:7px 8px!important;border-radius:0!important;}
+    .myths-table td:first-child{color:#222!important;}
+    .facts-strip{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;}
+    .fact-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .fact-emoji{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .fact-text{color:#444!important;font-size:8.5pt!important;line-height:1.5!important;}
+    .fact-text strong{color:#333!important;}
+    /* workshop */
+    .workshop-box{background:#f0eeff!important;border:1.5px solid #6040a0!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:18px!important;}
+    .ws-badge{background:#e8e0ff!important;border:1px solid #6040a0!important;color:#2a1060!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .ws-title{color:#1a1a1a!important;font-size:12pt!important;}
+    .ws-subtitle{color:#444!important;font-size:9pt!important;line-height:1.6!important;margin-bottom:12px!important;}
+    .map-preview{background:#000005!important;border:1px solid #555!important;border-radius:8px!important;padding:12px!important;margin-bottom:14px!important;break-inside:avoid!important;}
+    .map-preview-label{color:#aaa!important;font-size:8pt!important;}
+    .legend-item{color:#555!important;font-size:8pt!important;}
+    .materials-box{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:9px 13px!important;margin-bottom:14px!important;break-inside:avoid!important;}
+    .mat-title{color:#555!important;font-size:8pt!important;}
+    .mat-tag{background:#ececec!important;border:1px solid #ccc!important;color:#333!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .step-item{break-inside:avoid!important;page-break-inside:avoid!important;margin-bottom:10px!important;gap:10px!important;}
+    .step-num{width:26px!important;height:26px!important;background:#f0eeff!important;border:1px solid #6040a0!important;color:#2a1060!important;font-size:9pt!important;}
+    .step-content h4{color:#1a1a1a!important;font-size:10pt!important;margin-bottom:2px!important;}
+    .step-content p{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .step-tip{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:6px!important;border-radius:0 5px 5px 0!important;}
+    .rubric-table{font-size:8.5pt!important;}
+    .rubric-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f0f0f0!important;}
+    .rubric-table td{color:#444!important;padding:7px 8px!important;border-bottom:1px solid #eee!important;}
+    .rubric-table td:first-child{color:#222!important;}
+    .pts-badge{background:#fff5d0!important;color:#7a5800!important;}
+    .qa-item{border-bottom:1px solid #eee!important;padding:10px 0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .q-num{width:24px!important;height:24px!important;background:#f0eeff!important;border:1px solid #6040a0!important;color:#2a1060!important;font-size:9pt!important;}
+    .qa-item p{color:#444!important;font-size:9.5pt!important;line-height:1.55!important;}
+    .tools-row{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .tool-pill{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 12px!important;break-inside:avoid!important;}
+    .t-name{color:#222!important;font-size:9.5pt!important;}
+    .t-use{color:#555!important;font-size:8.5pt!important;}
+    .prompt-box{background:#f5f5f5!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;line-height:1.6!important;white-space:pre-wrap!important;word-break:break-word!important;padding:12px!important;border-radius:6px!important;}
+    .homework-box{background:#fffbea!important;border:1.5px solid #d4a820!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .hw-icon{font-size:1.6rem!important;}
+    .hw-content h3{color:#7a5800!important;font-size:10.5pt!important;margin-bottom:5px!important;}
+    .hw-content p{color:#444!important;font-size:9pt!important;line-height:1.6!important;}
+    h2,h3,.sec-title{break-after:avoid!important;page-break-after:avoid!important;}
+    section:has(.workshop-box){break-before:page!important;page-break-before:always!important;}
+    .content-section{break-before:auto!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة السادسة</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🌟 الحصة السادسة من ١٢</div>
+    <h1>المجموعات النجمية</h1>
+    <p class="subtitle">
+      منذ آلاف السنين وُصلت النجوم بخطوط خيالية لتُشكّل صوراً لأبطال وحيوانات وأساطير. هذه الأبراج هي خريطة السماء الأولى للبشرية — نتعلّمها اليوم ثم نرسم خارطتنا النجومية بأيدينا.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--violet)"></div>المدة: ٨٠ دقيقة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--cyan)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>النوع: مفهوم + ورشة رسم + رصد</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>المكان: القاعة + الخارج (اختياري)</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🗺️</span>
+        <div class="obj-title">أُعرّف المجموعة النجمية</div>
+        <div class="obj-desc">يشرح الطفل ما هي المجموعة النجمية ولماذا اخترع الإنسان هذه الأنماط في السماء.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">⚔️</span>
+        <div class="obj-title">أتعرف على الجبّار والدبّان والدب</div>
+        <div class="obj-desc">يُحدّد الطفل النجوم الرئيسية في كل برج ويصف شكله وأفضل موعد لرؤيته.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">📖</span>
+        <div class="obj-title">أعرف الأسطورة وراء كل برج</div>
+        <div class="obj-desc">يروي الطفل الأسطورة المرتبطة بأحد الأبراج الثلاثة بأسلوبه الخاص.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">✏️</span>
+        <div class="obj-title">أرسم خارطة النجوم</div>
+        <div class="obj-desc">ينجز الطفل خارطة نجومية لثلاثة أبراج على ورقة سوداء بالنقاط الفضية والخطوط.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>✨ مقدمة التشويق</h3>
+          <p>يُطفئ المدرّب الأضواء ويُعرض صورة سماء ليلية صافية. يسأل: <em style="color:var(--white)">"هل سبق أن ربطت نجوماً في السماء بخيالك ورأيت شكلاً؟"</em></p>
+          <ul>
+            <li>جولة: من رأى "شكلاً" في السماء؟ ماذا رأى؟</li>
+            <li>حقيقة مثيرة: البشر منذ ٣٠,٠٠٠ سنة فعلوا هذا بالضبط!</li>
+            <li>ربط: كيف أفاد ذلك الملاحين والمزارعين والبدو عبر التاريخ؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--violet)"></div>
+        <div class="tl-time">١٠–٣٥ د</div>
+        <div class="tl-content">
+          <h3>📖 الشرح النظري: الأبراج الثلاثة الكبرى</h3>
+          <p>جولة تفاعلية بين ثلاثة أبراج — شرح النجوم والأسطورة وطريقة التعرف عليها في السماء.</p>
+          <ul>
+            <li>الجبّار (أوريون): ثلاثة نجوم في حزامه — أسهل برج للتعرف عليه</li>
+            <li>الدبّان (العقرب/Scorpius): قلب العقرب أنتاريس الأحمر العملاق</li>
+            <li>الدبّ الأكبر (Ursa Major): مغرفة الشمال والنجم القطبي</li>
+            <li>كيف نُعوّل على الأبراج لتحديد الاتجاه والفصل؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-time cyan">٣٥–٤٨ د</div>
+        <div class="tl-content">
+          <h3>📚 الأساطير والتاريخ</h3>
+          <p>قصص مقتضبة وممتعة وراء كل برج — من الأساطير اليونانية والعربية والبربرية.</p>
+          <ul>
+            <li>الجبّار أوريون: الصياد الذي تحداه العقرب</li>
+            <li>الدب الأكبر: كاليستو وابنها آرقاس في الأسطورة اليونانية</li>
+            <li>الأسماء العربية للنجوم: بيتلجوز، رجل الجوزاء، دنب، أنتاريس</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٤٨–٧٢ د</div>
+        <div class="tl-content">
+          <h3>✏️ ورشة الخارطة النجومية</h3>
+          <p>كل طفل يرسم خارطة نجومية على ورقة سوداء بالنقاط الفضية — ثلاثة أبراج كاملة بنجومها وخطوطها وأسمائها.</p>
+          <ul>
+            <li>توزيع ورقة النجوم المُحدّد فيها مواضع النجوم بنقاط خفيفة</li>
+            <li>الطفل يضع النقاط الفضية ويصل بينها بقلم فضي</li>
+            <li>كتابة اسم البرج والنجوم الرئيسية</li>
+            <li>إضافة اللمسات الفنية الشخصية</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٧٢–٨٠ د</div>
+        <div class="tl-content">
+          <h3>✅ معرض الخرائط والخلاصة</h3>
+          <p>تُعلَّق الخرائط على الجدار وكل طفل يشرح خريطته لزميل. التقييم بين الأقران.</p>
+          <ul>
+            <li>أسئلة الخلاصة السريعة</li>
+            <li>واجب الرصد: ابحث عن برج واحد في السماء الليلة</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONSTELLATION MAPS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🌌 خرائط الأبراج الثلاثة</div>
+    <div class="const-grid" id="const-grid"></div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <div class="sec-title">📚 محتوى الشرح التفصيلي</div>
+
+    <div class="content-block">
+      <h3><span class="icon">🗺️</span> ما هي المجموعة النجمية؟</h3>
+      <p>
+        المجموعة النجمية (البرج) هي مجموعة من النجوم تبدو لنا في السماء مُرتّبة بشكل يُذكّرنا بصورة معينة — إنسان أو حيوان أو أداة. الاتحاد الفلكي الدولي يعترف رسمياً بـ <strong style="color:var(--white)">٨٨ مجموعة نجمية</strong> تُقسم سماء الليل كاملة.
+      </p>
+      <div class="hl">
+        🧭 <strong>لماذا اخترعها الإنسان؟</strong> كانت المجموعات النجمية "خريطة السماء" للأجداد — يعرفون بها الفصول (برج الجبّار في الشتاء = وقت البذر)، الاتجاهات (النجم القطبي = الشمال دائماً)، والتوقيت الليلي.
+      </div>
+      <p>
+        النجوم داخل البرج الواحد <strong style="color:var(--white)">ليست بالضرورة قريبة من بعضها</strong> في الفضاء الحقيقي — بعضها قد يبعد عشرة أضعاف الآخر — لكنها تبدو لنا قريبة لأننا نراها في اتجاه واحد من الأرض.
+      </p>
+      <div class="hl-cyan">
+        🌍 <strong>الأبراج في الثقافة العربية والأمازيغية:</strong> أعطى العرب أسماءً عربية لمئات النجوم لا تزال مستخدمة حتى اليوم في علم الفلك الدولي — بيتلجوز، دنب، فيغا، أنتاريس، أرقطورس. وللأمازيغ في الجزائر تسميات خاصة للنجوم ارتبطت بتقاويم الزراعة والرعي.
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">⚔️</span> الجبّار — أوريون Orion</h3>
+      <p>
+        أسهل برج يُعرَّف عليه في السماء الشتوية — يكفي أن تجد <strong style="color:var(--white)">ثلاثة نجوم في صف مستقيم</strong> (حزام الجبّار أو "الثلاثة الملوك") لتحديده. البرج كاملاً يُشبه صيّاداً يرفع هراوة.
+      </p>
+      <div class="hl-gold">
+        🌟 <strong>بيتلجوز — المتغير العملاق:</strong> النجم الأحمر في كتف الجبّار هو أحد أكبر النجوم المعروفة — لو حلّ محل شمسنا لابتلع المدار حتى المشتري. وهو نجم <em>متغيّر</em> يتذبذب في سطوعه، ويُتوقّع أن ينفجر سوبرنوفا في المستقبل — لا أحد يعرف متى بالضبط!
+      </div>
+      <p>
+        <strong style="color:var(--white)">الأسطورة اليونانية:</strong> أوريون الصياد العملاق تباهى بأنه يستطيع قتل كل الحيوانات على الأرض. غضبت منه آلهة الأرض وأرسلت عقرباً قاتلاً ليلدغه. حزناً عليه وضعه زيوس في السماء — لكن في النصف الذي لا يظهر فيه العقرب (الدبّان) إلا حين يغيب الجبّار!
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">🦂</span> الدبّان — العقرب Scorpius</h3>
+      <p>
+        برج صيفي جميل يشبه فعلاً شكل العقرب بذيله المنحني. قلبه <strong style="color:var(--white)">أنتاريس</strong> نجم أحمر عملاق لا يخطئه العين — اسمه يعني بالعربية والإغريقية "منافس المريخ" لأنه يُشبهه في اللون الأحمر المميز.
+      </p>
+      <p>
+        في التراث العربي يُسمّى هذا البرج <strong style="color:var(--white)">"العقرب"</strong> وكان مرجعاً مهماً للبدو في معرفة المواسم — ظهوره في الأفق الغربي عند الفجر يعني قدوم الشتاء.
+      </p>
+      <div class="hl">
+        ✨ <strong>ملاحظة للرصد:</strong> الجبّار والعقرب لا يظهران معاً في السماء أبداً — حين يرتفع أحدهما يغيب الآخر. في الأسطورة، هذا لأنهما عدوّان ووُضعا في جانبَين متقابلَين من السماء تحاشياً للقتال!
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">🐻</span> الدبّ الأكبر — Ursa Major</h3>
+      <p>
+        أشهر مجموعة نجمية في نصف الكرة الشمالي. الجزء الأبرز منها — <strong style="color:var(--white)">المغرفة الكبرى (Big Dipper)</strong> — سبعة نجوم تشبه مغرفة الطبخ. وأهم ما فيها: النجمان الأماميان للمغرفة يُشيران مباشرة إلى <strong style="color:var(--gold)">النجم القطبي (الجدي)</strong>.
+      </p>
+      <div class="hl-gold">
+        🧭 <strong>بوصلة السماء:</strong> مدّ خطاً من نجمَي "المِسمار والخَزق" (النجمَين الأماميَّين للمغرفة) خمسة أضعاف المسافة بينهما — ستصل إلى النجم القطبي. والنجم القطبي يُشير دائماً نحو الشمال الجغرافي بدقة مذهلة!
+      </div>
+      <p>
+        <strong style="color:var(--white)">الأسطورة:</strong> كاليستو فتاة جميلة حوّلها زيوس إلى دبة. حين كاد ابنها آرقاس يصطادها دون أن يعرف، أنقذه زيوس بتحويله هو أيضاً إلى دب صغير ووضعهما معاً في السماء — الدب الأكبر وابنه الدب الأصغر.
+      </p>
+    </div>
+
+    <!-- Myths table -->
+    <div class="content-block">
+      <h3><span class="icon">📜</span> جدول مقارن: الأبراج الثلاثة</h3>
+      <div style="overflow-x:auto">
+        <table class="myths-table" id="myths-tbl"></table>
+      </div>
+    </div>
+
+    <!-- Fun facts -->
+    <div style="margin-top:24px">
+      <div class="sec-title">⚡ حقائق عن المجموعات النجمية</div>
+      <div class="facts-strip">
+        <div class="fact-card">
+          <span class="fact-emoji">📐</span>
+          <div class="fact-text">النجوم ليست ثابتة — تتحرك ببطء شديد. بعد <strong>٥٠,٠٠٠ سنة</strong> ستتغير أشكال المجموعات النجمية وتبدو مختلفة عمّا نراها اليوم!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🌍</span>
+          <div class="fact-text">اشتُقّ نصف أسماء النجوم الدولية من اللغة العربية — علماء فلك مسلمون في العصر الذهبي رصدوا السماء وسمّوا النجوم، وظلّت أسماؤهم حتى اليوم.</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🧊</span>
+          <div class="fact-text">السدم داخل برج الجبّار هي <strong>مصانع نجوم</strong> — سحب ضخمة من الغاز تتكثّف لتكوّن نجوماً جديدة. سديم الجبّار مرئي بالعين المجردة كبقعة ضبابية تحت حزامه!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🗓️</span>
+          <div class="fact-text">أقدم خريطة نجومية معروفة وجدها علماء الآثار في كهف <strong>لاسكو بفرنسا</strong> — رسمها إنسان قبل حوالي <strong>١٧,٠٠٠ سنة</strong> وتُصوّر برج الثور!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">✏️ الورشة اليدوية</div>
+    <div class="workshop-box">
+
+      <div class="ws-header">
+        <div class="ws-badge">ورشة فردية</div>
+        <div class="ws-title">🌌 رسم خارطة النجوم بالشاشة السوداء والنقاط الفضية</div>
+      </div>
+      <p class="ws-subtitle">
+        الهدف ليس نسخ خريطة — بل إنشاء خريطة شخصية جميلة يفتخر بها الطفل. كل خريطة لها روح صاحبها — حجم النقاط يعكس سطوع النجم، والخطوط الرابطة تعكس فهمه لشكل البرج.
+      </p>
+
+      <!-- Mini preview map -->
+      <div class="map-preview">
+        <div class="map-preview-label">نموذج: خارطة الجبّار على ورقة سوداء</div>
+        <svg id="sample-map" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:500px;display:block;margin:0 auto"></svg>
+        <div class="map-legend">
+          <div class="legend-item"><div class="legend-dot" style="width:10px;height:10px;background:#fff;opacity:.9"></div>نجم ساطع جداً</div>
+          <div class="legend-item"><div class="legend-dot" style="width:7px;height:7px;background:#c8d4e8;opacity:.8"></div>نجم ساطع</div>
+          <div class="legend-item"><div class="legend-dot" style="width:4px;height:4px;background:#8899cc;opacity:.7"></div>نجم خافت</div>
+          <div class="legend-item"><div style="width:24px;height:1px;background:rgba(255,255,255,.3);margin:4px 0"></div>خط الربط</div>
+        </div>
+      </div>
+
+      <!-- Materials -->
+      <div class="materials-box">
+        <div class="mat-title">📦 المواد اللازمة — لكل طفل</div>
+        <div class="materials-row">
+          <span class="mat-tag">🖤 ورق مقوى أسود A3</span>
+          <span class="mat-tag">⚪ قلم ماركر فضي أو أبيض</span>
+          <span class="mat-tag">✨ ملصقات نقاط لامعة (مقاسات مختلفة)</span>
+          <span class="mat-tag">📏 مسطرة شفافة</span>
+          <span class="mat-tag">✏️ قلم رصاص للتخطيط المسبق</span>
+          <span class="mat-tag">📋 ورقة إرشادية بمواضع النجوم</span>
+          <span class="mat-tag">🔵 قلم لاصق أو غراء</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">⏱️ وقت الورشة: ٢٤ دقيقة كاملة</p>
+      </div>
+
+      <!-- Steps -->
+      <ol class="steps-list">
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>📋 التخطيط بالقلم الرصاص (٤ دقائق)</h4>
+            <p>يضع الطفل الورقة السوداء أمامه ويُحدّد بإشارات خفيفة بالقلم الرصاص مناطق البراج الثلاثة على الورقة — الجبّار في اليمين، الدب الأكبر في المنتصف العلوي، العقرب في اليسار. لا يرسم النجوم بعد، فقط يُخطّط للمساحة.</p>
+            <div class="step-tip">💡 يمكن للمدرّب طباعة ورقة إرشادية بمواضع النجوم بنقاط خفيفة كقالب — يضعها الطفل تحت الورقة السوداء كدليل!</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>⭐ وضع النقاط النجومية (١٠ دقائق)</h4>
+            <p>يلصق الطفل الملصقات اللامعة في أماكن النجوم — <strong>الملصقات الكبيرة للنجوم الساطعة</strong> (بيتلجوز، ريجل، أنتاريس، دبّة الأكبر) والملصقات الصغيرة للنجوم الأخرى. النجوم الكثيرة بدون أبراج تُوزّع عشوائياً كخلفية.</p>
+            <div class="step-tip">🌟 للحصول على تأثير واقعي أكثر: يلصق بعض الملصقات الصغيرة بكثافة في المناطق التي تكثر فيها النجوم (مجرة درب التبانة) ويتركها متناثرة في باقي المناطق.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>🖊️ رسم الخطوط الرابطة (٥ دقائق)</h4>
+            <p>بالقلم الفضي أو الأبيض يصل الطفل نجوم كل برج بخطوط رفيعة تُكوّن شكل البرج. الخطوط يجب أن تكون رفيعة شفافة — النجوم هي الأهم، الخطوط مجرد دليل.</p>
+            <div class="step-tip">📐 ضربة بالمسطرة تُعطي خطاً مستقيماً أجمل — لكن يمكن الاستغناء عنها لمن يُفضّل الحرية الفنية!</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>🏷️ التسمية والتزيين (٥ دقائق)</h4>
+            <p>يكتب الطفل اسم كل برج بالعربية واسم أبرز نجومه بالقلم الفضي. يمكن إضافة لمسات شخصية: رسم شكل الصياد أو العقرب أو الدب برسم خفيف، أو كتابة معلومة صغيرة عن كل برج في حافة الورقة.</p>
+          </div>
+        </div>
+
+      </ol>
+
+      <!-- Assessment rubric -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin:18px 0 10px">📊 معايير تقييم الخارطة</div>
+      <table class="rubric-table">
+        <thead>
+          <tr>
+            <th>المعيار</th>
+            <th>ممتاز ٣ نقاط</th>
+            <th>جيد ٢ نقاط</th>
+            <th>يحتاج تحسيناً ١ نقطة</th>
+            <th>النقاط</th>
+          </tr>
+        </thead>
+        <tbody id="rubric-body"></tbody>
+      </table>
+
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong style="color:var(--white)">ما هي المجموعة النجمية؟ وما الفرق بين الشكل المرئي والبرج الحقيقي في الفضاء؟</strong><br>الهدف: فهم أن أشكال الأبراج وهمية من منظورنا الأرضي.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong style="color:var(--white)">كيف تعثر على الشمال بدون بوصلة باستخدام نجوم الدبّ الأكبر؟</strong><br>الهدف: تطبيق معلومة عملية حياتية مباشرة.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong style="color:var(--white)">لماذا لا يظهر برج الجبّار وبرج العقرب في السماء في نفس الوقت؟</strong><br>الهدف: ربط الأسطورة بالحقيقة الفلكية (الاتجاهات المتعاكسة في السماء).</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong style="color:var(--white)">اذكر نجماً عربي الاسم وأخبرنا في أي برج يقع.</strong><br>الهدف: التفاخر بالإسهام العربي في علم الفلك.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong style="color:var(--white)">لو كنت ستُسمّي برجاً جديداً، ماذا ستختار شكله؟ ولماذا؟</strong><br>الهدف: الإبداع والتعبير الشخصي، ربط التاريخ بالحاضر.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌐 Stellarium Web</div>
+          <div class="t-use">عرض الأبراج الثلاثة في السماء الليلية بالوقت الحقيقي لموقع الجزائر</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📓 NotebookLM</div>
+          <div class="t-use">تلخيص مراجع فلكية عربية عن تسمية النجوم وإنتاج بودكاست للحصة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد صور واقعية للأبراج الثلاثة بالأشكال المرسومة ونقاط النجوم</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">كتابة قصص الأبراج الثلاثة بأسلوب مناسب للأطفال وطباعة ورقة الإرشادات</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(139,92,246,.2)">
+      <h3><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد قصة أسطورة برج الجبّار بأسلوب مُحلَّق:</p>
+      <div class="prompt-box" id="ready-prompt">أنت راوٍ أسطوري متخصص في تحويل الأساطير الفلكية لأطفال الجزائر.
+
+اكتب قصة أسطورة برج الجبّار (أوريون) بالعربية الفصيحة المبسّطة (٢٥٠ كلمة).
+
+القصة يجب أن:
+- تبدأ بوصف سماء ليلية فوق منطقة جرجرة الجزائرية
+- تُقدّم الصياد الجبّار وتصف غروره وشجاعته
+- تصف المواجهة مع العقرب التي أرسلتها الآلهة
+- تنتهي بوضعهما في السماء على طرفَين متعاكسَين
+- تربط القصة بنجوم حقيقية: بيتلجوز (الكتف)، ريجل (القدم)، حزام الجبّار
+- تكون مناسبة للقراءة الجهرية أمام أطفال ٨–١٢ سنة
+
+أسلوب: سردي درامي مشوّق، مع جمل قصيرة وواضحة.</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🔭</div>
+    <div class="hw-content">
+      <h3>واجب البيت — صائد الأبراج</h3>
+      <p>
+        الليلة بعد الغروب بساعة ونصف، ابحث في السماء عن برج الجبّار (في الشتاء) أو الدب الأكبر (في أي فصل — دائم الظهور في نصف الكرة الشمالي). ابدأ بحزام الجبّار الثلاثي أو مغرفة الدب الأكبر.
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🌟 <strong>تحدي الشمال:</strong> استخدم النجم القطبي لتحديد الشمال بدقة، ثم قارن بالبوصلة أو تطبيق الخرائط. هل كانت نتيجتك دقيقة؟ أحضر تقريرك الليلة القادمة!
+      </p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()">🖨️ طباعة الحصة والخارطة</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-05-alnujum-la-tuadd.html'">← الحصة الخامسة</button>
+    <button class="nav-btn" onclick="window.location.href='astronomy-kids-guide.html'" style="color:var(--muted)">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn primary" onclick="window.location.href='session-07-kusuf-wa-khusuf.html'">الحصة السابعة: الكسوف والخسوف ←</button>
+  </div>
+
+</div>
+
+<script>
+/* ── COLOURED STARS ── */
+(function(){
+  var c=document.getElementById('stars');
+  var cols=['#ffffff','#e8f0ff','#fff8d0','#c8e0ff','#ffb090','#ffe0b0'];
+  for(var i=0;i<220;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2.5+.25;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px',
+      'background:'+cols[Math.floor(Math.random()*cols.length)],
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(1.5+Math.random()*5)+'s',
+      '--delay:'+(-Math.random()*6)+'s',
+      '--min-op:'+(0.06+Math.random()*.38)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+/* ── CONSTELLATION DATA ── */
+var constellations=[
+  {
+    name:'الجبّار',latin:'Orion — الصياد',
+    color:'#c4b5fd',glow:'rgba(139,92,246,.3)',
+    season:'🌙 الشتاء (أكتوبر–مارس)',
+    desc:'أسهل برج للتعرف عليه — ثلاثة نجوم في صف مستقيم تشكّل حزامه الشهير.',
+    stars:[
+      {name:'بيتلجوز',bright:true,note:'عملاق أحمر — كتف الجبّار'},
+      {name:'ريجل',bright:true,note:'أزرق-أبيض — قدمه اليسرى'},
+      {name:'بيلاتريكس',bright:false,note:'كتفه الأيمن'},
+      {name:'حزام الجبّار',bright:true,note:'الثلاثة الملوك'},
+      {name:'سديم الجبّار',bright:false,note:'مصنع نجوم مرئي للعين'},
+    ],
+    /* svg points: [x,y,r,color] for stars; lines as pairs */
+    pts:[
+      [120,50, 8,'#ffb090'], /* betelgeuse - red supergiant */
+      [200,50, 6,'#c4b5fd'], /* bellatrix */
+      [130,105,5,'#e0e8ff'], /* belt 1 */
+      [160,115,5,'#e0e8ff'], /* belt 2 */
+      [190,125,5,'#e0e8ff'], /* belt 3 */
+      [145,165,9,'#b0d0ff'], /* rigel - blue */
+      [210,170,4,'#c0c8e0'], /* saiph */
+    ],
+    lines:[[0,1],[0,2],[1,4],[2,3],[3,4],[4,5],[4,6],[5,6]],
+  },
+  {
+    name:'الدبّان',latin:'Scorpius — العقرب',
+    color:'#ff9070',glow:'rgba(255,100,60,.28)',
+    season:'☀️ الصيف (يونيو–أغسطس)',
+    desc:'قلبه أنتاريس الأحمر العملاق لا يخطئه العين — ذيله المنحني أجمل ما في السماء الصيفية.',
+    stars:[
+      {name:'أنتاريس',bright:true,note:'قلب العقرب الأحمر'},
+      {name:'الشولة',bright:true,note:'إبرة ذيله'},
+      {name:'الزبانى الأكبر',bright:false,note:'المخلب الأيمن'},
+      {name:'الزبانى الأصغر',bright:false,note:'المخلب الأيسر'},
+      {name:'الإكليل',bright:false,note:'الرأس والقرون'},
+    ],
+    pts:[
+      [160,80, 9,'#ff7050'],  /* antares */
+      [130,65, 4,'#e0c8b0'],  /* graffias */
+      [155,50, 4,'#e0c8b0'],  /* dschubba */
+      [100,100,4,'#e0c8b0'],  /* pi sco */
+      [120,120,4,'#e0c8b0'],  /* rho sco */
+      [145,140,4,'#e0c8b0'],  /* nu sco */
+      [175,150,4,'#e0c8b0'],
+      [195,145,4,'#e0c8b0'],
+      [215,130,4,'#e0c8b0'],  /* tail curve */
+      [225,110,5,'#ffd090'],  /* shaula */
+      [235,90, 4,'#e0c8b0'],  /* lesath */
+    ],
+    lines:[[0,1],[1,2],[0,3],[3,4],[4,5],[5,6],[6,7],[7,8],[8,9],[9,10]],
+  },
+  {
+    name:'الدبّ الأكبر',latin:'Ursa Major — الدبّ الكبير',
+    color:'#60d0e8',glow:'rgba(64,212,232,.28)',
+    season:'🗓️ طوال السنة (شمالي دائم)',
+    desc:'المغرفة الكبرى السبعة دليلك للنجم القطبي — وهو مرشدك الدائم نحو الشمال.',
+    stars:[
+      {name:'دوبه',bright:true,note:'مؤشر النجم القطبي الأول'},
+      {name:'ميراك',bright:true,note:'مؤشر النجم القطبي الثاني'},
+      {name:'فيكدا',bright:false,note:'قاع المغرفة'},
+      {name:'ميغريز',bright:false,note:'قاع المغرفة'},
+      {name:'عليوت',bright:false,note:'العنق'},
+      {name:'ميزار',bright:true,note:'ذيل الدب — نجم مزدوج'},
+      {name:'بنتناش',bright:false,note:'طرف الذيل'},
+    ],
+    pts:[
+      [90, 80, 7,'#a0d8f0'],  /* dubhe */
+      [115,100,6,'#a0d8f0'],  /* merak */
+      [140,95, 5,'#c0e0f0'],  /* phecda */
+      [150,80, 5,'#c0e0f0'],  /* megrez */
+      [180,75, 5,'#c0e0f0'],  /* alioth */
+      [210,65, 6,'#a0d8f0'],  /* mizar */
+      [240,55, 4,'#c0e0f0'],  /* alkaid */
+    ],
+    lines:[[0,1],[1,2],[2,3],[3,0],[3,4],[4,5],[5,6]],
+  },
+];
+
+/* ── BUILD CONSTELLATION CARDS ── */
+(function(){
+  var grid=document.getElementById('const-grid');
+  constellations.forEach(function(c,ci){
+    var div=document.createElement('div');
+    div.className='const-card';
+    div.style.borderColor=c.glow.replace(/[\d.]+\)$/,'0.35)');
+
+    /* SVG map */
+    var W=280,H=140;
+    var svgNS='http://www.w3.org/2000/svg';
+    var svg=document.createElementNS(svgNS,'svg');
+    svg.setAttribute('viewBox','0 0 280 140');
+    svg.setAttribute('class','const-map');
+    svg.setAttribute('xmlns',svgNS);
+
+    /* background stars */
+    for(var i=0;i<40;i++){
+      var bg=document.createElementNS(svgNS,'circle');
+      bg.setAttribute('cx',Math.random()*280);
+      bg.setAttribute('cy',Math.random()*140);
+      bg.setAttribute('r',Math.random()*.8+.3);
+      bg.setAttribute('fill','rgba(255,255,255,'+(0.1+Math.random()*.25)+')');
+      svg.appendChild(bg);
+    }
+
+    /* connection lines */
+    c.lines.forEach(function(l){
+      var p1=c.pts[l[0]],p2=c.pts[l[1]];
+      var line=document.createElementNS(svgNS,'line');
+      line.setAttribute('x1',p1[0]);line.setAttribute('y1',p1[1]);
+      line.setAttribute('x2',p2[0]);line.setAttribute('y2',p2[1]);
+      line.setAttribute('stroke',c.glow.replace(/[\d.]+\)$/,'0.4)'));
+      line.setAttribute('stroke-width','0.8');
+      svg.appendChild(line);
+    });
+
+    /* stars */
+    c.pts.forEach(function(p){
+      /* glow */
+      var gl=document.createElementNS(svgNS,'circle');
+      gl.setAttribute('cx',p[0]);gl.setAttribute('cy',p[1]);
+      gl.setAttribute('r',p[2]*2.2);
+      gl.setAttribute('fill',p[3]);gl.setAttribute('opacity','0.08');
+      svg.appendChild(gl);
+      /* star */
+      var st=document.createElementNS(svgNS,'circle');
+      st.setAttribute('cx',p[0]);st.setAttribute('cy',p[1]);
+      st.setAttribute('r',p[2]);
+      st.setAttribute('fill',p[3]);
+      svg.appendChild(st);
+    });
+
+    div.appendChild(svg);
+
+    /* info */
+    var tagsHtml=c.stars.map(function(s){
+      return '<span class="star-tag'+(s.bright?' bright':'')+'">'+s.name+'</span>';
+    }).join('');
+
+    var info=document.createElement('div');
+    info.className='const-info';
+    info.innerHTML=
+      '<div class="const-name" style="color:'+c.color+'">'+c.name+'</div>'+
+      '<div class="const-latin">'+c.latin+'</div>'+
+      '<div class="const-desc">'+c.desc+'</div>'+
+      '<div class="const-stars-list">'+tagsHtml+'</div>'+
+      '<div class="const-season">'+c.season+'</div>';
+    div.appendChild(info);
+    grid.appendChild(div);
+  });
+})();
+
+/* ── MYTHS TABLE ── */
+(function(){
+  var data=[
+    ['البرج','أبرز نجم','اللون','الموسم','الأسطورة الرئيسية','ميزة للرصد'],
+    ['الجبّار','بيتلجوز','أحمر–أزرق','الشتاء','الصياد العملاق وعقرب الآلهة','حزام ثلاثي واضح جداً'],
+    ['العقرب','أنتاريس','أحمر قانٍ','الصيف','رسالة الآلهة لقتل الجبّار','ذيل منحني جميل'],
+    ['الدبّ الأكبر','مزار + دوبه','أبيض','طوال السنة','كاليستو وابنها آرقاس','مغرفة تشير للشمال دائماً'],
+  ];
+  var tbl=document.getElementById('myths-tbl');
+  var thead=document.createElement('thead');
+  var tbody=document.createElement('tbody');
+  data.forEach(function(row,ri){
+    var tr=document.createElement('tr');
+    if(ri===0){
+      row.forEach(function(c){
+        var th=document.createElement('th');
+        th.style.cssText='font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600';
+        th.textContent=c;tr.appendChild(th);
+      });
+      thead.appendChild(tr);
+    } else {
+      tr.className='m-row';
+      row.forEach(function(c,ci){
+        var td=document.createElement('td');
+        td.textContent=c;
+        if(ci===0)td.style.cssText='font-weight:700;color:var(--white)';
+        if(ci===1)td.style.cssText='color:var(--gold);font-weight:700';
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+  });
+  tbl.appendChild(thead);tbl.appendChild(tbody);
+})();
+
+/* ── SAMPLE MAP (Orion preview) ── */
+(function(){
+  var svg=document.getElementById('sample-map');
+  var svgNS='http://www.w3.org/2000/svg';
+  /* bg stars */
+  for(var i=0;i<60;i++){
+    var s=document.createElementNS(svgNS,'circle');
+    s.setAttribute('cx',Math.random()*500);s.setAttribute('cy',Math.random()*200);
+    var r=Math.random()*.7+.2;
+    s.setAttribute('r',r);
+    s.setAttribute('fill','rgba(255,255,255,'+(0.08+Math.random()*.3)+')');
+    svg.appendChild(s);
+  }
+  /* Orion key stars scaled to 500×200 */
+  var pts=[
+    [180,40, 10,'#ffb090','بيتلجوز'],
+    [300,40,  7,'#c4b5fd','بيلاتريكس'],
+    [195,90,  6,'#e0e8ff',''],
+    [230,100, 6,'#e0e8ff','حزام الجبّار'],
+    [265,110, 6,'#e0e8ff',''],
+    [205,160, 11,'#90b0ff','ريجل'],
+    [305,165,  5,'#c0c8e0','سيف'],
+    [230,135,  4,'rgba(255,255,255,.4)','سديم'],
+    [240,150,  4,'rgba(255,255,255,.4)',''],
+    [250,165,  4,'rgba(255,255,255,.3)',''],
+  ];
+  var lines=[[0,2],[1,4],[2,3],[3,4],[2,5],[4,6],[2,7]];
+  lines.forEach(function(l){
+    var p1=pts[l[0]],p2=pts[l[1]];
+    var ln=document.createElementNS(svgNS,'line');
+    ln.setAttribute('x1',p1[0]);ln.setAttribute('y1',p1[1]);
+    ln.setAttribute('x2',p2[0]);ln.setAttribute('y2',p2[1]);
+    ln.setAttribute('stroke','rgba(196,181,253,.35)');ln.setAttribute('stroke-width','0.8');
+    svg.appendChild(ln);
+  });
+  pts.forEach(function(p){
+    var gl=document.createElementNS(svgNS,'circle');
+    gl.setAttribute('cx',p[0]);gl.setAttribute('cy',p[1]);gl.setAttribute('r',p[2]*2);
+    gl.setAttribute('fill',p[3]);gl.setAttribute('opacity','0.08');svg.appendChild(gl);
+    var st=document.createElementNS(svgNS,'circle');
+    st.setAttribute('cx',p[0]);st.setAttribute('cy',p[1]);st.setAttribute('r',p[2]);
+    st.setAttribute('fill',p[3]);svg.appendChild(st);
+    if(p[4]){
+      var tx=document.createElementNS(svgNS,'text');
+      tx.setAttribute('x',p[0]+p[2]+4);tx.setAttribute('y',p[1]+4);
+      tx.setAttribute('font-family','Cairo,sans-serif');tx.setAttribute('font-size','8');
+      tx.setAttribute('fill','rgba(200,180,255,.7)');tx.textContent=p[4];
+      svg.appendChild(tx);
+    }
+  });
+})();
+
+/* ── RUBRIC ── */
+(function(){
+  var rows=[
+    ['دقة مواضع النجوم','٣ أبراج بمواضع صحيحة تماماً','برجان صحيحان وواحد تقريبي','برج واحد صحيح أو المواضع خاطئة'],
+    ['وضوح الخطوط الرابطة','جميع الخطوط واضحة ومستقيمة','معظم الخطوط واضحة','خطوط ناقصة أو غير واضحة'],
+    ['التسمية','جميع الأبراج والنجوم الرئيسية مسمّاة','الأبراج مسمّاة فقط','بعض الأسماء مكتوبة'],
+    ['الجمال والإتقان','خارطة جميلة ومنظمة جداً','مرتبة وجيدة','تحتاج مزيداً من العناية'],
+  ];
+  var tb=document.getElementById('rubric-body');
+  rows.forEach(function(r){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td>'+r[0]+'</td>'+
+      '<td>'+r[1]+' <span class="pts-badge">٣</span></td>'+
+      '<td>'+r[2]+' <span class="pts-badge">٢</span></td>'+
+      '<td>'+r[3]+' <span class="pts-badge">١</span></td>'+
+      '<td><span class="pts-badge" style="background:rgba(52,211,153,.15);color:var(--green)">/ ٣</span></td>';
+    tb.appendChild(tr);
+  });
+})();
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');
+    b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>

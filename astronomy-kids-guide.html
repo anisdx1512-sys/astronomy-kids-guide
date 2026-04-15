@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>آفاق جرجرة | دليل برنامج الفلك للأطفال</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #04060f;
+    --deep: #080d1f;
+    --cosmos: #0d1535;
+    --nebula: #1a2350;
+    --gold: #f5c842;
+    --amber: #e8a020;
+    --cyan: #40d4e8;
+    --violet: #8b5cf6;
+    --rose: #f472b6;
+    --white: #f0f4ff;
+    --muted: #8899cc;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--night);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* STARFIELD */
+  #stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+  }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite var(--delay, 0s);
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: var(--min-op, 0.2); transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.4); }
+  }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.25) 0%, transparent 70%);
+  }
+
+  .club-badge {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(245,200,66,0.12);
+    border: 1px solid rgba(245,200,66,0.35);
+    border-radius: 50px;
+    padding: 8px 22px;
+    font-size: 13px; color: var(--gold); letter-spacing: 1px;
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    font-weight: 700;
+    line-height: 1.25;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 50%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 16px;
+  }
+
+  .hero p {
+    color: var(--muted); font-size: 15px; max-width: 540px; margin: 0 auto 36px;
+    line-height: 1.8;
+  }
+
+  .age-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--violet), #4f46e5);
+    border-radius: 12px; padding: 10px 24px;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+    box-shadow: 0 8px 24px rgba(139,92,246,0.4);
+  }
+
+  /* OVERVIEW GRID */
+  .section { position: relative; z-index: 1; padding: 48px 20px; max-width: 1100px; margin: 0 auto; }
+
+  .section-title {
+    font-size: 13px; font-weight: 700; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 28px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(245,200,66,0.3), transparent);
+  }
+
+  .overview-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;
+  }
+
+  .stat-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 24px;
+    text-align: center;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .stat-card:hover { transform: translateY(-4px); border-color: rgba(245,200,66,0.25); }
+  .stat-icon { font-size: 2.2rem; margin-bottom: 10px; display: block; }
+  .stat-num { font-size: 2rem; font-weight: 900; color: var(--gold); display: block; }
+  .stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  /* CURRICULUM TABLE */
+  .curriculum-wrap { overflow-x: auto; }
+  .curriculum-table {
+    width: 100%; border-collapse: separate; border-spacing: 0 8px;
+    font-size: 14px;
+  }
+  .curriculum-table th {
+    font-size: 11px; letter-spacing: 2px; color: var(--muted);
+    text-transform: uppercase; padding: 0 16px 8px; text-align: right;
+    font-weight: 600;
+  }
+  .curriculum-table tr.session-row {
+    background: rgba(255,255,255,0.03);
+    transition: background 0.25s;
+    cursor: pointer;
+  }
+  .curriculum-table tr.session-row:hover { background: rgba(139,92,246,0.12); }
+  .curriculum-table td {
+    padding: 14px 16px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+  .curriculum-table td:first-child { border-radius: 12px 0 0 12px; border-right: none; }
+  .curriculum-table td:last-child  { border-radius: 0 12px 12px 0; border-left: none; }
+
+  .session-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--cosmos); border: 1px solid rgba(245,200,66,0.25);
+    font-size: 12px; font-weight: 700; color: var(--gold);
+  }
+  .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 50px;
+    font-size: 11px; font-weight: 600; margin: 2px 2px 0 0;
+  }
+  .tag-concept { background: rgba(64,212,232,0.15); color: var(--cyan); }
+  .tag-activity { background: rgba(139,92,246,0.2); color: #c4b5fd; }
+  .tag-observation { background: rgba(245,200,66,0.15); color: var(--gold); }
+  .tag-craft { background: rgba(244,114,182,0.15); color: var(--rose); }
+
+  /* AI TOOLS SECTION */
+  .tools-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;
+  }
+  .tool-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px; padding: 28px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .tool-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+  .tool-logo {
+    font-size: 1.8rem; margin-bottom: 12px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .tool-name {
+    font-size: 17px; font-weight: 700; margin-bottom: 6px;
+  }
+  .tool-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 16px; }
+
+  .use-case-list { list-style: none; }
+  .use-case-list li {
+    font-size: 13px; padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    display: flex; gap: 10px; align-items: flex-start; line-height: 1.5;
+  }
+  .use-case-list li:last-child { border-bottom: none; }
+  .use-case-list li::before { content: '→'; color: var(--cyan); flex-shrink: 0; margin-top: 1px; }
+
+  /* PROMPT GENERATOR */
+  .prompt-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 20px; padding: 32px;
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  @media(max-width:600px){ .form-row { grid-template-columns: 1fr; } }
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+  .form-group label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+  .form-group select, .form-group input {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px; padding: 12px 14px; color: var(--white);
+    font-family: 'Cairo', sans-serif; font-size: 14px;
+    transition: border-color 0.25s;
+    -webkit-appearance: none;
+  }
+  .form-group select:focus, .form-group input:focus {
+    outline: none; border-color: rgba(245,200,66,0.4);
+  }
+  .form-group select option { background: #1a2350; }
+
+  .gen-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--gold), var(--amber));
+    border: none; border-radius: 12px; padding: 16px;
+    color: var(--night); font-family: 'Cairo', sans-serif;
+    font-size: 15px; font-weight: 800; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-top: 8px;
+  }
+  .gen-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(245,200,66,0.35); }
+  .gen-btn:active { transform: scale(0.98); }
+
+  .prompt-output {
+    margin-top: 24px; display: none;
+    background: rgba(4,6,15,0.8);
+    border: 1px solid rgba(64,212,232,0.2);
+    border-radius: 14px; padding: 22px;
+  }
+  .prompt-output.show { display: block; animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .prompt-output h4 { font-size: 12px; letter-spacing: 2px; color: var(--cyan); margin-bottom: 14px; }
+  .prompt-output p { font-size: 13.5px; line-height: 1.9; color: #c8d4f0; white-space: pre-wrap; }
+  .copy-btn {
+    margin-top: 14px; padding: 8px 18px; border-radius: 8px;
+    background: rgba(64,212,232,0.15); border: 1px solid rgba(64,212,232,0.3);
+    color: var(--cyan); font-family: 'Cairo', sans-serif; font-size: 13px;
+    cursor: pointer; transition: background 0.2s;
+  }
+  .copy-btn:hover { background: rgba(64,212,232,0.25); }
+
+  /* SESSION WORKFLOW */
+  .workflow-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0;
+  }
+  .wf-step {
+    padding: 24px 20px; text-align: center; position: relative;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .wf-step:not(:last-child)::after {
+    content: '◀'; position: absolute; top: 50%; left: -14px;
+    transform: translateY(-50%); color: var(--gold); font-size: 18px; z-index: 2;
+  }
+  @media(max-width:600px){
+    .workflow-grid { grid-template-columns: 1fr; }
+    .wf-step:not(:last-child)::after { content: '▲'; left: 50%; top: auto; bottom: -14px; transform: translateX(-50%); }
+  }
+  .wf-icon { font-size: 2rem; margin-bottom: 10px; }
+  .wf-title { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+  .wf-desc { font-size: 12px; color: var(--muted); line-height: 1.6; }
+  .wf-time { font-size: 11px; color: var(--gold); font-weight: 700; margin-top: 8px; }
+
+  /* FOOTER */
+  footer {
+    position: relative; z-index: 1;
+    text-align: center; padding: 40px 20px;
+    color: var(--muted); font-size: 13px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    margin-top: 40px;
+  }
+  footer span { color: var(--gold); }
+
+  /* DIVIDER */
+  .cosmic-divider {
+    text-align: center; padding: 20px 0;
+    color: rgba(255,255,255,0.08); font-size: 20px; letter-spacing: 8px;
+  }
+
+  /* ── SESSIONS CARDS GRID ── */
+  .sessions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .session-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 18px;
+    padding: 22px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.28s, border-color 0.28s, box-shadow 0.28s;
+    position: relative;
+    overflow: hidden;
+  }
+  .session-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(245,200,66,0.04), transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .session-card:hover { transform: translateY(-5px); border-color: rgba(245,200,66,0.3); box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+  .session-card:hover::before { opacity: 1; }
+
+  /* Available card */
+  .session-card.available {
+    border-color: rgba(245,200,66,0.2);
+    cursor: pointer;
+  }
+  .session-card.available:hover { border-color: rgba(245,200,66,0.5); box-shadow: 0 16px 48px rgba(245,200,66,0.12); }
+
+  /* Coming soon card */
+  .session-card.soon {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .sc-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .sc-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--cosmos);
+    border: 1px solid rgba(245,200,66,0.25);
+    font-size: 13px; font-weight: 700;
+    color: var(--gold);
+  }
+  .sc-badge {
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border-radius: 50px;
+  }
+  .sc-badge.ready {
+    background: rgba(52,211,153,0.15);
+    border: 1px solid rgba(52,211,153,0.3);
+    color: #34d399;
+  }
+  .sc-badge.soon {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--muted);
+  }
+  .sc-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #e8f0ff;
+    line-height: 1.35;
+  }
+  .sc-desc {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.65;
+    flex: 1;
+  }
+  .sc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+  .sc-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+  .sc-open-btn {
+    font-size: 11px;
+    color: var(--gold);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0;
+    transform: translateX(4px);
+    transition: opacity 0.25s, transform 0.25s;
+  }
+  .session-card:hover .sc-open-btn { opacity: 1; transform: translateX(0); }
+</style>
+</head>
+<body>
+
+<!-- STARFIELD -->
+<div id="stars"></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="club-badge">🔭 نادي آفاق جرجرة للفلك</div>
+  <h1>برنامج الفلك للناشئين<br>رحلة إلى النجوم</h1>
+  <p>دليل شامل لتصميم حصص فلكية هادفة للأطفال من 7 إلى 12 سنة،<br>مع توظيف أدوات الذكاء الاصطناعي في إنتاج المحتوى</p>
+  <div class="age-badge">🌟 الفئة العمرية: 7 – 12 سنة</div>
+</div>
+
+<!-- OVERVIEW STATS -->
+<div class="section">
+  <div class="section-title">نظرة عامة على البرنامج</div>
+  <div class="overview-grid">
+    <div class="stat-card">
+      <span class="stat-icon">📅</span>
+      <span class="stat-num">12</span>
+      <span class="stat-label">حصة تعليمية</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">⏱️</span>
+      <span class="stat-num">90</span>
+      <span class="stat-label">دقيقة لكل حصة</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">👦</span>
+      <span class="stat-num">3</span>
+      <span class="stat-label">مجموعات عمرية</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">🏆</span>
+      <span class="stat-num">4</span>
+      <span class="stat-label">محاور رئيسية</span>
+    </div>
+  </div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- CURRICULUM -->
+<div class="section">
+  <div class="section-title">المنهج التفصيلي – 12 حصة</div>
+  <div class="curriculum-wrap">
+    <table class="curriculum-table">
+      <thead>
+        <tr>
+          <th>رقم</th>
+          <th>عنوان الحصة</th>
+          <th>المحتوى الرئيسي</th>
+          <th>النشاط العملي</th>
+          <th>الأدوات المقترحة</th>
+        </tr>
+      </thead>
+      <tbody id="curriculum-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- WORKFLOW -->
+<div class="section">
+  <div class="section-title">هيكل الحصة المثالية</div>
+  <div class="workflow-grid">
+    <div class="wf-step">
+      <div class="wf-icon">🌅</div>
+      <div class="wf-title">الإدفاء والتشويق</div>
+      <div class="wf-desc">سؤال استثاري – صورة فلكية مدهشة – قصة قصيرة</div>
+      <div class="wf-time">10 دقائق</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">📚</div>
+      <div class="wf-title">الجزء النظري</div>
+      <div class="wf-desc">شرح مبسّط بالصور والمجسمات والأنيماشن</div>
+      <div class="wf-time">25 دقيقة</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🔬</div>
+      <div class="wf-title">النشاط التطبيقي</div>
+      <div class="wf-desc">تجربة، رسم، لعبة تعليمية، أو ورشة يدوية</div>
+      <div class="wf-time">35 دقيقة</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">🌙</div>
+      <div class="wf-title">الخلاصة والتأمل</div>
+      <div class="wf-desc">ماذا تعلمنا؟ سؤال للتفكير في البيت</div>
+      <div class="wf-time">10 دقائق</div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-icon">⭐</div>
+      <div class="wf-title">التقييم والمكافأة</div>
+      <div class="wf-desc">بطاقة نجمة للحصة – دفتر الفلكي الصغير</div>
+      <div class="wf-time">10 دقائق</div>
+    </div>
+  </div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- AI TOOLS -->
+<div class="section">
+  <div class="section-title">توظيف أدوات الذكاء الاصطناعي</div>
+  <div class="tools-grid" id="tools-grid"></div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- PROMPT GENERATOR -->
+<div class="section">
+  <div class="section-title">مولّد البرومبت الفلكي</div>
+  <div class="prompt-box">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.7">
+      اختر معايير الحصة وسيتم توليد برومبت جاهز للنسخ والاستخدام مباشرة في Gemini أو ChatGPT لإنشاء محتوى مخصص لأطفالك.
+    </p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>الموضوع</label>
+        <select id="sel-topic">
+          <option value="الشمس وكواكب المجموعة الشمسية">☀️ المجموعة الشمسية</option>
+          <option value="القمر وأطوار القمر">🌙 القمر وأطواره</option>
+          <option value="النجوم والكواكب والفرق بينها">⭐ النجوم والكواكب</option>
+          <option value="المجرة درب التبانة وشكل الكون">🌌 درب التبانة</option>
+          <option value="الكسوف والخسوف">🌑 الكسوف والخسوف</option>
+          <option value="رواد الفضاء واستكشاف الفضاء">🚀 رواد الفضاء</option>
+          <option value="التلسكوب وكيف نشاهد النجوم">🔭 التلسكوب والرصد</option>
+          <option value="المجموعات النجمية والأبراج">✨ المجموعات النجمية</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>الفئة العمرية</label>
+        <select id="sel-age">
+          <option value="7 و 8 سنوات (مرحلة الروضة وأول ابتدائي)">7-8 سنوات (صغار)</option>
+          <option value="9 و 10 سنوات (مرحلة ابتدائي وسط)">9-10 سنوات (أوساط)</option>
+          <option value="11 و 12 سنة (مرحلة ابتدائي كبار)">11-12 سنة (كبار)</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>نوع المحتوى</label>
+        <select id="sel-type">
+          <option value="خطة درس كاملة">خطة درس كاملة</option>
+          <option value="ألعاب وأنشطة تفاعلية">ألعاب وأنشطة</option>
+          <option value="قصة فلكية قصيرة مشوّقة">قصة فلكية</option>
+          <option value="أسئلة واختبار قصير">اختبار وأسئلة</option>
+          <option value="ورشة يدوية ومشروع جماعي">ورشة يدوية</option>
+          <option value="بطاقات معلومات مصورة (إنفوغرافيك)">بطاقات إنفوغرافيك</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>الأداة المستهدفة</label>
+        <select id="sel-tool">
+          <option value="Gemini">🔵 Gemini</option>
+          <option value="ChatGPT">🟢 ChatGPT</option>
+          <option value="NotebookLM">📓 NotebookLM</option>
+          <option value="Claude">🟣 Claude</option>
+        </select>
+      </div>
+    </div>
+    <button class="gen-btn" onclick="generatePrompt()">✨ توليد البرومبت</button>
+
+    <div class="prompt-output" id="prompt-output">
+      <h4>البرومبت الجاهز للنسخ</h4>
+      <p id="prompt-text"></p>
+      <button class="copy-btn" onclick="copyPrompt()">📋 نسخ البرومبت</button>
+    </div>
+  </div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- CONTENT PIPELINE -->
+<div class="section">
+  <div class="section-title">سير العمل – من الفكرة إلى الحصة</div>
+  <div class="tools-grid">
+    <div class="tool-card" style="border-color:rgba(64,212,232,0.2)">
+      <div class="tool-logo">1️⃣ <span style="color:var(--cyan);font-size:1rem;font-weight:800">التخطيط</span></div>
+      <div class="tool-desc">استخدم <strong>Gemini</strong> لتوليد خطة الحصة الكاملة: الأهداف، التسلسل، الأفكار، الأمثلة المناسبة للعمر.</div>
+      <ul class="use-case-list">
+        <li>اطلب خطة حصة منظمة بعناوين وأوقات</li>
+        <li>اطلب 5 أسئلة تشويقية لفتح الحصة</li>
+        <li>اطلب مفاهيم مبسطة بمثال يومي</li>
+      </ul>
+    </div>
+    <div class="tool-card" style="border-color:rgba(245,200,66,0.2)">
+      <div class="tool-logo">2️⃣ <span style="color:var(--gold);font-size:1rem;font-weight:800">إثراء المحتوى</span></div>
+      <div class="tool-desc">استخدم <strong>NotebookLM</strong> لتحميل مراجع فلكية (PDF، مقالات) وإنتاج ملخصات وبودكاست صوتي للحصة.</div>
+      <ul class="use-case-list">
+        <li>حمّل كتاب فلك للأطفال → اطلب ملخصاً</li>
+        <li>أنشئ بودكاست 5 دقائق يشرح الموضوع</li>
+        <li>اطلب أسئلة مراجعة من المرجع المحمّل</li>
+      </ul>
+    </div>
+    <div class="tool-card" style="border-color:rgba(244,114,182,0.2)">
+      <div class="tool-logo">3️⃣ <span style="color:var(--rose);font-size:1rem;font-weight:800">المواد البصرية</span></div>
+      <div class="tool-desc">استخدم <strong>Gemini</strong> لتوليد صور توضيحية، أو وصف لطباعة بطاقات تعليمية وإنفوغرافيكات.</div>
+      <ul class="use-case-list">
+        <li>صمّم بطاقة معلومات عن كوكب معين</li>
+        <li>اطلب وصفاً لرسم مخطط المجموعة الشمسية</li>
+        <li>أنتج قائمة تحضيرية لمواد الورشة</li>
+      </ul>
+    </div>
+    <div class="tool-card" style="border-color:rgba(139,92,246,0.2)">
+      <div class="tool-logo">4️⃣ <span style="color:#c4b5fd;font-size:1rem;font-weight:800">التقييم والمتابعة</span></div>
+      <div class="tool-desc">استخدم <strong>Claude أو Gemini</strong> لتوليد اختبارات مناسبة للعمر وشهادات تقدير مخصصة لكل طفل.</div>
+      <ul class="use-case-list">
+        <li>اختبار 5 أسئلة بالصور للصغار (7-8)</li>
+        <li>ألغاز فلكية للكبار (11-12)</li>
+        <li>شهادة "فلكي صغير" قابلة للطباعة</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="cosmic-divider">✦ ✦ ✦</div>
+
+<!-- SESSIONS CARDS -->
+<div class="section">
+  <div class="section-title">📖 الحصص التفصيلية</div>
+  <div class="sessions-grid" id="sessions-cards"></div>
+</div>
+
+<footer>
+  برنامج الفلك للناشئين · <span>نادي آفاق جرجرة</span> · تيزي وزو، الجزائر<br>
+  <span style="color:var(--muted);font-size:11px;margin-top:6px;display:block">صُمّم لمساعدتك في توظيف الذكاء الاصطناعي بشكل منهجي وفعّال</span>
+</footer>
+
+<script>
+// ── STARS ──
+(function(){
+  var c = document.getElementById('stars');
+  for(var i=0;i<180;i++){
+    var s = document.createElement('div');
+    s.className='star';
+    var sz = Math.random()*2.2+0.4;
+    s.style.cssText=[
+      'width:'+sz+'px','height:'+sz+'px',
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(2+Math.random()*4)+'s',
+      '--delay:'+(-Math.random()*5)+'s',
+      '--min-op:'+(0.1+Math.random()*0.3)
+    ].join(';');
+    c.appendChild(s);
+  }
+})();
+
+// ── CURRICULUM DATA ──
+var sessions = [
+  { num:1, title:'مرحباً أيها الكون!', content:'ما هو الفضاء؟ كيف بدأ الكون؟ حجم الكون بأرقام بسيطة', activity:'رسم خريطة الكون بالورق الملوّن', tags:['concept','activity'], tools:'Gemini · صور NASA' },
+  { num:2, title:'شمسنا الرائعة', content:'الشمس: تركيبها، حرارتها، ضوؤها، أهميتها للحياة', activity:'تجربة: محاكاة أشعة الشمس بالمصباح والكرة', tags:['concept','activity'], tools:'NotebookLM · Gemini' },
+  { num:3, title:'جيراننا الكواكب', content:'المجموعة الشمسية: ترتيب الكواكب، أحجامها، مميزاتها', activity:'صنع نموذج المجموعة الشمسية بالعجين الملوّن', tags:['craft','concept'], tools:'Gemini · Canva' },
+  { num:4, title:'القمر – رفيق الليل', content:'أطوار القمر، المد والجزر، رحلات أبولو', activity:'تتبع القمر لمدة أسبوع ورسم أطواره', tags:['observation','activity'], tools:'Gemini · Moon Phase App' },
+  { num:5, title:'النجوم لا تُعدّ', content:'ما هي النجوم؟ الفرق بين النجوم والكواكب، ألوان النجوم', activity:'لعبة: صنّف النجوم حسب لونها وحجمها', tags:['concept','activity'], tools:'Gemini · Stellarium' },
+  { num:6, title:'المجموعات النجمية', content:'الأبراج الشهيرة: الجبّار، الدبّان، الدبّ الأكبر', activity:'رسم خارطة النجوم بالشاشة السوداء والنقاط الفضية', tags:['craft','observation'], tools:'NotebookLM · Stellarium' },
+  { num:7, title:'كسوف الشمس وخسوف القمر', content:'كيف يحدث الكسوف؟ لماذا لا يحدث كل شهر؟', activity:'محاكاة: كرات الشمس والقمر والأرض والمصباح', tags:['concept','activity'], tools:'Gemini · YouTube NASA' },
+  { num:8, title:'المذنبات والنيازك', content:'ما الفرق؟ من أين تأتي؟ هل هي خطيرة؟', activity:'تجربة: صنع مذنب بالثلج الجاف (محاكاة)', tags:['concept','activity'], tools:'Gemini · NASA Kids' },
+  { num:9, title:'رواد الفضاء والمحطات', content:'محطة الفضاء الدولية، الحياة في انعدام الجاذبية', activity:'تصميم بدلة فضاء على الورق', tags:['craft','concept'], tools:'NotebookLM · Gemini' },
+  { num:10, title:'التلسكوب – عين على الكون', content:'أنواع التلاسكيب، كيف نختار؟ كيف نستخدمه؟', activity:'جلسة رصد حقيقية بالتلسكوب (ليلاً)', tags:['observation'], tools:'Stellarium · Club Telescope' },
+  { num:11, title:'المجرة درب التبانة', content:'شكل المجرة، موضع الشمس فيها، المجرات الأخرى', activity:'رسم المجرة بالملح والغراء على ورق أسود', tags:['craft','concept'], tools:'Gemini · Hubble Images' },
+  { num:12, title:'الفلكي الصغير يتخرج!', content:'مراجعة كاملة، سؤال وجواب، مشاريع الأطفال', activity:'عرض مشاريع + توزيع شهادات "فلكي صغير"', tags:['activity'], tools:'Canva · Gemini · Claude' },
+];
+
+var tagClasses = { concept:'tag-concept', activity:'tag-activity', observation:'tag-observation', craft:'tag-craft' };
+var tagLabels  = { concept:'مفهوم', activity:'نشاط', observation:'رصد', craft:'ورشة' };
+
+var tbody = document.getElementById('curriculum-body');
+sessions.forEach(function(s){
+  var tagsHtml = s.tags.map(function(t){
+    return '<span class="tag '+tagClasses[t]+'">'+tagLabels[t]+'</span>';
+  }).join('');
+  var tr = document.createElement('tr');
+  tr.className = 'session-row';
+  tr.innerHTML =
+    '<td><span class="session-num">'+s.num+'</span></td>'+
+    '<td style="font-weight:700;color:#e8f0ff;">'+s.title+'</td>'+
+    '<td style="color:var(--muted);font-size:13px">'+s.content+'</td>'+
+    '<td>'+tagsHtml+'<br><span style="color:#b0c0e0;font-size:12px;margin-top:4px;display:inline-block">'+s.activity+'</span></td>'+
+    '<td style="color:var(--cyan);font-size:12px;">'+s.tools+'</td>';
+  tbody.appendChild(tr);
+});
+
+// ── SESSION CARDS WITH LINKS ──
+var sessionFiles = {
+  1: 'session-01-marhaba-alkawn.html',
+  2: 'session-02-shamsuna-alraiea.html',
+  3: 'session-03-jiranuna-alkawakib.html',
+  4: 'session-04-alqamar-rafiq-allayl.html',
+  5: 'session-05-alnujum-la-tuadd.html',
+  6: 'session-06-almajmuaat-alnajmia.html',
+  7: 'session-07-kusuf-wa-khusuf.html'
+};
+
+var cardsContainer = document.getElementById('sessions-cards');
+sessions.forEach(function(s) {
+  var hasFile = !!sessionFiles[s.num];
+  var tagsHtml = s.tags.map(function(t){
+    return '<span class="tag '+tagClasses[t]+'" style="font-size:10px">'+tagLabels[t]+'</span>';
+  }).join('');
+
+  var card = document.createElement(hasFile ? 'a' : 'div');
+  card.className = 'session-card ' + (hasFile ? 'available' : 'soon');
+  if (hasFile) {
+    card.href = sessionFiles[s.num];
+    card.target = '_blank';
+  }
+
+  card.innerHTML =
+    '<div class="sc-top">' +
+      '<span class="sc-num">' + s.num + '</span>' +
+      '<span class="sc-badge ' + (hasFile ? 'ready' : 'soon') + '">' +
+        (hasFile ? '✓ متاحة' : 'قريباً') +
+      '</span>' +
+    '</div>' +
+    '<div class="sc-title">' + s.title + '</div>' +
+    '<div class="sc-desc">' + s.content + '</div>' +
+    '<div class="sc-footer">' +
+      '<div class="sc-tags">' + tagsHtml + '</div>' +
+      (hasFile ? '<span class="sc-open-btn">فتح الحصة ←</span>' : '') +
+    '</div>';
+
+  cardsContainer.appendChild(card);
+});
+
+// ── AI TOOLS DATA ──
+var tools = [
+  {
+    emoji:'🔵', name:'Google Gemini', color:'rgba(64,212,232,0.15)',
+    desc:'الأداة الرئيسية لتوليد محتوى تعليمي غني ومتنوع باللغة العربية.',
+    uses:[
+      'توليد خطة حصة كاملة بأهداف وأنشطة ووقت محدد',
+      'إنتاج قصص فلكية قصيرة مناسبة لكل فئة عمرية',
+      'إنشاء أسئلة واختبارات بمستويات مختلفة',
+      'توليد صور توضيحية باستخدام Imagen',
+      'تبسيط مفاهيم معقدة بأمثلة يومية مألوفة للطفل'
+    ]
+  },
+  {
+    emoji:'📓', name:'Google NotebookLM', color:'rgba(245,200,66,0.1)',
+    desc:'أداة مثالية لتحميل مراجع فلكية وإنتاج ملخصات وبودكاست تعليمي.',
+    uses:[
+      'حمّل كتب فلك بالـ PDF واستخرج منها ملخصات',
+      'أنشئ بودكاست صوتي 5-10 دقائق لكل حصة',
+      'اطرح أسئلة مباشرة على المراجع المحمّلة',
+      'أنتج ملاحظات دراسية منظمة للمدرب',
+      'اربط عدة مصادر معاً للحصول على محتوى متكامل'
+    ]
+  },
+  {
+    emoji:'🎨', name:'Canva AI / Magic Write', color:'rgba(244,114,182,0.1)',
+    desc:'لتصميم البطاقات والإنفوغرافيكات والشهادات البصرية الجذابة.',
+    uses:[
+      'تصميم بطاقات معلومات مصورة لكل كوكب',
+      'شهادات "فلكي صغير" قابلة للطباعة والتخصيص',
+      'خلفيات عروض PowerPoint بتصميم فلكي',
+      'بوسترات إعلانية لأنشطة النادي',
+      'أوراق عمل مصورة للأطفال'
+    ]
+  },
+  {
+    emoji:'🟣', name:'Claude (Anthropic)', color:'rgba(139,92,246,0.12)',
+    desc:'ممتاز للتفكير المنهجي، البرمجة، وتوليد محتوى دقيق ومنسجم.',
+    uses:[
+      'تصميم منهج متكامل ومتدرج على عدة حصص',
+      'صياغة أسئلة نقاش عميقة لكبار الأطفال',
+      'كتابة نصوص البودكاست والشرح المنطوق',
+      'توليد ألغاز فلكية ذكية ومتدرجة الصعوبة',
+      'مراجعة وتحسين المحتوى الذي توليده بأدوات أخرى'
+    ]
+  },
+];
+
+var tg = document.getElementById('tools-grid');
+tools.forEach(function(t){
+  var div = document.createElement('div');
+  div.className='tool-card';
+  div.style.borderColor=t.color.replace('0.1','0.25').replace('0.12','0.25').replace('0.15','0.3');
+  var lis = t.uses.map(function(u){ return '<li>'+u+'</li>'; }).join('');
+  div.innerHTML=
+    '<div class="tool-logo">'+t.emoji+' <span class="tool-name">'+t.name+'</span></div>'+
+    '<div class="tool-desc">'+t.desc+'</div>'+
+    '<ul class="use-case-list">'+lis+'</ul>';
+  tg.appendChild(div);
+});
+
+// ── PROMPT GENERATOR ──
+function generatePrompt(){
+  var topic = document.getElementById('sel-topic').value;
+  var age   = document.getElementById('sel-age').value;
+  var type  = document.getElementById('sel-type').value;
+  var tool  = document.getElementById('sel-tool').value;
+
+  var prompts = {
+    'خطة درس كاملة':
+      'أنت مدرب تربوي متخصص في علم الفلك للأطفال. اكتب لي خطة درس كاملة بالعربية حول موضوع:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nالخطة يجب أن تحتوي على:\n1. أهداف الحصة (3 أهداف واضحة)\n2. المواد والأدوات اللازمة\n3. مقدمة تشويقية (10 دقائق) – سؤال أو صورة أو قصة\n4. الشرح النظري المبسط (25 دقيقة) مع أمثلة يومية مفهومة للطفل\n5. النشاط التطبيقي التفاعلي (35 دقيقة) مع خطوات مفصلة\n6. الخلاصة والتقييم (10 دقائق)\n7. سؤال للتفكير في البيت\n\nاستخدم لغة بسيطة وجذابة، مع الاهتمام بالتدرج المناسب للعمر.',
+
+    'ألعاب وأنشطة تفاعلية':
+      'أنت مبدع في تصميم الألعاب التعليمية للأطفال. اقترح لي 5 ألعاب وأنشطة تفاعلية حول:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nلكل نشاط اذكر:\n- اسم النشاط وهدفه\n- المواد المطلوبة (بسيطة ومتوفرة)\n- طريقة التنفيذ خطوة بخطوة\n- المدة الزمنية\n- كيفية ربطه بالمفهوم الفلكي\n\nركز على الأنشطة الجماعية والمرحة التي تنمّي روح الاستكشاف.',
+
+    'قصة فلكية قصيرة مشوّقة':
+      'أنت كاتب قصص أطفال موهوب ومتخصص في الفلك. اكتب قصة قصيرة مشوّقة (300-400 كلمة) بالعربية الفصيحة المبسطة، يكون بطلها طفل جزائري يكتشف:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nالقصة يجب أن:\n- تبدأ بمشهد جذاب ومثير للتشويق\n- تتضمن معلومة فلكية دقيقة مدمجة بشكل طبيعي\n- تنتهي بدرس قيمي أو رسالة إيجابية\n- تستخدم أسماء جزائرية وأماكن محلية\n- تكون مناسبة للقراءة الجهرية في الحصة',
+
+    'أسئلة واختبار قصير':
+      'أنت معلم فلك متخصص في تقييم الأطفال. أنشئ اختباراً قصيراً (10 أسئلة) حول:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nالاختبار يجب أن يتضمن:\n- 3 أسئلة بالصح والخطأ\n- 3 أسئلة اختيار من متعدد (3 خيارات)\n- 2 سؤال صور (وصف الصورة)\n- 2 سؤال مفتوح بسيط\n\nادرج مفتاح الإجابات في النهاية. استخدم لغة واضحة ومناسبة للعمر.',
+
+    'ورشة يدوية ومشروع جماعي':
+      'أنت مشرف ورش تعليمية للأطفال. صمّم لي ورشة يدوية جماعية حول:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nالورشة تشمل:\n- اسم المشروع وهدفه التعليمي\n- قائمة المواد (يجب أن تكون رخيصة ومتوفرة: كرتون، ورق ملوّن، غراء...)\n- خطوات التنفيذ مرقمة ومفصلة\n- دور كل فرد في المجموعة\n- كيفية عرض النتائج على الزملاء\n- أسئلة تأملية في نهاية الورشة',
+
+    'بطاقات معلومات مصورة (إنفوغرافيك)':
+      'أنت مصمم محتوى تعليمي متخصص. اكتب لي محتوى نصياً لـ 4 بطاقات معلومات مصورة (إنفوغرافيك) حول:\n\n【 '+topic+' 】\n\nالفئة العمرية: '+age+'\n\nلكل بطاقة:\n- عنوان جذاب قصير (5 كلمات)\n- 3 حقائق مدهشة بلغة بسيطة\n- رقم إحصائي مثير للدهشة\n- سؤال ختامي يُحفّز التفكير\n\nالمحتوى يجب أن يكون قابلاً للتصميم في Canva بشكل بصري جميل.'
+  };
+
+  var toolTips = {
+    'Gemini': '\n\n💡 نصيحة للاستخدام مع Gemini:\nافتح gemini.google.com → اختر اللغة العربية → الصق البرومبت مباشرة. يمكنك طلب تعديلات في المحادثة ذاتها.',
+    'ChatGPT': '\n\n💡 نصيحة للاستخدام مع ChatGPT:\nاستخدم GPT-4 للحصول على أفضل نتيجة. يمكنك في النهاية طلب: "اعد صياغته بأسلوب أبسط" أو "أضف نشاطاً إضافياً".',
+    'NotebookLM': '\n\n💡 نصيحة للاستخدام مع NotebookLM:\nحمّل أولاً مرجعاً فلكياً (PDF أو رابط) ثم اطرح هذه الأسئلة على المصدر المحمّل لنتائج أدق ومحتوى موثوق.',
+    'Claude': '\n\n💡 نصيحة للاستخدام مع Claude:\nيتميز بدقة المحتوى والتماسك المنطقي. بعد الرد الأول اطلب: "حسّن الجزء الثالث وأضف مثالاً محلياً جزائرياً".'
+  };
+
+  var finalPrompt = prompts[type] + toolTips[tool];
+
+  document.getElementById('prompt-text').textContent = finalPrompt;
+  var out = document.getElementById('prompt-output');
+  out.classList.add('show');
+  out.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function copyPrompt(){
+  var text = document.getElementById('prompt-text').textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.querySelector('.copy-btn');
+    btn.textContent = '✅ تم النسخ!';
+    setTimeout(function(){ btn.textContent = '📋 نسخ البرومبت'; }, 2000);
+  });
+}
+</script>
+</body>
+</html>

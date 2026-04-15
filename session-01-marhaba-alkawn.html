@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ١ – مرحباً أيها الكون! | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --night: #04060f;
+    --deep: #080d1f;
+    --cosmos: #0d1535;
+    --nebula: #1a2350;
+    --gold: #f5c842;
+    --amber: #e8a020;
+    --cyan: #40d4e8;
+    --violet: #8b5cf6;
+    --rose: #f472b6;
+    --white: #f0f4ff;
+    --muted: #8899cc;
+    --green: #34d399;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--night);
+    color: var(--white);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── STARS ── */
+  #stars { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+  .star {
+    position: absolute; background: white; border-radius: 50%;
+    animation: twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);
+  }
+  @keyframes twinkle {
+    0%,100% { opacity: var(--min-op,0.2); transform: scale(1); }
+    50% { opacity:1; transform: scale(1.4); }
+  }
+
+  /* ── LAYOUT ── */
+  .page { position: relative; z-index: 1; max-width: 980px; margin: 0 auto; padding: 0 20px 80px; }
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb {
+    display: flex; align-items: center; gap: 8px;
+    padding: 20px 0 0;
+    font-size: 12px; color: var(--muted); letter-spacing: 1px;
+  }
+  .breadcrumb a { color: var(--gold); text-decoration: none; }
+
+  /* ── SESSION HERO ── */
+  .session-hero {
+    padding: 44px 0 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    margin-bottom: 48px;
+  }
+  .session-num-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(139,92,246,0.15);
+    border: 1px solid rgba(139,92,246,0.35);
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 12px; color: #c4b5fd; letter-spacing: 1px;
+    margin-bottom: 20px;
+  }
+  .session-hero h1 {
+    font-family: 'Amiri', serif;
+    font-size: clamp(2rem, 5vw, 3.4rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, #fff 0%, var(--gold) 55%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.25; margin-bottom: 14px;
+  }
+  .session-hero p.subtitle {
+    color: var(--muted); font-size: 15px; max-width: 600px; line-height: 1.8;
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 20px; margin-top: 28px;
+  }
+  .meta-item {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+  }
+  .meta-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+
+  /* ── SECTION TITLES ── */
+  .sec-title {
+    font-size: 11px; font-weight: 700; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase;
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 24px;
+  }
+  .sec-title::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(90deg, rgba(245,200,66,0.3), transparent);
+  }
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); gap: 14px;
+    margin-bottom: 56px;
+  }
+  .obj-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 22px;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .obj-card:hover { border-color: rgba(245,200,66,0.2); transform: translateY(-3px); }
+  .obj-icon { font-size: 1.6rem; margin-bottom: 12px; display: block; }
+  .obj-title { font-size: 13px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+  .obj-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; margin-bottom: 56px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    right: 19px; top: 0; bottom: 0; width: 1px;
+    background: linear-gradient(to bottom, rgba(139,92,246,0.5), rgba(64,212,232,0.2), transparent);
+  }
+  .tl-item {
+    display: flex; gap: 24px; align-items: flex-start;
+    margin-bottom: 28px; padding-right: 48px; position: relative;
+  }
+  .tl-dot {
+    position: absolute; right: 11px; top: 14px;
+    width: 17px; height: 17px; border-radius: 50%;
+    border: 2px solid var(--violet);
+    background: var(--night);
+    flex-shrink: 0;
+  }
+  .tl-dot.gold { border-color: var(--gold); }
+  .tl-dot.cyan { border-color: var(--cyan); }
+  .tl-dot.rose { border-color: var(--rose); }
+  .tl-dot.green { border-color: var(--green); }
+  .tl-time {
+    font-size: 11px; color: var(--violet); font-weight: 700;
+    letter-spacing: 1px; white-space: nowrap; padding-top: 2px;
+    width: 58px; flex-shrink: 0;
+  }
+  .tl-time.gold { color: var(--gold); }
+  .tl-time.cyan { color: var(--cyan); }
+  .tl-time.rose { color: var(--rose); }
+  .tl-time.green { color: var(--green); }
+  .tl-content {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 14px; padding: 18px 20px; flex: 1;
+  }
+  .tl-content h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .tl-content p  { font-size: 13px; color: var(--muted); line-height: 1.75; }
+  .tl-content ul { list-style: none; margin-top: 10px; }
+  .tl-content ul li {
+    font-size: 13px; color: var(--muted); line-height: 1.7;
+    padding-right: 14px; position: relative;
+  }
+  .tl-content ul li::before {
+    content: '›'; position: absolute; right: 0;
+    color: var(--gold);
+  }
+
+  /* ── CONTENT CARDS ── */
+  .content-section { margin-bottom: 56px; }
+  .content-block {
+    background: rgba(255,255,255,0.025);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 18px; padding: 28px 32px;
+    margin-bottom: 16px;
+  }
+  .content-block h3 {
+    font-size: 17px; font-weight: 700;
+    color: var(--cyan); margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .content-block h3 .icon { font-size: 1.4rem; }
+  .content-block p {
+    font-size: 14px; color: var(--muted); line-height: 1.85; margin-bottom: 12px;
+  }
+  .content-block p:last-child { margin-bottom: 0; }
+  .highlight {
+    background: rgba(245,200,66,0.08);
+    border-right: 3px solid var(--gold);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px; margin: 16px 0;
+    font-size: 14px; color: #d4c07a; line-height: 1.8;
+  }
+
+  /* ── NUMBERS GRID ── */
+  .numbers-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 14px;
+    margin-top: 20px;
+  }
+  .num-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px; padding: 20px; text-align: center;
+    transition: transform 0.3s;
+  }
+  .num-card:hover { transform: translateY(-3px); }
+  .num-big { font-size: 1.8rem; font-weight: 900; display: block; margin-bottom: 6px; }
+  .num-label { font-size: 12px; color: var(--muted); }
+
+  /* ── ACTIVITY ── */
+  .activity-box {
+    background: linear-gradient(135deg, rgba(139,92,246,0.1), rgba(64,212,232,0.06));
+    border: 1px solid rgba(139,92,246,0.25);
+    border-radius: 20px; padding: 32px;
+    margin-bottom: 56px;
+  }
+  .activity-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 24px;
+  }
+  .activity-badge {
+    background: rgba(139,92,246,0.2); border: 1px solid rgba(139,92,246,0.4);
+    border-radius: 50px; padding: 6px 16px;
+    font-size: 11px; font-weight: 700; color: #c4b5fd; letter-spacing: 1px;
+  }
+  .activity-title { font-size: 18px; font-weight: 700; }
+  .steps-list { list-style: none; }
+  .step-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    margin-bottom: 18px;
+  }
+  .step-num {
+    width: 30px; height: 30px; border-radius: 50%;
+    background: rgba(139,92,246,0.25); border: 1px solid rgba(139,92,246,0.4);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; color: #c4b5fd;
+    flex-shrink: 0;
+  }
+  .step-content h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+  .step-content p  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .materials-row {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px;
+  }
+  .material-tag {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 50px; padding: 5px 14px;
+    font-size: 12px; color: var(--muted);
+  }
+
+  /* ── ASSESSMENT ── */
+  .qa-list { list-style: none; }
+  .qa-item {
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    padding: 16px 0;
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .qa-item:last-child { border-bottom: none; }
+  .q-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: rgba(64,212,232,0.1); border: 1px solid rgba(64,212,232,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--cyan); flex-shrink: 0;
+  }
+  .qa-item p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-top: 2px; }
+  .qa-item strong { color: var(--white); }
+
+  /* ── TOOLS ROW ── */
+  .tools-row {
+    display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 56px;
+  }
+  .tool-pill {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px; padding: 14px 20px;
+    display: flex; align-items: center; gap: 10px;
+    transition: border-color 0.3s;
+  }
+  .tool-pill:hover { border-color: rgba(245,200,66,0.25); }
+  .tool-pill .t-name { font-size: 14px; font-weight: 700; }
+  .tool-pill .t-use  { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  /* ── HOMEWORK ── */
+  .homework-box {
+    background: rgba(245,200,66,0.05);
+    border: 1px solid rgba(245,200,66,0.2);
+    border-radius: 16px; padding: 24px 28px;
+    margin-bottom: 56px;
+    display: flex; gap: 20px; align-items: flex-start;
+  }
+  .hw-icon { font-size: 2rem; flex-shrink: 0; }
+  .hw-content h3 { font-size: 15px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+  .hw-content p  { font-size: 13px; color: var(--muted); line-height: 1.75; }
+
+  /* ── PRINT / NAV ── */
+  .bottom-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.06); padding-top: 32px;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .nav-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 12px; padding: 10px 22px;
+    font-size: 13px; color: var(--muted); cursor: pointer;
+    font-family: 'Cairo', sans-serif;
+    transition: background 0.2s, color 0.2s;
+  }
+  .nav-btn:hover { background: rgba(245,200,66,0.1); color: var(--gold); }
+  .nav-btn.primary {
+    background: rgba(139,92,246,0.15); border-color: rgba(139,92,246,0.35);
+    color: #c4b5fd;
+  }
+  .nav-btn.primary:hover { background: rgba(139,92,246,0.3); color: #e0d8ff; }
+
+  @media print {
+    /* ── إعدادات الصفحة ── */
+    @page {
+      size: A4;
+      margin: 18mm 15mm 18mm 15mm;
+    }
+
+    /* ── إخفاء العناصر الديكورية ── */
+    #stars, .breadcrumb, .bottom-nav, .copy-btn { display: none !important; }
+
+    /* ── إعادة تعيين الخلفية ── */
+    html, body {
+      background: white !important;
+      color: #111 !important;
+      font-size: 11pt;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* ── التخطيط ── */
+    .page {
+      max-width: 100% !important;
+      padding: 0 !important;
+      margin: 0 !important;
+    }
+
+    /* ── Hero ── */
+    .session-hero {
+      padding: 12px 0 16px !important;
+      border-bottom: 1.5px solid #ddd !important;
+      margin-bottom: 20px !important;
+    }
+    .session-hero h1 {
+      -webkit-text-fill-color: #1a1a1a !important;
+      background: none !important;
+      color: #1a1a1a !important;
+      font-size: 22pt !important;
+    }
+    .session-num-badge {
+      background: #f0f0f0 !important;
+      border: 1px solid #ccc !important;
+      color: #555 !important;
+    }
+    .session-hero p.subtitle { color: #444 !important; }
+    .meta-item { color: #555 !important; }
+    .meta-dot  { background: #bbb !important; }
+
+    /* ── عناوين الأقسام ── */
+    .sec-title {
+      color: #333 !important;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 4px;
+      margin-bottom: 14px !important;
+    }
+    .sec-title::after { background: #ddd !important; }
+
+    /* ── بطاقات الأهداف ── */
+    .objectives-grid {
+      grid-template-columns: repeat(2, 1fr) !important;
+      gap: 10px !important;
+      margin-bottom: 24px !important;
+    }
+    .obj-card {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      padding: 12px !important;
+      break-inside: avoid;
+    }
+    .obj-title { color: #555 !important; }
+    .obj-desc  { color: #444 !important; }
+
+    /* ── التسلسل الزمني ── */
+    .timeline { margin-bottom: 24px !important; }
+    .timeline::before { background: #ccc !important; }
+    .tl-dot   { border-color: #999 !important; background: white !important; }
+    .tl-time  { color: #555 !important; }
+    .tl-content {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      break-inside: avoid;
+    }
+    .tl-content h3 { color: #222 !important; }
+    .tl-content p, .tl-content li { color: #444 !important; }
+    .tl-content li::before { color: #888 !important; }
+    .tl-item { margin-bottom: 12px !important; }
+
+    /* ── بلوكات المحتوى ── */
+    .content-block {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      padding: 14px 16px !important;
+      margin-bottom: 12px !important;
+      break-inside: avoid;
+    }
+    .content-block h3 { color: #333 !important; font-size: 13pt !important; }
+    .content-block p  { color: #444 !important; font-size: 10.5pt !important; }
+
+    /* ── الإبرازات ── */
+    .highlight {
+      background: #f5f5f5 !important;
+      border-right: 3px solid #999 !important;
+      color: #333 !important;
+      break-inside: avoid;
+    }
+
+    /* ── بطاقات الأرقام ── */
+    .numbers-grid {
+      grid-template-columns: repeat(3, 1fr) !important;
+      gap: 8px !important;
+    }
+    .num-card {
+      background: #f9f9f9 !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      padding: 10px !important;
+      break-inside: avoid;
+    }
+    .num-big   { font-size: 14pt !important; color: #222 !important; }
+    .num-label { color: #555 !important; font-size: 9pt !important; }
+
+    /* ── صندوق النشاط ── */
+    .activity-box {
+      background: #f7f7f7 !important;
+      border: 1.5px solid #ccc !important;
+      border-radius: 10px !important;
+      padding: 16px 18px !important;
+      margin-bottom: 24px !important;
+      break-inside: avoid;
+    }
+    .activity-badge {
+      background: #eee !important;
+      border: 1px solid #ccc !important;
+      color: #555 !important;
+    }
+    .activity-title { color: #1a1a1a !important; font-size: 13pt !important; }
+
+    /* المواد */
+    .materials-row { gap: 6px !important; }
+    .material-tag {
+      background: #e8e8e8 !important;
+      border: 1px solid #ccc !important;
+      color: #333 !important;
+    }
+
+    /* خطوات النشاط */
+    .step-item { break-inside: avoid; margin-bottom: 12px !important; }
+    .step-num {
+      background: #eee !important;
+      border: 1px solid #ccc !important;
+      color: #333 !important;
+    }
+    .step-content h4 { color: #111 !important; }
+    .step-content p  { color: #444 !important; }
+
+    /* ── أسئلة التقييم ── */
+    .qa-item { border-bottom: 1px solid #eee !important; break-inside: avoid; }
+    .q-num {
+      background: #eee !important;
+      border: 1px solid #ccc !important;
+      color: #333 !important;
+    }
+    .qa-item p { color: #444 !important; }
+
+    /* ── الأدوات ── */
+    .tools-row { margin-bottom: 24px !important; gap: 8px !important; }
+    .tool-pill {
+      background: #f5f5f5 !important;
+      border: 1px solid #ddd !important;
+      border-radius: 8px !important;
+      break-inside: avoid;
+    }
+    .t-name { color: #222 !important; }
+    .t-use  { color: #555 !important; }
+
+    /* ── البرومبت ── */
+    .prompt-box {
+      background: #f0f0f0 !important;
+      border: 1px solid #ccc !important;
+      color: #333 !important;
+      font-size: 9pt !important;
+      white-space: pre-wrap !important;
+      word-break: break-word !important;
+    }
+
+    /* ── واجب البيت ── */
+    .homework-box {
+      background: #fffbea !important;
+      border: 1.5px solid #e5c84a !important;
+      border-radius: 10px !important;
+      padding: 16px 20px !important;
+      break-inside: avoid;
+    }
+    .hw-content h3 { color: #7a6000 !important; }
+    .hw-content p  { color: #444 !important; }
+
+    /* ── فواصل الصفحات الذكية ── */
+    h2, h3, .sec-title { break-after: avoid; }
+    section { break-inside: avoid-page; }
+
+    /* منع القص في العناصر المهمة */
+    .obj-card, .tl-content, .step-item,
+    .num-card, .qa-item, .tool-pill,
+    .homework-box, .activity-box { page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div id="stars"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة الأولى</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🔭 الحصة الأولى من ١٢</div>
+    <h1>مرحباً أيها الكون!</h1>
+    <p class="subtitle">
+      رحلتنا الكونية تبدأ من هنا — نكتشف ما هو الفضاء، كيف وُلد الكون، وكم هو ضخم بأرقام بسيطة تفهمها كل عقول فضولية.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <div class="meta-dot" style="background:var(--violet)"></div>
+        المدة: ٨٠ دقيقة
+      </div>
+      <div class="meta-item">
+        <div class="meta-dot" style="background:var(--cyan)"></div>
+        الفئة العمرية: ٨ – ١٤ سنة
+      </div>
+      <div class="meta-item">
+        <div class="meta-dot" style="background:var(--gold)"></div>
+        النوع: مفهوم + نشاط
+      </div>
+      <div class="meta-item">
+        <div class="meta-dot" style="background:var(--green)"></div>
+        المكان: القاعة الداخلية
+      </div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🌌</span>
+        <div class="obj-title">أعرّف الفضاء</div>
+        <div class="obj-desc">يستطيع الطفل تعريف الفضاء الخارجي بكلماته الخاصة ويميّزه عن الغلاف الجوي للأرض.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">💥</span>
+        <div class="obj-title">أفهم الانفجار الكبير</div>
+        <div class="obj-desc">يشرح الطفل نظرية الانفجار الكبير بطريقة مبسطة مع التسلسل الزمني الأساسي.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🔢</span>
+        <div class="obj-title">أتخيّل حجم الكون</div>
+        <div class="obj-desc">يستخدم الطفل تشبيهات يومية لتخيّل المسافات الكونية الهائلة بدلاً من الأرقام المجردة.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🤩</span>
+        <div class="obj-title">أطرح أسئلة فضولية</div>
+        <div class="obj-desc">يُبادر الطفل بطرح أسئلة علمية وينمّي روح الاستكشاف والبحث عن المجهول.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🚀 مقدمة التشويق</h3>
+          <p>يدخل المدرّب ويسأل مباشرة: <em style="color:var(--white)">"لو أُعطيتَ تذكرة للسفر إلى أي مكان في الكون، إلى أين ستذهب؟"</em></p>
+          <ul>
+            <li>جولة سريعة للإجابات — لا تعليق، فقط استماع وتشجيع</li>
+            <li>عرض صورة Hubble Deep Field: مئات المجرات في بقعة سماء كصندوق الثقاب</li>
+            <li>السؤال الجوهري: "ما الذي ترونه؟ وما الذي لا ترونه؟"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--violet)"></div>
+        <div class="tl-time">١٠–٣٥ د</div>
+        <div class="tl-content">
+          <h3>📖 الشرح النظري: ما هو الفضاء؟</h3>
+          <p>شرح تفاعلي مع أسئلة مستمرة. لا محاضرة جامدة — بل حوار مع الأطفال.</p>
+          <ul>
+            <li>الفضاء = كل ما يوجد خارج الغلاف الجوي للأرض (فوق ١٠٠ كم)</li>
+            <li>ماذا يوجد في الفضاء: نجوم، كواكب، مجرات، غبار، غاز... وكثير جداً من الفراغ!</li>
+            <li>قانون الصمت: لماذا لا يوجد صوت في الفضاء؟ تجربة بسيطة بالأيدي</li>
+            <li>قصة الانفجار الكبير بالتسلسل: نقطة صغيرة → انفجار → توسّع → نجوم → كواكب → نحن</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-time cyan">٣٥–٥٠ د</div>
+        <div class="tl-content">
+          <h3>🔢 حجم الكون بأرقام بسيطة</h3>
+          <p>نُحوّل الأرقام المخيفة إلى تشبيهات مفهومة ومضحكة.</p>
+          <ul>
+            <li>من الأرض إلى القمر: كأنك تقود سيارة ٩ سنوات بلا توقف</li>
+            <li>من الأرض إلى الشمس: ١٧٠ سنة بسيارة!</li>
+            <li>من الأرض إلى أقرب نجم (ألفا سنتوري): لو كانت الشمس حجم برتقالة، هو يبعد ٢٤٠٠ كم</li>
+            <li>عدد النجوم في الكون: أكثر من حبات الرمل في كل شواطئ الأرض مجتمعة</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٥٠–٧٠ د</div>
+        <div class="tl-content">
+          <h3>🎨 النشاط التطبيقي: خريطة كوني</h3>
+          <p>كل طفل يرسم "خريطة الكون" بالورق الملوّن — كما يتخيّله هو، لا كما يجب أن يكون.</p>
+          <ul>
+            <li>يضع الأرض في المنتصف، ثم يضيف ما يعرفه من الفضاء حوله</li>
+            <li>يكتب سؤالاً واحداً لا يعرف إجابته في زاوية الورقة</li>
+            <li>كل مجموعة (٣-٤ أطفال) تدمج خرائطها في خريطة جماعية</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٧٠–٨٠ د</div>
+        <div class="tl-content">
+          <h3>✅ الخلاصة والتقييم</h3>
+          <p>جولة سريعة — كل طفل يقول جملة واحدة تبدأ بـ "اكتشفت اليوم أن..."</p>
+          <ul>
+            <li>عرض أسئلة الخلاصة (انظر قسم التقييم أدناه)</li>
+            <li>إعلان واجب البيت: راقب السماء الليلة وعدّ النجوم التي تراها</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CONTENT — WHAT IS SPACE -->
+  <section class="content-section">
+    <div class="sec-title">📚 محتوى الشرح التفصيلي</div>
+
+    <div class="content-block">
+      <h3><span class="icon">🌌</span> ما هو الفضاء؟</h3>
+      <p>
+        الفضاء الخارجي هو كل ما يوجد خارج الغلاف الجوي للأرض. العلماء يتفقون أن الفضاء يبدأ من ارتفاع حوالي <strong>١٠٠ كيلومتر</strong> فوق سطح الأرض — وهو ما يسمى خط كارمان.
+      </p>
+      <p>
+        الفضاء ليس فارغاً تماماً؛ فهو مليء بالنجوم والكواكب والمجرات والغبار الكوني والإشعاع. لكنه في نفس الوقت أكثر فراغاً من أي شيء نستطيع صنعه على الأرض.
+      </p>
+      <div class="highlight">
+        💡 <strong>تشبيه للأطفال:</strong> لو كانت الأرض حجم كرة قدم، فإن الغلاف الجوي لا يتجاوز سمك ورقة واحدة ملفوفة حولها — والفضاء يبدأ فوراً بعدها!
+      </div>
+      <p>
+        في الفضاء لا يوجد هواء، لذلك لا يوجد صوت. الضوء يسافر ولكن الصوت لا يمكنه الانتقال بدون وسط مادي. لهذا السبب انفجار نجم على بُعد ملايين السنين الضوئية — لن تسمع له صوتاً أبداً!
+      </p>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">💥</span> كيف بدأ الكون؟ — الانفجار الكبير</h3>
+      <p>
+        قبل حوالي <strong>١٣.٨ مليار سنة</strong>، لم يكن هناك شيء — لا مكان، لا زمان، لا مادة. ثم في لحظة واحدة، بدأ الكون بالتوسع من نقطة صغيرة جداً جداً في ما نسميه <strong>"الانفجار الكبير"</strong>.
+      </p>
+
+      <div class="highlight">
+        ⚠️ <strong>تنبيه مهم للمدرّب:</strong> الانفجار الكبير لم يكن "انفجاراً" كالقنبلة في مكان ما — بل كان توسعاً للمكان نفسه. الكون لم ينفجر في الفضاء، بل الفضاء نفسه بدأ يتوسع ولا يزال يتوسع حتى اليوم!
+      </div>
+
+      <p><strong style="color:var(--white)">التسلسل الزمني المبسّط:</strong></p>
+      <ul style="list-style:none;margin-top:12px">
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:var(--muted)">
+          <span style="color:var(--gold);font-weight:700;min-width:90px">اللحظة ٠</span>
+          <span>الانفجار الكبير — الكون يبدأ حاراً جداً وصغيراً جداً</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:var(--muted)">
+          <span style="color:var(--violet);font-weight:700;min-width:90px">~٣٨٠ ألف سنة</span>
+          <span>يبرد الكون بما يكفي لتتكوّن أول ذرات الهيدروجين والهيليوم</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:var(--muted)">
+          <span style="color:var(--cyan);font-weight:700;min-width:90px">~٢٠٠ مليون سنة</span>
+          <span>تتجمع الغازات وتشتعل — تولد أوائل النجوم</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;margin-bottom:12px;font-size:13px;color:var(--muted)">
+          <span style="color:var(--rose);font-weight:700;min-width:90px">~٩ مليارات سنة</span>
+          <span>تتكوّن شمسنا ومجموعتنا الشمسية</span>
+        </li>
+        <li style="display:flex;gap:12px;align-items:flex-start;font-size:13px;color:var(--muted)">
+          <span style="color:var(--green);font-weight:700;min-width:90px">~١٣.٨ مليار سنة</span>
+          <span>الآن — نحن هنا نتساءل عن كل هذا!</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-block">
+      <h3><span class="icon">🔢</span> حجم الكون بأرقام تُذهل العقول</h3>
+      <p>الأرقام الكونية ضخمة جداً لدرجة أنها لا معنى لها إذا قلناها مجردة. لهذا نحوّلها إلى تشبيهات:</p>
+
+      <div class="numbers-grid">
+        <div class="num-card">
+          <span class="num-big" style="color:var(--cyan)">٣٨٤ ألف</span>
+          <span class="num-label">كم بين الأرض والقمر<br><span style="color:var(--gold);font-size:11px">= ٩ سنوات بالسيارة</span></span>
+        </div>
+        <div class="num-card">
+          <span class="num-big" style="color:var(--gold)">١٥٠ مليون</span>
+          <span class="num-label">كم بين الأرض والشمس<br><span style="color:var(--gold);font-size:11px">= ١٧٠ سنة بالسيارة</span></span>
+        </div>
+        <div class="num-card">
+          <span class="num-big" style="color:var(--violet)">٤.٢</span>
+          <span class="num-label">سنة ضوئية لأقرب نجم<br><span style="color:var(--gold);font-size:11px">= ٤٠ تريليون كم</span></span>
+        </div>
+        <div class="num-card">
+          <span class="num-big" style="color:var(--rose)">٢٠٠ مليار</span>
+          <span class="num-label">نجم في مجرتنا وحدها<br><span style="color:var(--gold);font-size:11px">= شمسنا واحدة منها فقط</span></span>
+        </div>
+        <div class="num-card">
+          <span class="num-big" style="color:var(--green)">٢ تريليون</span>
+          <span class="num-label">مجرة في الكون المرئي<br><span style="color:var(--gold);font-size:11px">ونحن في واحدة منها</span></span>
+        </div>
+        <div class="num-card">
+          <span class="num-big" style="color:var(--amber)">١٣.٨</span>
+          <span class="num-label">مليار سنة عمر الكون<br><span style="color:var(--gold);font-size:11px">عمر الأرض ٤.٥ مليار فقط</span></span>
+        </div>
+      </div>
+
+      <div class="highlight" style="margin-top:20px">
+        🌊 <strong>أكثر من رمال الشواطئ:</strong> عدد النجوم في الكون المرئي أكبر من عدد حبّات الرمل في جميع شواطئ وصحاري الأرض مجتمعة — يقدّره العلماء بـ <strong>سبتيليون نجم (١٠²⁴)</strong>!
+      </div>
+    </div>
+  </section>
+
+  <!-- ACTIVITY -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎨 النشاط التطبيقي</div>
+    <div class="activity-box">
+      <div class="activity-header">
+        <div class="activity-badge">نشاط جماعي</div>
+        <div class="activity-title">🗺️ رسم خريطة الكون بالورق الملوّن</div>
+      </div>
+
+      <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:20px">
+        ليس الهدف الدقة العلمية — بل الهدف أن يرى الطفل ما يتخيله، ويدرك ما لا يعرفه بعد. الخريطة الخاطئة هي أجمل نقطة بداية!
+      </p>
+
+      <div style="margin-bottom:24px">
+        <div style="font-size:12px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px">المواد اللازمة</div>
+        <div class="materials-row">
+          <span class="material-tag">ورق A3 أبيض أو أسود</span>
+          <span class="material-tag">أقلام ملوّنة ولاصقة</span>
+          <span class="material-tag">ملصقات نجوم لامعة</span>
+          <span class="material-tag">مقص وغراء</span>
+          <span class="material-tag">ورق ملوّن للقص</span>
+          <span class="material-tag">أقلام فضية وذهبية</span>
+        </div>
+      </div>
+
+      <ol class="steps-list">
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>المقدمة التشويقية (٣ دقائق)</h4>
+            <p>يقول المدرّب: "الآن أنتم رسامو الكون. ارسموا ما تعرفونه — ولا تخافوا من الخطأ، لأن العلماء أنفسهم لا يعرفون شكل الكون الكامل!"</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>الرسم الفردي (١٢ دقيقة)</h4>
+            <p>كل طفل يرسم خريطته الخاصة: الأرض في المركز، ثم القمر، الشمس، الكواكب، النجوم، المجرات — بالترتيب الذي يراه منطقياً. في زاوية الورقة يكتب سؤالاً واحداً لا يعرف إجابته.</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>الدمج الجماعي (٨ دقائق)</h4>
+            <p>مجموعات من ٣-٤ أطفال تلصق خرائطها معاً وتحاول توحيدها في خريطة مشتركة. أين اتفقوا؟ أين اختلفوا؟ من له رأي مختلف وسبب منطقي؟</p>
+          </div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>عرض "جدار الأسئلة" (٥ دقائق)</h4>
+            <p>تُلصق الأسئلة التي كتبها الأطفال على جدار واحد. هذا الجدار سيبقى طوال البرنامج — وكلما مرت حصة جديدة، نضع عليها الإجابة. الفضول هو المحرّك!</p>
+          </div>
+        </div>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong>من يستطيع أن يشرح لي بجملة واحدة: ما هو الفضاء؟</strong><br>
+          الهدف: التحقق من استيعاب التعريف الأساسي.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong>لماذا لا نسمع صوتاً في الفضاء؟</strong><br>
+          الهدف: ربط مفهوم الفضاء بغياب الهواء وغياب انتقال الصوت.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong>لو سافرت بسيارة إلى الشمس — كم سنة تحتاج؟</strong><br>
+          الهدف: التأكد من ترسّخ التشبيه الكمي في الذاكرة.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong>الكون بدأ منذ ١٣.٨ مليار سنة — والأرض عمرها ٤.٥ مليار سنة. ماذا يعني هذا؟</strong><br>
+          الهدف: التفكير المنطقي والاستنتاج (الأرض ليست قديمة كالكون).</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong>ما هو السؤال الذي خرج من رأسك اليوم ولا تزال تريد إجابة عليه؟</strong><br>
+          الهدف: تعزيز الفضول والتفكير النقدي — ولا توجد إجابة خاطئة.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد صور توضيحية لـ Hubble Deep Field وشرح الانفجار الكبير</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude (Anthropic)</div>
+          <div class="t-use">توليد قصة قصيرة عن طفل جزائري يكتشف الفضاء لأول مرة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌐 NASA Eyes / Stellarium</div>
+          <div class="t-use">عرض تفاعلي لحجم المجموعة الشمسية والمسافات</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📓 NotebookLM</div>
+          <div class="t-use">تلخيص مقالات فلكية وإنتاج ملاحظات للمدرّب</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROMPT BOX -->
+    <div class="content-block" style="border-color:rgba(139,92,246,0.2)">
+      <h3><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">انسخ هذا البرومبت وألصقه في Gemini أو Claude لتوليد محتوى إضافي للحصة:</p>
+      <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap" id="ready-prompt">أنت مدرّب تربوي متخصص في علم الفلك للأطفال.
+
+اكتب قصة قصيرة (٢٠٠ كلمة) بالعربية الفصيحة المبسّطة، بطلها طفل جزائري اسمه "يوسف" من منطقة القبائل يرى السماء المليئة بالنجوم لأول مرة خارج المدينة.
+
+القصة يجب أن:
+- تبدأ بمشهد ليلي جميل في الطبيعة الجزائرية
+- تتضمن سؤالاً يطرحه يوسف عن الفضاء
+- تنتهي بشعور الدهشة والرغبة في التعلّم
+- تكون مناسبة للقراءة الجهرية أمام أطفال عمرهم ٨-١٢ سنة</div>
+      <button onclick="copyPrompt()" style="margin-top:14px;background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.35);border-radius:10px;padding:9px 20px;color:#c4b5fd;font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🌙</div>
+    <div class="hw-content">
+      <h3>واجب البيت — للنجمة الصغيرة</h3>
+      <p>
+        الليلة، بعد الغروب بساعة، اذهب إلى مكان يمكنك منه رؤية السماء. ابتعد عن الأضواء قدر المستطاع.
+        عدّ النجوم التي تستطيع رؤيتها في دقيقة واحدة، وارسم شكل السماء كما تبدو لك.
+        في الحصة القادمة ستخبرنا: هل رأيت شيئاً لفت انتباهك؟
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🔭 تلميح: لو رأيت نقطة مضيئة لا تومض — فأنت تنظر إلى كوكب، ليس نجماً!
+      </p>
+    </div>
+  </div>
+
+  <!-- BOTTOM NAV -->
+  <div style="text-align:center;margin-bottom:16px">
+    <button class="nav-btn" onclick="window.print()" style="display:inline-flex;align-items:center;gap:8px">🖨️ طباعة الحصة</button>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='astronomy-kids-guide.html'">← العودة للدليل</button>
+    <div style="font-size:13px;color:var(--muted);text-align:center">
+      برنامج الفلك للأطفال · آفاق جرجرة
+    </div>
+    <button class="nav-btn primary" onclick="window.location.href='session-02-shamsuna-alraiea.html'">الحصة الثانية: شمسنا الرائعة ←</button>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+(function(){
+  var c = document.getElementById('stars');
+  for(var i=0;i<160;i++){
+    var s = document.createElement('div');
+    s.className='star';
+    var sz = Math.random()*2+0.4;
+    s.style.cssText=[
+      'width:'+sz+'px','height:'+sz+'px',
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(2+Math.random()*4)+'s',
+      '--delay:'+(-Math.random()*5)+'s',
+      '--min-op:'+(0.1+Math.random()*0.3)
+    ].join(';');
+    c.appendChild(s);
+  }
+})();
+
+function copyPrompt(){
+  var text = document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn = document.getElementById('copy-btn');
+    btn.textContent = '✅ تم النسخ!';
+    setTimeout(function(){ btn.textContent = '📋 نسخ البرومبت'; }, 2500);
+  });
+}
+</script>
+</body>
+</html>
