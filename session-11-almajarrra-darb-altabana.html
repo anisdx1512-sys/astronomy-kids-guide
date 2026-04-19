@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ١١ – المجرة درب التبانة | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#04060f;--deep:#080d1f;--cosmos:#0d1535;
+    --gold:#f5c842;--amber:#e8a020;
+    --milky:#c8b4f8;--arm:#8b70c8;--core:#ffd090;
+    --cyan:#40d4e8;--green:#34d399;--rose:#f472b6;
+    --white:#f0f4ff;--muted:#8899cc;--violet:#8b5cf6;
+    --blue:#60a5fa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.12);transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
+
+  /* subtle milky glow */
+  #glow-mw{
+    position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+    width:120%;height:40px;
+    background:linear-gradient(90deg,transparent,rgba(200,180,248,.04) 30%,rgba(200,180,248,.08) 50%,rgba(200,180,248,.04) 70%,transparent);
+    pointer-events:none;z-index:0;
+    filter:blur(18px);
+    animation:mwp 14s ease-in-out infinite;
+  }
+  @keyframes mwp{0%,100%{opacity:.6;}50%{opacity:1;}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:48px;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(200,180,248,.1);border:1px solid rgba(200,180,248,.3);
+    border-radius:50px;padding:6px 18px;font-size:12px;color:var(--milky);letter-spacing:1px;margin-bottom:20px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,var(--milky) 30%,var(--core) 60%,var(--gold) 90%,var(--cyan) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.25;margin-bottom:14px;
+  }
+  .session-hero p.subtitle{color:var(--muted);font-size:15px;max-width:640px;line-height:1.8;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SEC TITLE ── */
+  .sec-title{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-bottom:56px;}
+  .obj-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px;transition:border-color .3s,transform .3s;}
+  .obj-card:hover{border-color:rgba(200,180,248,.28);transform:translateY(-3px);}
+  .obj-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+  .obj-title{font-size:13px;font-weight:700;color:var(--milky);margin-bottom:6px;}
+  .obj-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(200,180,248,.5),rgba(245,200,66,.2),transparent);}
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--milky);background:var(--night);flex-shrink:0;}
+  .tl-dot.gold{border-color:var(--gold);}
+  .tl-dot.cyan{border-color:var(--cyan);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-time{font-size:11px;color:var(--milky);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.gold{color:var(--gold);}
+  .tl-time.cyan{color:var(--cyan);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-time.green{color:var(--green);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── MILKY WAY DIAGRAM ── */
+  .mw-wrap{overflow-x:auto;margin-bottom:24px;}
+  .mw-wrap svg{display:block;margin:0 auto;min-width:600px;}
+
+  /* ── GALAXY STATS ── */
+  .gal-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:12px;margin-bottom:20px;}
+  .gal-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;text-align:center;transition:transform .3s;}
+  .gal-stat:hover{transform:translateY(-3px);}
+  .gal-num{font-size:1.8rem;font-weight:900;display:block;margin-bottom:5px;}
+  .gal-lbl{font-size:12px;color:var(--muted);line-height:1.5;}
+
+  /* ── GALAXY TYPE CARDS ── */
+  .galaxy-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px;margin-bottom:56px;}
+  .gtype-card{background:rgba(4,6,20,.9);border-radius:16px;overflow:hidden;transition:transform .3s,border-color .3s;}
+  .gtype-card:hover{transform:translateY(-4px);}
+  .gtype-svg{display:block;width:100%;background:#010208;}
+  .gtype-info{padding:14px 16px 16px;}
+  .gtype-name{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .gtype-desc{font-size:11.5px;color:var(--muted);line-height:1.6;}
+  .gtype-ex{font-size:10.5px;color:var(--gold);margin-top:6px;font-weight:700;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-section{margin-bottom:56px;}
+  .content-block{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:28px 32px;margin-bottom:16px;}
+  .content-block h3{font-size:17px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .hl{background:rgba(200,180,248,.07);border-right:3px solid var(--milky);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#ddd6fe;line-height:1.8;}
+  .hl-gold{background:rgba(245,200,66,.08);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#d4c07a;line-height:1.8;}
+  .hl-cyan{background:rgba(64,212,232,.07);border-right:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#99eef8;line-height:1.8;}
+  .hl-green{background:rgba(52,211,153,.07);border-right:3px solid var(--green);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#99f6e4;line-height:1.8;}
+
+  /* ── POSITION TABLE ── */
+  .pos-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px;}
+  .pos-table th{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600;}
+  .pos-table tr.p-row{background:rgba(255,255,255,.025);transition:background .25s;}
+  .pos-table tr.p-row:hover{background:rgba(200,180,248,.07);}
+  .pos-table td{padding:11px 12px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);font-size:13px;vertical-align:middle;}
+  .pos-table td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--white);}
+  .pos-table td:last-child{border-radius:0 10px 10px 0;}
+
+  /* ── SCALE VISUAL ── */
+  .scale-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .scale-label{font-size:12px;font-weight:700;min-width:140px;text-align:left;}
+  .scale-bar-wrap{flex:1;background:rgba(255,255,255,.06);border-radius:50px;height:8px;overflow:hidden;}
+  .scale-bar{height:8px;border-radius:50px;}
+  .scale-val{font-size:11px;color:var(--muted);min-width:110px;}
+
+  /* ── FACTS ── */
+  .facts-strip{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .fact-card{flex:1;min-width:190px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;}
+  .fact-emoji{font-size:1.5rem;display:block;margin-bottom:8px;}
+  .fact-text{font-size:13px;color:var(--muted);line-height:1.7;}
+  .fact-text strong{color:var(--gold);}
+
+  /* ── WORKSHOP ── */
+  .ws-box{background:linear-gradient(135deg,rgba(200,180,248,.07),rgba(245,200,66,.04));border:1px solid rgba(200,180,248,.2);border-radius:20px;padding:32px;margin-bottom:56px;}
+  .ws-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .ws-badge{background:rgba(200,180,248,.17);border:1px solid rgba(200,180,248,.38);border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--milky);letter-spacing:1px;}
+  .ws-title{font-size:18px;font-weight:700;}
+  .ws-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* colour palette */
+  .palette-strip{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:20px;}
+  .palette-chip{display:flex;flex-direction:column;align-items:center;gap:5px;font-size:10.5px;color:var(--muted);}
+  .palette-dot{width:30px;height:30px;border-radius:50%;box-shadow:0 2px 10px rgba(0,0,0,.4);}
+
+  /* stages */
+  .stages-strip{display:flex;gap:0;margin-bottom:22px;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.06);}
+  .stage{flex:1;padding:12px 8px;text-align:center;background:rgba(255,255,255,.02);border-left:1px solid rgba(255,255,255,.05);}
+  .stage:last-child{border-left:none;}
+  .stage-icon{font-size:1.4rem;display:block;margin-bottom:4px;}
+  .stage-lbl{font-size:11px;color:var(--muted);line-height:1.4;}
+
+  /* materials */
+  .materials-box{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 22px;margin-bottom:22px;}
+  .mat-title{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:10px;}
+  .materials-row{display:flex;flex-wrap:wrap;gap:7px;}
+  .mat-tag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:50px;padding:5px 13px;font-size:12px;color:var(--muted);}
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:20px;}
+  .step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:rgba(200,180,248,.13);border:1px solid rgba(200,180,248,.32);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--milky);}
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{background:rgba(245,200,66,.07);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;color:#d4c07a;line-height:1.65;margin-top:8px;}
+  .step-science{background:rgba(52,211,153,.06);border-right:3px solid var(--green);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;color:#99f6e4;line-height:1.65;margin-top:8px;}
+
+  /* expected result */
+  .result-box{background:rgba(52,211,153,.06);border:1px solid rgba(52,211,153,.2);border-radius:14px;padding:18px 22px;margin-top:20px;}
+  .result-title{font-size:13px;font-weight:700;color:var(--green);margin-bottom:12px;}
+  .result-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;}
+  .result-check{color:var(--green);font-size:14px;flex-shrink:0;}
+  .result-text{font-size:13px;color:var(--muted);line-height:1.6;}
+
+  /* ── ASSESSMENT ── */
+  .qa-list{list-style:none;}
+  .qa-item{border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .qa-item:last-child{border-bottom:none;}
+  .q-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:rgba(200,180,248,.1);border:1px solid rgba(200,180,248,.24);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--milky);}
+  .qa-item p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:2px;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 20px;transition:border-color .3s;}
+  .tool-pill:hover{border-color:rgba(200,180,248,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  .prompt-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;}
+  .copy-btn{margin-top:14px;background:rgba(200,180,248,.12);border:1px solid rgba(200,180,248,.3);border-radius:10px;padding:9px 20px;color:var(--milky);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .copy-btn:hover{background:rgba(200,180,248,.24);}
+
+  .homework-box{background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.2);border-radius:16px;padding:24px 28px;margin-bottom:56px;display:flex;gap:20px;align-items:flex-start;}
+  .hw-icon{font-size:2rem;flex-shrink:0;}
+  .hw-content h3{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .hw-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:32px;flex-wrap:wrap;gap:12px;}
+  .nav-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;}
+  .nav-btn:hover{background:rgba(200,180,248,.1);color:var(--milky);}
+  .nav-btn.primary{background:rgba(200,180,248,.12);border-color:rgba(200,180,248,.32);color:var(--milky);}
+  .nav-btn.primary:hover{background:rgba(200,180,248,.26);color:#ede9fe;}
+
+  /* ══════════════ PRINT ══════════════ */
+  @media print{
+    @page{size:A4 portrait;margin:15mm 14mm 15mm 14mm;}
+    @page:first{margin-top:10mm;}
+    *,*::before,*::after{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{font-family:'Cairo','Arial',sans-serif!important;background:white!important;color:#1a1a1a!important;margin:0!important;padding:0!important;overflow:visible!important;min-height:unset!important;width:100%!important;}
+    #stars,#glow-mw,.breadcrumb,.bottom-nav,.print-bar,.copy-btn{display:none!important;}
+    .page{position:static!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;}
+    .session-hero{padding:8px 0 14px!important;border-bottom:2px solid #5040a0!important;margin-bottom:18px!important;background:none!important;}
+    .session-hero h1{font-size:20pt!important;font-weight:700!important;color:#1a0060!important;-webkit-text-fill-color:#1a0060!important;background:none!important;line-height:1.2!important;margin-bottom:8px!important;}
+    .session-num-badge{background:#f0eeff!important;border:1px solid #5040a0!important;color:#1a0060!important;font-size:9pt!important;padding:4px 12px!important;border-radius:20px!important;margin-bottom:10px!important;display:inline-block!important;}
+    .session-hero p.subtitle{color:#444!important;font-size:10pt!important;}
+    .meta-row{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-top:10px!important;}
+    .meta-item{color:#555!important;font-size:9pt!important;}
+    .meta-dot{background:#bbb!important;}
+    .sec-title{font-size:8.5pt!important;color:#1a0060!important;letter-spacing:2px!important;border-bottom:1.5px solid #5040a0!important;padding-bottom:4px!important;margin-bottom:12px!important;break-after:avoid!important;}
+    .sec-title::after{display:none!important;}
+    .objectives-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;margin-bottom:18px!important;}
+    .obj-card{background:#f0eeff!important;border:1px solid #ccc!important;border-right:3px solid #5040a0!important;border-radius:6px!important;padding:10px 12px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .obj-icon{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .obj-title{color:#1a0060!important;font-size:9.5pt!important;}
+    .obj-desc{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .timeline{margin-bottom:18px!important;}
+    .timeline::before{background:#ccc!important;width:1px!important;}
+    .tl-item{margin-bottom:9px!important;break-inside:avoid!important;page-break-inside:avoid!important;padding-right:38px!important;}
+    .tl-dot{width:13px!important;height:13px!important;right:14px!important;top:12px!important;border-color:#aaa!important;background:white!important;}
+    .tl-time{color:#1a0060!important;font-size:8.5pt!important;width:52px!important;}
+    .tl-content{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:9px 13px!important;}
+    .tl-content h3{color:#222!important;font-size:10pt!important;margin-bottom:5px!important;}
+    .tl-content p,.tl-content li{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .tl-content li::before{color:#aaa!important;}
+    .mw-wrap{overflow:visible!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .mw-wrap svg{min-width:unset!important;width:100%!important;}
+    .gal-stats{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important;}
+    .gal-stat{background:#f0eeff!important;border:1px solid #ccc!important;border-top:2px solid #5040a0!important;border-radius:6px!important;padding:8px!important;break-inside:avoid!important;}
+    .gal-num{font-size:12pt!important;color:#1a0060!important;}
+    .gal-lbl{color:#555!important;font-size:8pt!important;}
+    .galaxy-types{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important;margin-bottom:18px!important;}
+    .gtype-card{background:#000!important;border:1px solid #888!important;border-radius:6px!important;break-inside:avoid!important;}
+    .gtype-svg{max-height:90px!important;}
+    .gtype-info{padding:8px 10px 10px!important;}
+    .gtype-name{color:#222!important;font-size:9.5pt!important;}
+    .gtype-desc{color:#444!important;font-size:8pt!important;}
+    .gtype-ex{color:#7a5800!important;font-size:7.5pt!important;}
+    .content-section{margin-bottom:18px!important;}
+    .content-block{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .content-block h3{font-size:11pt!important;margin-bottom:8px!important;}
+    .content-block p{color:#444!important;font-size:9.5pt!important;line-height:1.65!important;margin-bottom:8px!important;}
+    .hl{background:#f0eeff!important;border-right:3px solid #5040a0!important;color:#0a0030!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-gold{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-cyan{background:#e0faff!important;border-right:3px solid #208090!important;color:#002030!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-green{background:#e8faf5!important;border-right:3px solid #20a080!important;color:#003828!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .pos-table{font-size:8.5pt!important;border-collapse:collapse!important;}
+    .pos-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f5f5f5!important;}
+    .pos-table td{color:#444!important;border-bottom:1px solid #eee!important;background:white!important;padding:7px 8px!important;border-radius:0!important;}
+    .pos-table td:first-child{color:#222!important;}
+    .scale-bar-row{margin-bottom:7px!important;}
+    .scale-label{font-size:8.5pt!important;color:#333!important;}
+    .scale-bar-wrap{background:#e0e0e0!important;}
+    .scale-val{color:#555!important;font-size:8pt!important;}
+    .facts-strip{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;}
+    .fact-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .fact-emoji{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .fact-text{color:#444!important;font-size:8.5pt!important;line-height:1.5!important;}
+    .ws-box{background:#f0eeff!important;border:1.5px solid #5040a0!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:18px!important;}
+    .ws-badge{background:#e0d8ff!important;border:1px solid #5040a0!important;color:#1a0060!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .ws-title{color:#1a1a1a!important;font-size:12pt!important;}
+    .ws-subtitle{color:#444!important;font-size:9pt!important;margin-bottom:12px!important;}
+    .palette-strip{gap:8px!important;margin-bottom:14px!important;}
+    .palette-dot{width:22px!important;height:22px!important;}
+    .palette-chip{font-size:8pt!important;color:#555!important;}
+    .stages-strip{display:flex!important;margin-bottom:14px!important;border:1px solid #ddd!important;border-radius:6px!important;overflow:hidden!important;}
+    .stage{background:#f5f5f5!important;border-left:1px solid #ddd!important;padding:8px 5px!important;}
+    .stage-icon{font-size:1.2rem!important;}
+    .stage-lbl{color:#555!important;font-size:8pt!important;}
+    .materials-box{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:9px 13px!important;margin-bottom:12px!important;break-inside:avoid!important;}
+    .mat-title{color:#555!important;font-size:8pt!important;}
+    .mat-tag{background:#ececec!important;border:1px solid #ccc!important;color:#333!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .step-item{break-inside:avoid!important;page-break-inside:avoid!important;margin-bottom:10px!important;gap:10px!important;}
+    .step-num{width:26px!important;height:26px!important;background:#f0eeff!important;border:1px solid #5040a0!important;color:#1a0060!important;font-size:9pt!important;}
+    .step-content h4{color:#1a1a1a!important;font-size:10pt!important;margin-bottom:2px!important;}
+    .step-content p{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .step-tip{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:5px!important;border-radius:0 5px 5px 0!important;}
+    .step-science{background:#e8faf5!important;border-right:3px solid #20a080!important;color:#003828!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:5px!important;border-radius:0 5px 5px 0!important;}
+    .result-box{background:#e8faf5!important;border:1px solid #b0d8c0!important;border-radius:6px!important;padding:12px 16px!important;margin-top:12px!important;break-inside:avoid!important;}
+    .result-title{color:#1a6a3a!important;font-size:10pt!important;}
+    .result-check{color:#1a6a3a!important;}
+    .result-text{color:#444!important;font-size:9pt!important;}
+    .qa-item{border-bottom:1px solid #eee!important;padding:10px 0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .q-num{width:24px!important;height:24px!important;background:#f0eeff!important;border:1px solid #5040a0!important;color:#1a0060!important;font-size:9pt!important;}
+    .qa-item p{color:#444!important;font-size:9.5pt!important;line-height:1.55!important;}
+    .tools-row{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .tool-pill{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 12px!important;break-inside:avoid!important;}
+    .t-name{color:#222!important;font-size:9.5pt!important;}
+    .t-use{color:#555!important;font-size:8.5pt!important;}
+    .prompt-box{background:#f5f5f5!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;line-height:1.6!important;white-space:pre-wrap!important;word-break:break-word!important;padding:12px!important;border-radius:6px!important;}
+    .homework-box{background:#fffbea!important;border:1.5px solid #d4a820!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .hw-icon{font-size:1.6rem!important;}
+    .hw-content h3{color:#7a5800!important;font-size:10.5pt!important;margin-bottom:5px!important;}
+    .hw-content p{color:#444!important;font-size:9pt!important;line-height:1.6!important;}
+    h2,h3,.sec-title{break-after:avoid!important;page-break-after:avoid!important;}
+    section:has(.ws-box){break-before:page!important;page-break-before:always!important;}
+    .content-section{break-before:auto!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div id="glow-mw"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة الحادية عشرة</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🌌 الحصة الحادية عشرة من ١٢</div>
+    <h1>المجرة — درب التبانة</h1>
+    <p class="subtitle">
+      نحن لسنا في مركز الكون — بل في ذراع هادئة من مجرة ضخمة تحتوي ٢٠٠ مليار نجم. اليوم نرسم منزلنا الكوني الحقيقي: شكل المجرة، موضعنا فيها، وما يوجد خارجها من مجرات لا تُحصى.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--milky)"></div>المدة: ٨٠ دقيقة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--core)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>النوع: مفهوم + ورشة فن كوني</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>المكان: القاعة — طاولات عمل</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🌌</span>
+        <div class="obj-title">أصف شكل المجرة</div>
+        <div class="obj-desc">يصف الطفل مجرة درب التبانة بشكلها الحلزوني ومكوّناتها ويُقارنها بتشبيهات يومية.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">📍</span>
+        <div class="obj-title">أحدّد موضعنا في المجرة</div>
+        <div class="obj-desc">يُحدّد الطفل موضع شمسنا في المجرة ويشرح لماذا لا نرى مركزها بشكل مباشر.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🔭</span>
+        <div class="obj-title">أعرف المجرات الأخرى</div>
+        <div class="obj-desc">يُسمّي الطفل أنواع المجرات الأربعة ويذكر مثالاً لكل نوع.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🎨</span>
+        <div class="obj-title">أرسم المجرة بالملح والغراء</div>
+        <div class="obj-desc">ينجز الطفل لوحة فنية علمية تُظهر بنية المجرة بأذرعها ومركزها بأسلوب جميل.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🌌 مقدمة التشويق</h3>
+          <p>يُطفئ المدرّب الأضواء ويعرض صورة Hubble Deep Field — ١٠,٠٠٠ مجرة في بقعة سماء أصغر من رأس إبرة.</p>
+          <ul>
+            <li><em style="color:var(--white)">"كل نقطة في هذه الصورة — ليست نجماً — بل مجرة بأكملها. كم عدد النجوم التي ترى هنا؟"</em></li>
+            <li>ربط: من الحصة الأولى كنا نظن أن الكون = النجوم. اليوم نرى أن النجوم مجرد عنوان المنزل!</li>
+            <li>تساؤل: "أين نحن في كل هذا؟ هل نحن في المركز؟"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--milky)"></div>
+        <div class="tl-time">١٠–٣٥ د</div>
+        <div class="tl-content">
+          <h3>📖 درب التبانة — منزلنا الكوني</h3>
+          <p>شرح بنية المجرة من الخارج والداخل — كيف تبدو لو رأيناها من فوق، وأين نقف فيها بالضبط.</p>
+          <ul>
+            <li>شكل المجرة: قرص حلزوني بارز المركز — مثل قرص فريزبي</li>
+            <li>الأذرع الرئيسية الأربعة وموضع ذراع الجبّار (ذراعنا)</li>
+            <li>شمسنا على بُعد ٢٦,٠٠٠ سنة ضوئية من المركز</li>
+            <li>لماذا نرى درب التبانة كشريط في السماء؟ نحن داخلها!</li>
+            <li>الثقب الأسود الهائل في المركز: القوس A*</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-time cyan">٣٥–٤٨ د</div>
+        <div class="tl-content">
+          <h3>🔭 المجرات الأخرى — الجيران والبُعداء</h3>
+          <p>أنواع المجرات الأربعة مع أمثلة قريبة ومثيرة.</p>
+          <ul>
+            <li>المجرات الحلزونية — منها مجرتنا وأندروميدا</li>
+            <li>المجرات الإهليجية — عمالقة خاملة ثرية بالنجوم القديمة</li>
+            <li>المجرات اللامنتظمة — غالباً نتيجة اصطدام مجرتَين</li>
+            <li>المجموعة المحلية: ٥٤ مجرة من بينها مجرتنا وأندروميدا</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٤٨–٧٢ د</div>
+        <div class="tl-content">
+          <h3>🎨 ورشة الملح والغراء — رسم المجرة</h3>
+          <p>كل طفل يرسم مجرته الخاصة على ورق أسود بالغراء والملح والألوان المائية — تقنية علمية وفنية في آنٍ واحد.</p>
+          <ul>
+            <li>رسم شكل المجرة الحلزوني بالغراء</li>
+            <li>إضافة الملح المرفرف على الغراء الرطب</li>
+            <li>تلوين بالألوان المائية — الفيزياء تتدخل!</li>
+            <li>تسمية الأجزاء وتحديد موضع الشمس</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٧٢–٨٠ د</div>
+        <div class="tl-content">
+          <h3>✅ معرض اللوحات والخلاصة</h3>
+          <p>تُعلَّق اللوحات وتُفتح نافذة تأمل: "هذه الليلة حين تنظر للسماء — ستعرف أنك ترى جزءاً من منزلك."</p>
+          <ul>
+            <li>أسئلة التقييم السريعة</li>
+            <li>ربط بالحصة الأخيرة: التخرج والمشاريع الختامية</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MILKY WAY DIAGRAM -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🌌 مخطط مجرة درب التبانة — من الأعلى</div>
+    <div class="mw-wrap">
+      <svg id="mw-svg" viewBox="0 0 700 460" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px"></svg>
+    </div>
+    <!-- Stats -->
+    <div class="gal-stats" id="gal-stats"></div>
+  </section>
+
+  <!-- GALAXY TYPES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🔭 أنواع المجرات الأربعة</div>
+    <div class="galaxy-types" id="galaxy-types"></div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <div class="sec-title">📚 محتوى الشرح التفصيلي</div>
+
+    <div class="content-block">
+      <h3 style="color:var(--milky)"><span class="icon">🌌</span> درب التبانة — منزلنا الكوني</h3>
+      <p>
+        درب التبانة مجرة حلزونية قضيبية تحتوي على <strong style="color:var(--white)">٢٠٠–٤٠٠ مليار نجم</strong>. قطرها حوالي <strong style="color:var(--gold)">١٠٠,٠٠٠ سنة ضوئية</strong> وسُمكها يتراوح بين ١,٠٠٠ و١٢,٠٠٠ سنة ضوئية حسب المنطقة.
+      </p>
+      <div class="hl">
+        🍕 <strong>تشبيه جميل:</strong> تخيّل قرص بيتزا عملاق — الجزء الوسط أسمك (النتوء المركزي) وتمتد منه أذرع حلزونية نحو الخارج. لو نظرت من جانب البيتزا ستراها شريطاً رقيقاً — هكذا نرى درب التبانة في سمائنا الليلية تماماً!
+      </div>
+      <p>
+        تملك مجرتنا <strong style="color:var(--white)">٤ أذرع رئيسية</strong>: ذراع البرسيوس، ذراع القوس-القنطور، ذراع النورما-النجم الرامي، وذراع القيثارة-الجعجاع. شمسنا تقع في <strong style="color:var(--gold)">ذراع الجبّار</strong> — ذراع صغيرة ثانوية بين ذراع البرسيوس وذراع القوس-القنطور.
+      </p>
+      <div class="hl-gold">
+        📍 <strong>موضعنا بالأرقام:</strong> شمسنا تبعد <strong>٢٦,٠٠٠ سنة ضوئية</strong> عن مركز المجرة — أي في النصف الخارجي تقريباً. لسنا في المركز ولسنا في الحافة. تدور حول مركز المجرة بسرعة ٢٢٠ كم/ثانية وتُكمل دورة كاملة كل ٢٢٠–٢٣٠ مليون سنة (يُسمّى هذا بالسنة الكونية أو السنة المجرية).
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3 style="color:var(--core)"><span class="icon">⚫</span> المركز المحظور — القوس A*</h3>
+      <p>
+        في قلب مجرتنا يوجد <strong style="color:var(--white)">ثقب أسود هائل</strong> يُسمّى القوس A* (Sagittarius A*) — كتلته تعادل <strong style="color:var(--gold)">٤ ملايين مرة</strong> كتلة شمسنا. في عام ٢٠٢٢ التقط علماء "تلسكوب أفق الحدث" أول صورة حقيقية للظل الذي يُلقيه هذا الوحش المادي.
+      </p>
+      <div class="hl-cyan">
+        🌟 <strong>لماذا لا نرى المركز؟</strong> بيننا وبين مركز المجرة سُحب ضخمة من الغبار الكوني تحجب الضوء المرئي تماماً. لهذا رُصد المركز بالأشعة تحت الحمراء والراديوية التي تخترق الغبار — لا بالضوء العادي!
+      </div>
+    </div>
+
+    <div class="content-block">
+      <h3 style="color:var(--cyan)"><span class="icon">🌌</span> ما وراء مجرتنا — جيراننا الكونيون</h3>
+      <p>
+        مجرتنا ليست وحيدة — تنتمي إلى <strong style="color:var(--white)">المجموعة المحلية</strong>، وهي مجموعة من ٥٤ مجرة تنجذب نحو بعضها جاذبياً في منطقة قطرها حوالي ١٠ ملايين سنة ضوئية.
+      </p>
+
+      <!-- Distance scale -->
+      <div style="margin-top:16px" id="distance-scale"></div>
+
+      <div class="hl-green" style="margin-top:16px">
+        💥 <strong>تحذير كوني:</strong> مجرة أندروميدا (أقرب مجرة عملاقة) تتجه نحونا بسرعة ١١٠ كم/ثانية! بعد حوالي <strong>٤.٥ مليار سنة</strong> ستصطدم بمجرتنا. لكن لا داعي للقلق — الفضاء بين النجوم شاسع جداً، والاحتمال ضئيل جداً لاصطدام نجمَين.
+      </div>
+    </div>
+
+    <!-- Position comparison table -->
+    <div class="content-block">
+      <h3 style="color:var(--gold)"><span class="icon">📍</span> موضعنا في التسلسل الكوني</h3>
+      <div style="overflow-x:auto">
+        <table class="pos-table" id="pos-table"></table>
+      </div>
+    </div>
+
+    <!-- Fun facts -->
+    <div style="margin-top:24px">
+      <div class="sec-title">⚡ حقائق كونية مذهلة</div>
+      <div class="facts-strip">
+        <div class="fact-card">
+          <span class="fact-emoji">🌃</span>
+          <div class="fact-text">الشريط الأبيض المرئي في السماء الليلية الصافية هو مجرتنا ذاتها — نحن <strong>داخلها</strong> وننظر عبر ألف مليار نجم معاً!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🧮</span>
+          <div class="fact-text">الكون المرئي يحتوي على <strong>٢ تريليون مجرة</strong>. لو عددت مجرة كل ثانية بلا توقف لاحتجت ٦٠ مليون سنة لتنتهي!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">⏳</span>
+          <div class="fact-text">شمسنا أكملت حوالي <strong>٢٠ دورة كونية</strong> منذ تشكّلها — في كل دورة تقطع ٢٠٠,٠٠٠ سنة ضوئية حول مركز المجرة!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🌀</span>
+          <div class="fact-text">مجرة أندروميدا مرئية بالعين المجردة ليلاً كبقعة ضبابية صغيرة — إنها <strong>أبعد شيء يراه الإنسان بدون تلسكوب</strong>: ٢.٥ مليون سنة ضوئية!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKSHOP -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎨 الورشة الفنية</div>
+    <div class="ws-box">
+
+      <div class="ws-header">
+        <div class="ws-badge">فن كوني</div>
+        <div class="ws-title">🌌 رسم المجرة بالملح والغراء على ورق أسود</div>
+      </div>
+      <p class="ws-subtitle">
+        هذه التقنية تجمع الفيزياء والفن — حين يُلامس اللون المائي حبّات الملح المُشبّعة بالغراء، ينتشر بشكل حلزوني طبيعي يُشبه انتشار النجوم في أذرع المجرة الفعلية. نتيجة لا يمكن التنبؤ بها تماماً — كما في الكون نفسه!
+      </p>
+
+      <!-- Colour palette -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px">🎨 لوحة ألوان المجرة</div>
+      <div class="palette-strip" id="palette-strip"></div>
+
+      <!-- Stages -->
+      <div class="stages-strip">
+        <div class="stage"><span class="stage-icon">✏️</span><div class="stage-lbl">رسم الغراء</div></div>
+        <div class="stage"><span class="stage-icon">🧂</span><div class="stage-lbl">إضافة الملح</div></div>
+        <div class="stage"><span class="stage-icon">⏳</span><div class="stage-lbl">الانتظار</div></div>
+        <div class="stage"><span class="stage-icon">🎨</span><div class="stage-lbl">التلوين</div></div>
+        <div class="stage"><span class="stage-icon">✨</span><div class="stage-lbl">الإضافات</div></div>
+      </div>
+
+      <!-- Materials -->
+      <div class="materials-box">
+        <div class="mat-title">📦 المواد اللازمة — لكل طفل</div>
+        <div class="materials-row">
+          <span class="mat-tag">🖤 ورق مقوى أسود A3</span>
+          <span class="mat-tag">🔵 غراء سائل (أبيض)</span>
+          <span class="mat-tag">🧂 ملح طعام ناعم</span>
+          <span class="mat-tag">🎨 ألوان مائية (أزرق/بنفسجي/ذهبي/أبيض)</span>
+          <span class="mat-tag">🖌️ فرشاة رفيعة وأخرى متوسطة</span>
+          <span class="mat-tag">💧 كأس ماء</span>
+          <span class="mat-tag">⬛ ورقة تحت للتغطية</span>
+          <span class="mat-tag">✏️ قلم أبيض للتسمية</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px">⏱ وقت الورشة: ٢٤ دقيقة | يُفضّل التجفيف الطبيعي ١٠–١٥ دقيقة (استمر في الشرح خلاله)</p>
+      </div>
+
+      <!-- Steps -->
+      <ol class="steps-list">
+
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>✏️ التخطيط (٢ دقيقتان)</h4>
+            <p>بقلم الرصاص يرسم الطفل بخطوط خفيفة شكل المجرة المُخطَّط: مركز دائري كبير وأذرع حلزونية تمتد منه. لا حاجة للكمال — المجرات الحقيقية غير منتظمة!</p>
+            <div class="step-tip">💡 اعرض صورة حقيقية لمجرة حلزونية (من Hubble) للإلهام. اطلب منهم ألا ينسخوا بل يشعروا بالحرية في تصميمهم.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>🔵 رسم الغراء (٥ دقائق)</h4>
+            <p>يُطبّق الطفل الغراء السائل مباشرةً على الورقة السوداء باتباع خطوط الأذرع الحلزونية من المركز للخارج. يُضيف كمية أكثر على المنطقة المركزية لتكون أكثف وأضخم.</p>
+            <div class="step-science">🔬 <strong>العلم:</strong> النتوء المركزي للمجرة أكثف بكثير في النجوم — لذا نضع الغراء أكثف في المركز لمحاكاة هذه الكثافة.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>🧂 إضافة الملح (٣ دقائق)</h4>
+            <p>فوراً وبسرعة (قبل أن يجفّ الغراء) يُرشّ الطفل الملح بسخاء على كل الورقة الرطبة. يُنفض الزائد بلطف — يجب أن تبقى حبّات الملح على الغراء فقط.</p>
+            <div class="step-science">🔬 <strong>سرّ التقنية:</strong> الملح سيمتص اللون المائي بشكل غير منتظم بسبب خاصية الشعرية في البلّورات — ينتج نمطاً طبيعياً يُشبه انتشار النجوم!</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>⏳ الانتظار وجفاف جزئي (٣ دقائق)</h4>
+            <p>اترك الورقة تجفّ جزئياً — الغراء يجب أن يكون لزجاً لكن غير سائل. يستمر المدرّب في الشرح خلال هذا الوقت — "لماذا ننتظر؟ الملح يحتاج وقتاً ليتشرّب الغراء."</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٥</div>
+          <div class="step-content">
+            <h4>🎨 التلوين بالألوان المائية (٨ دقائق)</h4>
+            <p>بفرشاة مُشبَّعة باللون المائي يُلامس الطفل حبّات الملح دون ضغط — اللون سينتشر تلقائياً! استخدم: ذهبي/برتقالي للمركز (نجوم ساخنة)، أزرق/بنفسجي للأذرع، أبيض للنجوم الفردية.</p>
+            <div class="step-tip">✨ السرّ: لا تفرك — فقط المساس الخفيف بالفرشاة. الملح سيسحب اللون ويصنع المعجزة بنفسه!</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٦</div>
+          <div class="step-content">
+            <h4>✨ الإضافات الأخيرة والتسمية (٣ دقائق)</h4>
+            <p>بعد الجفاف: يُضيف نقاط بيضاء بالقلم الأبيض كنجوم منفردة، ويكتب "موضع الشمس" بسهم صغير، واسم المجرة في الحافة. الورقة تصبح لوحة فنية علمية فريدة.</p>
+          </div>
+        </div>
+
+      </ol>
+
+      <!-- Expected results -->
+      <div class="result-box">
+        <div class="result-title">✅ ما ستراه بعد الجفاف</div>
+        <div class="result-row"><span class="result-check">✓</span><span class="result-text">تدرّج لوني طبيعي من الذهبي الكثيف في المركز للبنفسجي الخفيف في الأطراف</span></div>
+        <div class="result-row"><span class="result-check">✓</span><span class="result-text">أنماط بلّورية على حبّات الملح تُشبه مجموعات النجوم الفعلية</span></div>
+        <div class="result-row"><span class="result-check">✓</span><span class="result-text">ملمس بارز ثلاثي الأبعاد يُشعرك بحجم الأذرع</span></div>
+        <div class="result-row"><span class="result-check">✓</span><span class="result-text">كل لوحة فريدة ومختلفة — كما أن كل مجرة حقيقية فريدة!</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong style="color:var(--white)">أين تقع شمسنا في مجرة درب التبانة؟ هل نحن في المركز؟</strong><br>الهدف: تصحيح الفهم الخاطئ الشائع عن موضعنا.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong style="color:var(--white)">لماذا نرى درب التبانة كشريط في السماء وليس كقرص كامل؟</strong><br>الهدف: فهم أننا داخل المجرة لا خارجها.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong style="color:var(--white)">اذكر الفرق بين المجرة الحلزونية والإهليجية.</strong><br>الهدف: تمييز أنواع المجرات حسب الشكل والمميزات.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong style="color:var(--white)">ماذا يوجد في مركز مجرتنا؟ وكيف رُصد رغم أننا لا نراه بالضوء؟</strong><br>الهدف: معرفة الثقب الأسود الهائل وطريقة رصده.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong style="color:var(--white)">في ورشة الملح — لماذا انتشر اللون بشكل طبيعي دون أن تفركه؟ ما الظاهرة العلمية؟</strong><br>الهدف: ربط نشاط الفن بمفهوم الشعرية وامتصاص السوائل.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد صور مجرات بأنواعها من قاعدة بيانات Hubble لعرضها في الفصل</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📓 NotebookLM</div>
+          <div class="t-use">تلخيص مقالات عن صورة القوس A* وتاريخ رصد المجرة وإنتاج بودكاست</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌐 NASA Hubble Gallery</div>
+          <div class="t-use">صور مجرات تفاعلية — أفضل ما التقطه هابل للمجرات الحلزونية والإهليجية</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">كتابة قصة قصيرة بضمير المجرة وبطاقة معلومات مجرة درب التبانة للطباعة</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(200,180,248,.2)">
+      <h3 style="color:var(--milky)"><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد قصة الكون من منظور المجرة نفسها:</p>
+      <div class="prompt-box" id="ready-prompt">أنت كاتب قصص كونية بضمير الغائب المتجسّد.
+
+اكتب قصة بعنوان "أنا درب التبانة" بالعربية الفصيحة المبسّطة، ٢٠٠ كلمة.
+
+المجرة تتحدث وتحكي:
+- ولادتها منذ ١٣ مليار سنة من سحب غاز ضخمة
+- كيف تشكّلت أذرعها الحلزونية ببطء خلال المليارات
+- الثقب الأسود في مركزها — الحارس الهادئ
+- لحظة تشكّل نجم صغير اسمه "الشمس" في أحد أذرعها
+- الكواكب تتشكّل حول الشمس... وعلى أحدها يظهر الإنسان
+- المجرة تنظر لهذا الإنسان الصغير بدهشة: "كيف أصبح قادراً على فهمي؟"
+
+الأسلوب: شعري ومؤثّر، مع حقائق علمية دقيقة مضمّنة بشكل طبيعي، مناسب لأطفال ١٠–١٤ سنة.</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🌌</div>
+    <div class="hw-content">
+      <h3>واجب البيت — صائد درب التبانة</h3>
+      <p>
+        في الليالي الصافية والبعيدة عن أضواء المدينة — ابحث عن الشريط الأبيض الباهت الذي يعبر السماء من أفق إلى آخر. هذا هو مستوى مجرتنا. إذا كنت بالقرب من الجبل أو في قرية تيزي وزو — فرصتك أكبر بكثير!
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🌌 <strong>تحدي الحصة الأخيرة:</strong> أحضر لوحة "الملح والغراء" التي رسمتها اليوم للحصة الثانية عشرة — ستكون جزءاً من معرض التخرج الختامي. ضع اسمك عليها بفخر!
+      </p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()">🖨️ طباعة الحصة</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-10-altelescope.html'">← الحصة العاشرة</button>
+    <button class="nav-btn" onclick="window.location.href='astronomy-kids-guide.html'" style="color:var(--muted)">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn primary" onclick="window.location.href='session-12-graduation.html'">الحصة الثانية عشرة: حفل التخرج 🎓 ←</button>
+  </div>
+
+</div>
+
+<script>
+/* ── STARS (cosmic density) ── */
+(function(){
+  var c=document.getElementById('stars');
+  var cols=['#ffffff','#e8e0ff','#c8d8ff','#fff8d0','#ffd8c0','#d0b0ff'];
+  for(var i=0;i<280;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2.2+.18;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px',
+      'background:'+cols[Math.floor(Math.random()*cols.length)],
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(1.5+Math.random()*5)+'s','--delay:'+(-Math.random()*6)+'s',
+      '--min-op:'+(0.05+Math.random()*.38)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+var NS='http://www.w3.org/2000/svg';
+function mk(t,a,p){var e=document.createElementNS(NS,t);Object.keys(a).forEach(function(k){e.setAttribute(k,a[k]);});if(p)p.appendChild(e);return e;}
+function tx(s,a,p){var t=document.createElementNS(NS,'text');Object.keys(a).forEach(function(k){t.setAttribute(k,a[k]);});t.textContent=s;if(p)p.appendChild(t);return t;}
+
+/* ── MILKY WAY SVG ── */
+(function(){
+  var svg=document.getElementById('mw-svg');
+  var W=700,H=460,cx=350,cy=230;
+
+  mk('rect',{x:0,y:0,width:W,height:H,fill:'#010208'},svg);
+  /* background stars */
+  for(var i=0;i<120;i++)mk('circle',{cx:Math.random()*W,cy:Math.random()*H,r:Math.random()*.6+.15,fill:'rgba(255,255,255,'+(0.05+Math.random()*.2)+')'},svg);
+
+  var defs=mk('defs',{},svg);
+
+  /* Glow gradient for core */
+  var cg=mk('radialGradient',{id:'core-g',cx:'50%',cy:'50%',r:'50%'},defs);
+  mk('stop',{offset:'0%','stop-color':'#ffe8a0','stop-opacity':'1'},cg);
+  mk('stop',{offset:'35%','stop-color':'#d4a020','stop-opacity':'.8'},cg);
+  mk('stop',{offset:'70%','stop-color':'#8050c0','stop-opacity':'.4'},cg);
+  mk('stop',{offset:'100%','stop-color':'#1a0040','stop-opacity':'0'},cg);
+
+  /* arm gradients */
+  function armGrad(id,col1,col2){
+    var g=mk('radialGradient',{id:id,cx:'50%',cy:'50%',r:'50%'},defs);
+    mk('stop',{offset:'0%','stop-color':col1,'stop-opacity':'.9'},g);
+    mk('stop',{offset:'100%','stop-color':col2,'stop-opacity':'0'},g);
+  }
+  armGrad('ag1','#9090ff','#1a0050');
+  armGrad('ag2','#a080e0','#1a0050');
+  armGrad('ag3','#8070c8','#100040');
+  armGrad('ag4','#b090f0','#1a0050');
+
+  /* Disk background glow */
+  mk('ellipse',{cx:cx,cy:cy,rx:260,ry:260,fill:'rgba(60,30,100,.12)'},svg);
+  mk('ellipse',{cx:cx,cy:cy,rx:200,ry:200,fill:'rgba(80,40,120,.1)'},svg);
+
+  /* Spiral arms — drawn as path clusters */
+  function spiralArm(svg,startAngle,color,opacity){
+    var pts=[];
+    for(var a=startAngle;a<startAngle+Math.PI*1.4;a+=0.04){
+      var r=22+((a-startAngle)/(Math.PI*1.4))*210;
+      var jitter=(Math.random()-.5)*18;
+      pts.push([cx+Math.cos(a)*r+jitter,cy+Math.sin(a)*r+jitter]);
+    }
+    /* draw as connected dots */
+    pts.forEach(function(p){
+      var sz=Math.random()*2.5+.5;
+      mk('circle',{cx:p[0],cy:p[1],r:sz,fill:color,opacity:opacity*(0.4+Math.random()*.6)},svg);
+    });
+  }
+
+  var armColors=['#a090ff','#c0a8ff','#8080e8','#d0b8ff'];
+  var angles=[0, Math.PI/2, Math.PI, 3*Math.PI/2];
+  angles.forEach(function(a,i){
+    spiralArm(svg,a,armColors[i],.55);
+    spiralArm(svg,a+0.25,armColors[i],.3);
+  });
+
+  /* additional star field in arms */
+  for(var j=0;j<300;j++){
+    var a=Math.random()*Math.PI*2;
+    var r=Math.random()*230;
+    var col=Math.random()>.5?'rgba(200,180,255,':'rgba(255,240,200,';
+    mk('circle',{cx:cx+Math.cos(a)*r,cy:cy+Math.sin(a)*r,r:Math.random()*.8+.2,fill:col+(0.1+Math.random()*.5)+')'},svg);
+  }
+
+  /* Core glow */
+  mk('ellipse',{cx:cx,cy:cy,rx:140,ry:140,fill:'url(#core-g)'},svg);
+  mk('ellipse',{cx:cx,cy:cy,rx:60,ry:60,fill:'rgba(255,220,100,.4)'},svg);
+  mk('ellipse',{cx:cx,cy:cy,rx:25,ry:25,fill:'rgba(255,240,160,.7)'},svg);
+  mk('circle',{cx:cx,cy:cy,r:8,fill:'#fff8e0'},svg);
+
+  /* Central bar */
+  mk('rect',{x:cx-70,y:cy-12,width:140,height:24,fill:'rgba(255,220,150,.25)',rx:'8',transform:'rotate(-20,'+cx+','+cy+')'},svg);
+
+  /* Sun position marker */
+  var sunX=cx+180,sunY=cy-80;
+  mk('circle',{cx:sunX,cy:sunY,r:8,fill:'none',stroke:'rgba(245,200,66,.7)','stroke-width':'1.5','stroke-dasharray':'4 3'},svg);
+  mk('circle',{cx:sunX,cy:sunY,r:3.5,fill:'#f5c842'},svg);
+  /* label line */
+  mk('line',{x1:sunX,y1:sunY-8,x2:sunX+10,y2:sunY-32,stroke:'rgba(245,200,66,.5)','stroke-width':'.8'},svg);
+  tx('شمسنا',{x:sunX+14,y:sunY-26,'font-family':'Cairo,sans-serif','font-size':'10','fill':'rgba(245,200,66,.9)'},svg);
+  tx('٢٦,٠٠٠ سنة ضوئية',{x:sunX+14,y:sunY-14,'font-family':'Cairo,sans-serif','font-size':'8.5','fill':'rgba(245,200,66,.6)'},svg);
+
+  /* arm labels */
+  var armLabels=[
+    {x:cx+60,y:cy-230,txt:'ذراع البرسيوس'},
+    {x:cx-250,y:cy-80,txt:'ذراع القوس-القنطور'},
+    {x:cx+235,y:cy+100,txt:'ذراع الجبّار (ذراعنا)'},
+    {x:cx-60,y:cy+240,txt:'ذراع النورما'},
+  ];
+  armLabels.forEach(function(l){
+    tx(l.txt,{x:l.x,y:l.y,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'9','fill':'rgba(180,160,255,.6)'},svg);
+  });
+
+  /* Core label */
+  tx('النتوء المركزي',{x:cx+4,y:cy+42,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'9','fill':'rgba(255,220,120,.6)'},svg);
+  tx('(القوس A*)',{x:cx+4,y:cy+56,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'8.5','fill':'rgba(255,200,80,.5)'},svg);
+
+  /* Scale bar */
+  mk('line',{x1:cx+210,y1:cy+250,x2:cx+310,y2:cy+250,stroke:'rgba(255,255,255,.25)','stroke-width':'1.5'},svg);
+  mk('line',{x1:cx+210,y1:cy+245,x2:cx+210,y2:cy+255,stroke:'rgba(255,255,255,.3)','stroke-width':'1'},svg);
+  mk('line',{x1:cx+310,y1:cy+245,x2:cx+310,y2:cy+255,stroke:'rgba(255,255,255,.3)','stroke-width':'1'},svg);
+  tx('~٢٥,٠٠٠ سنة ضوئية',{x:cx+260,y:cy+268,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'8.5','fill':'rgba(200,180,255,.5)'},svg);
+})();
+
+/* ── GAL STATS ── */
+var stats=[
+  {num:'٢٠٠ مليار',lbl:'نجم في المجرة',color:'var(--milky)'},
+  {num:'١٠٠,٠٠٠',lbl:'سنة ضوئية — القطر',color:'var(--core)'},
+  {num:'٢٦,٠٠٠',lbl:'سنة ضوئية — بُعد شمسنا',color:'var(--gold)'},
+  {num:'٢٢٠ كم/ث',lbl:'سرعة دوران شمسنا',color:'var(--cyan)'},
+  {num:'٢٢٠ مليون',lbl:'سنة — السنة الكونية',color:'var(--green)'},
+  {num:'٤ مليون',lbl:'مرة كتلة الشمس — القوس A*',color:'var(--rose)'},
+];
+var sg=document.getElementById('gal-stats');
+stats.forEach(function(s){
+  var d=document.createElement('div');d.className='gal-stat';
+  d.innerHTML='<span class="gal-num" style="color:'+s.color+'">'+s.num+'</span><div class="gal-lbl">'+s.lbl+'</div>';
+  sg.appendChild(d);
+});
+
+/* ── GALAXY TYPE CARDS ── */
+(function(){
+  var types=[
+    {name:'حلزونية',color:'#a080e0',desc:'أذرع حلزونية نشطة بتشكيل نجوم جديدة',ex:'مثال: درب التبانة، أندروميدا',
+    draw:function(svg){
+      mk('rect',{x:0,y:0,width:190,height:110,fill:'#010208'},svg);
+      for(var i=0;i<20;i++)mk('circle',{cx:Math.random()*190,cy:Math.random()*110,r:Math.random()*.5+.1,fill:'rgba(255,255,255,.15)'},svg);
+      var defs=mk('defs',{},svg);var rg=mk('radialGradient',{id:'sg0',cx:'50%',cy:'50%',r:'50%'},defs);
+      mk('stop',{offset:'0%','stop-color':'#ffe8a0'},rg);mk('stop',{offset:'100%','stop-color':'#6040c0','stop-opacity':'0'},rg);
+      mk('ellipse',{cx:95,cy:55,rx:70,ry:70,fill:'url(#sg0)'},svg);
+      for(var a=0;a<Math.PI*2;a+=0.05){var r=10+((a/(Math.PI*2))*55);mk('circle',{cx:95+Math.cos(a)*r,cy:55+Math.sin(a)*r,r:.8,fill:'rgba(180,150,255,'+(0.2+Math.random()*.4)+')'},svg);}
+      for(var a=0;a<Math.PI*2;a+=0.05){var r=10+((a/(Math.PI*2))*55);mk('circle',{cx:95+Math.cos(a+Math.PI)*r,cy:55+Math.sin(a+Math.PI)*r,r:.8,fill:'rgba(150,180,255,'+(0.2+Math.random()*.4)+')'},svg);}
+      mk('ellipse',{cx:95,cy:55,rx:22,ry:22,fill:'rgba(255,220,120,.5)'},svg);mk('circle',{cx:95,cy:55,r:6,fill:'#fff8d0'},svg);
+    }},
+    {name:'إهليجية',color:'#f0c880',desc:'بيضاوية قديمة — نجوم محمرّة لا تكاد تتشكّل نجوم جديدة',ex:'مثال: M87، NGC 1300',
+    draw:function(svg){
+      mk('rect',{x:0,y:0,width:190,height:110,fill:'#010208'},svg);
+      for(var i=0;i<15;i++)mk('circle',{cx:Math.random()*190,cy:Math.random()*110,r:Math.random()*.5+.1,fill:'rgba(255,255,255,.12)'},svg);
+      var defs=mk('defs',{},svg);var rg=mk('radialGradient',{id:'sg1',cx:'50%',cy:'50%',r:'50%'},defs);
+      mk('stop',{offset:'0%','stop-color':'#ffe0a0'},rg);mk('stop',{offset:'60%','stop-color':'#c08030','stop-opacity':'.6'},rg);mk('stop',{offset:'100%','stop-color':'#804010','stop-opacity':'0'},rg);
+      mk('ellipse',{cx:95,cy:55,rx:65,ry:42,fill:'url(#sg1)'},svg);
+      for(var i=0;i<80;i++){var a=Math.random()*Math.PI*2,r=Math.random()*60;mk('circle',{cx:95+Math.cos(a)*r,cy:55+Math.sin(a)*r*.65,r:Math.random()*.7+.2,fill:'rgba(255,200,120,'+(0.1+Math.random()*.4)+')'},svg);}
+    }},
+    {name:'لامنتظمة',color:'#80d8a0',desc:'أشكال عشوائية — غالباً نتيجة تفاعل مجرتَين',ex:'مثال: سحابة ماجلان، NGC 4038',
+    draw:function(svg){
+      mk('rect',{x:0,y:0,width:190,height:110,fill:'#010208'},svg);
+      for(var i=0;i<15;i++)mk('circle',{cx:Math.random()*190,cy:Math.random()*110,r:Math.random()*.5+.1,fill:'rgba(255,255,255,.12)'},svg);
+      var pts=[[60,30],[90,20],[130,40],[150,55],[140,75],[110,90],[70,85],[50,65]];
+      var pathD='M '+pts[0][0]+' '+pts[0][1];pts.forEach(function(p){pathD+=' L '+p[0]+' '+p[1];});pathD+=' Z';
+      mk('path',{d:pathD,fill:'rgba(80,200,140,.25)','stroke':'rgba(100,220,160,.3)','stroke-width':'1'},svg);
+      for(var i=0;i<120;i++){mk('circle',{cx:50+Math.random()*100,cy:20+Math.random()*75,r:Math.random()*.8+.2,fill:'rgba(150,255,180,'+(0.1+Math.random()*.5)+')'},svg);}
+      mk('circle',{cx:75,cy:55,r:12,fill:'rgba(200,255,150,.3)'},svg);mk('circle',{cx:120,cy:48,r:8,fill:'rgba(150,220,200,.25)'},svg);
+    }},
+    {name:'حلزونية قضيبية',color:'#c4b5fd',desc:'مثل الحلزونية لكن بشريط نجمي يخرج من المركز',ex:'مثال: مجرتنا درب التبانة!',
+    draw:function(svg){
+      mk('rect',{x:0,y:0,width:190,height:110,fill:'#010208'},svg);
+      for(var i=0;i<20;i++)mk('circle',{cx:Math.random()*190,cy:Math.random()*110,r:Math.random()*.5+.1,fill:'rgba(255,255,255,.12)'},svg);
+      var defs=mk('defs',{},svg);var rg=mk('radialGradient',{id:'sg3',cx:'50%',cy:'50%',r:'50%'},defs);
+      mk('stop',{offset:'0%','stop-color':'#ffe8a0'},rg);mk('stop',{offset:'100%','stop-color':'#6040c0','stop-opacity':'0'},rg);
+      mk('ellipse',{cx:95,cy:55,rx:65,ry:65,fill:'url(#sg3)'},svg);
+      /* bar */
+      mk('rect',{x:60,y:50,width:70,height:10,fill:'rgba(255,220,120,.4)',rx:'4',transform:'rotate(-15,95,55)'},svg);
+      /* arms from bar ends */
+      for(var a=0;a<Math.PI*1.3;a+=0.06){var r=8+((a/(Math.PI*1.3))*52);mk('circle',{cx:95+Math.cos(a-0.4)*r,cy:55+Math.sin(a-0.4)*r,r:.8,fill:'rgba(200,170,255,'+(0.2+Math.random()*.45)+')'},svg);}
+      for(var a=0;a<Math.PI*1.3;a+=0.06){var r=8+((a/(Math.PI*1.3))*52);mk('circle',{cx:95+Math.cos(a+Math.PI-0.4)*r,cy:55+Math.sin(a+Math.PI-0.4)*r,r:.8,fill:'rgba(180,200,255,'+(0.2+Math.random()*.45)+')'},svg);}
+      mk('circle',{cx:95,cy:55,r:7,fill:'#fff8d0'},svg);
+    }},
+  ];
+
+  var gt=document.getElementById('galaxy-types');
+  types.forEach(function(t,i){
+    var card=document.createElement('div');card.className='gtype-card';
+    card.style.borderColor=t.color.replace(/[^,]+\)$/,'0.3)').replace('#','rgba(').replace(/([0-9a-f]{2})/gi,function(m){return parseInt(m,16)+','}).slice(0,-1)+')';
+    card.style.border='1px solid '+t.color+'44';
+
+    var svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 190 110');
+    svg.setAttribute('class','gtype-svg');
+    t.draw(svg);
+    card.appendChild(svg);
+
+    var info=document.createElement('div');info.className='gtype-info';
+    info.innerHTML='<div class="gtype-name" style="color:'+t.color+'">'+t.name+'</div>'+
+      '<div class="gtype-desc">'+t.desc+'</div>'+
+      '<div class="gtype-ex">'+t.ex+'</div>';
+    card.appendChild(info);
+    gt.appendChild(card);
+  });
+})();
+
+/* ── DISTANCE SCALE ── */
+(function(){
+  var items=[
+    {label:'القمر',val:384000,max:2.5e18,color:'#c8d4e8',display:'٣٨٤,٠٠٠ كم'},
+    {label:'الشمس',val:1.5e8,max:2.5e18,color:'#f5c842',display:'١٥٠ مليون كم'},
+    {label:'أقرب نجم (ألفا سنتوري)',val:4.2,max:2500000,color:'#a0c0ff',display:'٤.٢ سنة ضوئية'},
+    {label:'مركز المجرة',val:26000,max:2500000,color:'#ffd090',display:'٢٦,٠٠٠ سنة ضوئية'},
+    {label:'حافة المجرة',val:50000,max:2500000,color:'#c4b5fd',display:'~٥٠,٠٠٠ سنة ضوئية'},
+    {label:'مجرة أندروميدا',val:2500000,max:2500000,color:'#34d399',display:'٢.٥ مليون سنة ضوئية'},
+  ];
+  var cont=document.getElementById('distance-scale');
+  items.forEach(function(item){
+    var pct=Math.min(Math.log(item.val+1)/Math.log(item.max+1)*100,100);
+    var row=document.createElement('div');row.className='scale-bar-row';
+    row.innerHTML='<div class="scale-label" style="color:'+item.color+'">'+item.label+'</div>'+
+      '<div class="scale-bar-wrap"><div class="scale-bar" style="width:'+pct+'%;background:'+item.color+'"></div></div>'+
+      '<div class="scale-val">'+item.display+'</div>';
+    cont.appendChild(row);
+  });
+})();
+
+/* ── POSITION TABLE ── */
+(function(){
+  var rows=[
+    ['المستوى','المكان','الحجم','ملاحظة'],
+    ['الكوكب','الأرض','١٢,٧٤٢ كم قطراً','منزلنا المباشر'],
+    ['النجم','شمسنا','١.٤ مليون كم قطراً','نجمنا المُضيء'],
+    ['الذراع','ذراع الجبّار','آلاف السنين الضوئية','حيّنا في المجرة'],
+    ['المجرة','درب التبانة','١٠٠,٠٠٠ سنة ضوئية','مدينتنا الكونية'],
+    ['المجموعة المحلية','٥٤ مجرة','~١٠ مليون س.ض.','حيّنا بين المجرات'],
+    ['العنقود العظيم','مئات المجموعات','مئات الملايين س.ض.','المنطقة المعيشية'],
+    ['الكون المرئي','٢ تريليون مجرة','٩٣ مليار سنة ضوئية','كل ما نستطيع رؤيته'],
+  ];
+  var tbl=document.getElementById('pos-table');
+  var thead=document.createElement('thead'),tbody=document.createElement('tbody');
+  rows.forEach(function(r,ri){
+    var tr=document.createElement('tr');
+    if(ri===0){r.forEach(function(c){var th=document.createElement('th');th.style.cssText='font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600';th.textContent=c;tr.appendChild(th);});thead.appendChild(tr);}
+    else{
+      tr.className='p-row';
+      r.forEach(function(c,ci){
+        var td=document.createElement('td');
+        if(ci===0){td.style.cssText='font-weight:700;color:var(--white)';}
+        if(ci===1){td.style.color='var(--milky)';td.textContent=c;}
+        else{td.textContent=c;}
+        tr.appendChild(td);
+      });tbody.appendChild(tr);
+    }
+  });
+  tbl.appendChild(thead);tbl.appendChild(tbody);
+})();
+
+/* ── PALETTE ── */
+var palette=[
+  {color:'#ffd090',label:'ذهبي — المركز'},
+  {color:'#ff8830',label:'برتقالي — جسر'},
+  {color:'#c4b5fd',label:'بنفسجي — الأذرع'},
+  {color:'#60a5fa',label:'أزرق — الأطراف'},
+  {color:'#ffffff',label:'أبيض — النجوم'},
+  {color:'#f472b6',label:'وردي — مجرات أخرى'},
+];
+var ps=document.getElementById('palette-strip');
+palette.forEach(function(p){
+  var chip=document.createElement('div');chip.className='palette-chip';
+  chip.innerHTML='<div class="palette-dot" style="background:'+p.color+'"></div>'+p.label;
+  ps.appendChild(chip);
+});
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>

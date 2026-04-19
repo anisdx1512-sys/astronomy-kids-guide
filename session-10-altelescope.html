@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ١٠ – التلسكوب عين على الكون | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#04060f;--deep:#080d1f;--cosmos:#0d1535;
+    --gold:#f5c842;--amber:#e8a020;
+    --lens:#40d4e8;--metal:#8899cc;
+    --green:#34d399;--violet:#8b5cf6;--rose:#f472b6;
+    --white:#f0f4ff;--muted:#8899cc;--cyan:#40d4e8;
+    --obs:#a78bfa;--dim:#60a5fa;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS (dense for telescope session) ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.15);transform:scale(1);}50%{opacity:1;transform:scale(1.6);}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:48px;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(64,212,232,.1);border:1px solid rgba(64,212,232,.32);
+    border-radius:50px;padding:6px 18px;font-size:12px;color:var(--cyan);letter-spacing:1px;margin-bottom:20px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2rem,5vw,3.4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,var(--cyan) 35%,var(--obs) 65%,var(--gold) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.25;margin-bottom:14px;
+  }
+  .session-hero p.subtitle{color:var(--muted);font-size:15px;max-width:640px;line-height:1.8;}
+  .meta-row{display:flex;flex-wrap:wrap;gap:20px;margin-top:28px;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SEC TITLE ── */
+  .sec-title{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── OBJECTIVES ── */
+  .objectives-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin-bottom:56px;}
+  .obj-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:16px;padding:22px;transition:border-color .3s,transform .3s;}
+  .obj-card:hover{border-color:rgba(64,212,232,.25);transform:translateY(-3px);}
+  .obj-icon{font-size:1.6rem;margin-bottom:12px;display:block;}
+  .obj-title{font-size:13px;font-weight:700;color:var(--cyan);margin-bottom:6px;}
+  .obj-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(64,212,232,.5),rgba(167,139,250,.2),transparent);}
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--cyan);background:var(--night);flex-shrink:0;}
+  .tl-dot.gold{border-color:var(--gold);}
+  .tl-dot.obs{border-color:var(--obs);}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-time{font-size:11px;color:var(--cyan);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.gold{color:var(--gold);}
+  .tl-time.obs{color:var(--obs);}
+  .tl-time.green{color:var(--green);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── TELESCOPE TYPES GRID ── */
+  .scope-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px;margin-bottom:56px;}
+  .scope-card{background:rgba(4,6,20,.9);border-radius:18px;overflow:hidden;transition:transform .3s,border-color .3s;}
+  .scope-card:hover{transform:translateY(-4px);}
+  .scope-card.refractor{border:1px solid rgba(64,212,232,.25);}
+  .scope-card.reflector{border:1px solid rgba(167,139,250,.25);}
+  .scope-card.catadioptric{border:1px solid rgba(245,200,66,.22);}
+  .scope-svg{display:block;width:100%;}
+  .scope-info{padding:16px 20px 20px;}
+  .scope-type-lbl{font-size:9.5px;font-weight:700;letter-spacing:2px;margin-bottom:5px;}
+  .scope-name{font-size:16px;font-weight:700;margin-bottom:6px;}
+  .scope-desc{font-size:12px;color:var(--muted);line-height:1.65;margin-bottom:10px;}
+  .scope-tags{display:flex;flex-wrap:wrap;gap:5px;}
+  .stag{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.09);border-radius:50px;padding:3px 10px;font-size:11px;color:var(--muted);}
+  .stag.pro{background:rgba(52,211,153,.1);border-color:rgba(52,211,153,.25);color:var(--green);}
+  .stag.con{background:rgba(239,68,68,.08);border-color:rgba(239,68,68,.2);color:#fca5a5;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-section{margin-bottom:56px;}
+  .content-block{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:28px 32px;margin-bottom:16px;}
+  .content-block h3{font-size:17px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .hl{background:rgba(64,212,232,.07);border-right:3px solid var(--cyan);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#99eef8;line-height:1.8;}
+  .hl-gold{background:rgba(245,200,66,.08);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#d4c07a;line-height:1.8;}
+  .hl-obs{background:rgba(167,139,250,.08);border-right:3px solid var(--obs);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#c4b5fd;line-height:1.8;}
+  .hl-green{background:rgba(52,211,153,.07);border-right:3px solid var(--green);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#99f6e4;line-height:1.8;}
+
+  /* ── SPECS COMPARISON TABLE ── */
+  .specs-table{width:100%;border-collapse:separate;border-spacing:0 6px;font-size:13px;}
+  .specs-table th{font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600;}
+  .specs-table tr.s-row{background:rgba(255,255,255,.025);transition:background .25s;}
+  .specs-table tr.s-row:hover{background:rgba(64,212,232,.07);}
+  .specs-table td{padding:11px 12px;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);color:var(--muted);font-size:13px;vertical-align:middle;}
+  .specs-table td:first-child{border-radius:10px 0 0 10px;font-weight:700;color:var(--white);}
+  .specs-table td:last-child{border-radius:0 10px 10px 0;}
+  .rating{display:inline-flex;gap:2px;}
+  .rating span{width:10px;height:10px;border-radius:50%;display:inline-block;}
+
+  /* ── PARTS DIAGRAM ── */
+  .parts-wrap{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start;margin-top:16px;}
+  .parts-svg-box{flex-shrink:0;}
+  .parts-legend{flex:1;min-width:200px;}
+  .part-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;}
+  .part-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:3px;}
+  .part-name{font-size:13px;font-weight:700;margin-bottom:2px;}
+  .part-desc{font-size:12px;color:var(--muted);line-height:1.55;}
+
+  /* ── BUYING GUIDE ── */
+  .buy-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:12px;margin-top:16px;}
+  .buy-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:18px;transition:transform .3s;}
+  .buy-card:hover{transform:translateY(-3px);}
+  .buy-price{font-size:1.5rem;font-weight:900;display:block;margin-bottom:4px;}
+  .buy-label{font-size:12px;color:var(--muted);margin-bottom:10px;}
+  .buy-name{font-size:14px;font-weight:700;margin-bottom:6px;}
+  .buy-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+  .buy-tag{display:inline-block;background:rgba(52,211,153,.12);border:1px solid rgba(52,211,153,.25);border-radius:50px;padding:2px 9px;font-size:10.5px;color:var(--green);margin-top:8px;font-weight:700;}
+
+  /* ── DARK ADAPTATION ── */
+  .dark-box{background:rgba(0,0,0,.4);border:1px solid rgba(167,139,250,.22);border-radius:16px;padding:24px;margin-top:16px;}
+  .dark-title{font-size:13px;font-weight:700;color:var(--obs);margin-bottom:12px;letter-spacing:.5px;}
+  .dark-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;}
+  .dark-step{text-align:center;padding:14px 10px;}
+  .dark-icon{font-size:1.6rem;display:block;margin-bottom:6px;}
+  .dark-lbl{font-size:11.5px;color:var(--muted);line-height:1.5;}
+  .dark-time{font-size:10px;color:var(--obs);font-weight:700;margin-top:4px;}
+
+  /* ── OBSERVATION LOG ── */
+  .obs-box{background:linear-gradient(135deg,rgba(64,212,232,.06),rgba(167,139,250,.04));border:1px solid rgba(64,212,232,.2);border-radius:20px;padding:32px;margin-bottom:56px;}
+  .obs-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .obs-badge{background:rgba(64,212,232,.16);border:1px solid rgba(64,212,232,.38);border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--cyan);letter-spacing:1px;}
+  .obs-title{font-size:18px;font-weight:700;}
+  .obs-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* target cards */
+  .targets-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:12px;margin-bottom:22px;}
+  .target-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.07);border-radius:14px;padding:16px;text-align:center;transition:transform .3s,border-color .3s;}
+  .target-card:hover{transform:translateY(-3px);}
+  .target-emoji{font-size:2rem;display:block;margin-bottom:8px;}
+  .target-name{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .target-type{font-size:10.5px;color:var(--muted);margin-bottom:6px;}
+  .target-diff{display:inline-block;padding:2px 9px;border-radius:50px;font-size:10px;font-weight:700;}
+  .diff-easy{background:rgba(52,211,153,.14);color:var(--green);}
+  .diff-med{background:rgba(245,200,66,.14);color:var(--gold);}
+  .diff-hard{background:rgba(239,68,68,.12);color:#fca5a5;}
+
+  /* observation log table */
+  .log-wrap{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.06);border-radius:12px;overflow:hidden;margin-top:20px;}
+  .log-header{display:grid;grid-template-columns:140px 1fr 80px 90px 90px;background:rgba(255,255,255,.04);padding:10px 14px;font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
+  .log-row{display:grid;grid-template-columns:140px 1fr 80px 90px 90px;padding:10px 14px;border-top:1px solid rgba(255,255,255,.04);align-items:center;}
+  .log-target{font-size:13px;font-weight:700;color:var(--white);}
+  .log-field{background:rgba(255,255,255,.04);border:1px dashed rgba(255,255,255,.1);border-radius:6px;height:22px;}
+  .log-type-badge{font-size:10px;padding:3px 8px;border-radius:50px;font-weight:700;}
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:rgba(64,212,232,.12);border:1px solid rgba(64,212,232,.32);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--cyan);}
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{background:rgba(245,200,66,.07);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;color:#d4c07a;line-height:1.65;margin-top:8px;}
+
+  /* ── FACTS ── */
+  .facts-strip{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px;}
+  .fact-card{flex:1;min-width:190px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;}
+  .fact-emoji{font-size:1.5rem;display:block;margin-bottom:8px;}
+  .fact-text{font-size:13px;color:var(--muted);line-height:1.7;}
+  .fact-text strong{color:var(--gold);}
+
+  /* ── ASSESSMENT ── */
+  .qa-list{list-style:none;}
+  .qa-item{border-bottom:1px solid rgba(255,255,255,.05);padding:14px 0;display:flex;gap:14px;align-items:flex-start;}
+  .qa-item:last-child{border-bottom:none;}
+  .q-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:rgba(64,212,232,.1);border:1px solid rgba(64,212,232,.24);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--cyan);}
+  .qa-item p{font-size:14px;color:var(--muted);line-height:1.7;margin-top:2px;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 20px;transition:border-color .3s;}
+  .tool-pill:hover{border-color:rgba(64,212,232,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  .prompt-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;}
+  .copy-btn{margin-top:14px;background:rgba(64,212,232,.12);border:1px solid rgba(64,212,232,.3);border-radius:10px;padding:9px 20px;color:var(--cyan);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .copy-btn:hover{background:rgba(64,212,232,.24);}
+
+  .homework-box{background:rgba(245,200,66,.05);border:1px solid rgba(245,200,66,.2);border-radius:16px;padding:24px 28px;margin-bottom:56px;display:flex;gap:20px;align-items:flex-start;}
+  .hw-icon{font-size:2rem;flex-shrink:0;}
+  .hw-content h3{font-size:15px;font-weight:700;color:var(--gold);margin-bottom:8px;}
+  .hw-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:32px;flex-wrap:wrap;gap:12px;}
+  .nav-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;}
+  .nav-btn:hover{background:rgba(64,212,232,.1);color:var(--cyan);}
+  .nav-btn.primary{background:rgba(64,212,232,.12);border-color:rgba(64,212,232,.32);color:var(--cyan);}
+  .nav-btn.primary:hover{background:rgba(64,212,232,.26);color:#e0faff;}
+
+  /* ══════════════ PRINT ══════════════ */
+  @media print{
+    @page{size:A4 portrait;margin:15mm 14mm 15mm 14mm;}
+    @page:first{margin-top:10mm;}
+    *,*::before,*::after{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{font-family:'Cairo','Arial',sans-serif!important;background:white!important;color:#1a1a1a!important;margin:0!important;padding:0!important;overflow:visible!important;min-height:unset!important;width:100%!important;}
+    #stars,.breadcrumb,.bottom-nav,.print-bar,.copy-btn{display:none!important;}
+    .page{position:static!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;overflow:visible!important;}
+    .session-hero{padding:8px 0 14px!important;border-bottom:2px solid #208090!important;margin-bottom:18px!important;background:none!important;}
+    .session-hero h1{font-size:20pt!important;font-weight:700!important;color:#004048!important;-webkit-text-fill-color:#004048!important;background:none!important;line-height:1.2!important;margin-bottom:8px!important;}
+    .session-num-badge{background:#e0faff!important;border:1px solid #208090!important;color:#004048!important;font-size:9pt!important;padding:4px 12px!important;border-radius:20px!important;margin-bottom:10px!important;display:inline-block!important;}
+    .session-hero p.subtitle{color:#444!important;font-size:10pt!important;}
+    .meta-row{display:flex!important;flex-wrap:wrap!important;gap:14px!important;margin-top:10px!important;}
+    .meta-item{color:#555!important;font-size:9pt!important;}
+    .meta-dot{background:#bbb!important;}
+    .sec-title{font-size:8.5pt!important;color:#004048!important;letter-spacing:2px!important;border-bottom:1.5px solid #208090!important;padding-bottom:4px!important;margin-bottom:12px!important;break-after:avoid!important;}
+    .sec-title::after{display:none!important;}
+    .objectives-grid{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;margin-bottom:18px!important;}
+    .obj-card{background:#e0faff!important;border:1px solid #ccc!important;border-right:3px solid #208090!important;border-radius:6px!important;padding:10px 12px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .obj-icon{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .obj-title{color:#004048!important;font-size:9.5pt!important;}
+    .obj-desc{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .timeline{margin-bottom:18px!important;}
+    .timeline::before{background:#ccc!important;width:1px!important;}
+    .tl-item{margin-bottom:9px!important;break-inside:avoid!important;page-break-inside:avoid!important;padding-right:38px!important;}
+    .tl-dot{width:13px!important;height:13px!important;right:14px!important;top:12px!important;border-color:#aaa!important;background:white!important;}
+    .tl-time{color:#004048!important;font-size:8.5pt!important;width:52px!important;}
+    .tl-content{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:9px 13px!important;}
+    .tl-content h3{color:#222!important;font-size:10pt!important;margin-bottom:5px!important;}
+    .tl-content p,.tl-content li{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .tl-content li::before{color:#aaa!important;}
+    .scope-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:10px!important;margin-bottom:18px!important;}
+    .scope-card{background:#000!important;border:1px solid #888!important;border-radius:8px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .scope-svg{max-height:110px!important;}
+    .scope-info{padding:10px 12px 12px!important;}
+    .scope-type-lbl{color:#555!important;font-size:8pt!important;}
+    .scope-name{color:#222!important;font-size:10pt!important;}
+    .scope-desc{color:#444!important;font-size:8.5pt!important;}
+    .stag{background:#f0f0f0!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;}
+    .stag.pro{background:#e8faf5!important;border-color:#20a080!important;color:#003828!important;}
+    .stag.con{background:#fde8e8!important;border-color:#e09090!important;color:#8b0000!important;}
+    .content-section{margin-bottom:18px!important;}
+    .content-block{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:12px 16px!important;margin-bottom:10px!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .content-block h3{font-size:11pt!important;margin-bottom:8px!important;}
+    .content-block p{color:#444!important;font-size:9.5pt!important;line-height:1.65!important;margin-bottom:8px!important;}
+    .hl{background:#e0faff!important;border-right:3px solid #208090!important;color:#002030!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-gold{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-obs{background:#f0eeff!important;border-right:3px solid #6040a0!important;color:#180840!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .hl-green{background:#e8faf5!important;border-right:3px solid #20a080!important;color:#003828!important;font-size:9pt!important;padding:8px 12px!important;margin:8px 0!important;break-inside:avoid!important;}
+    .specs-table{font-size:8.5pt!important;border-collapse:collapse!important;}
+    .specs-table th{color:#555!important;font-size:8pt!important;padding:5px 8px!important;border-bottom:1.5px solid #ccc!important;background:#f5f5f5!important;}
+    .specs-table td{color:#444!important;border-bottom:1px solid #eee!important;background:white!important;padding:7px 8px!important;border-radius:0!important;}
+    .specs-table td:first-child{color:#222!important;}
+    .parts-wrap{display:flex!important;flex-wrap:nowrap!important;gap:16px!important;align-items:flex-start!important;}
+    .parts-svg-box svg{width:160px!important;height:auto!important;}
+    .part-name{color:#222!important;font-size:9.5pt!important;}
+    .part-desc{color:#555!important;font-size:8.5pt!important;}
+    .buy-grid{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important;}
+    .buy-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .buy-price{font-size:14pt!important;color:#004048!important;}
+    .buy-label{color:#555!important;font-size:8pt!important;}
+    .buy-name{color:#222!important;font-size:9.5pt!important;}
+    .buy-desc{color:#444!important;font-size:8.5pt!important;}
+    .buy-tag{background:#e8faf5!important;border-color:#20a080!important;color:#003828!important;}
+    .dark-box{background:#f5f5f5!important;border:1px solid #ddd!important;border-radius:6px!important;padding:12px!important;break-inside:avoid!important;}
+    .dark-title{color:#333!important;font-size:9.5pt!important;}
+    .dark-steps{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:6px!important;}
+    .dark-step{padding:8px 4px!important;}
+    .dark-icon{font-size:1.2rem!important;}
+    .dark-lbl{color:#444!important;font-size:8pt!important;}
+    .dark-time{color:#555!important;font-size:7.5pt!important;}
+    .obs-box{background:#e8f8ff!important;border:1.5px solid #208090!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:18px!important;}
+    .obs-badge{background:#c0f0ff!important;border:1px solid #208090!important;color:#004048!important;font-size:8.5pt!important;padding:3px 10px!important;}
+    .obs-title{color:#1a1a1a!important;font-size:12pt!important;}
+    .obs-subtitle{color:#444!important;font-size:9pt!important;margin-bottom:12px!important;}
+    .targets-grid{display:grid!important;grid-template-columns:repeat(4,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .target-card{background:#f5f5f5!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .target-emoji{font-size:1.3rem!important;margin-bottom:5px!important;}
+    .target-name{color:#222!important;font-size:9.5pt!important;}
+    .target-type{color:#555!important;font-size:8pt!important;}
+    .diff-easy{background:#e8faf5!important;color:#003828!important;}
+    .diff-med{background:#fffbea!important;color:#5a3800!important;}
+    .diff-hard{background:#fde8e8!important;color:#8b0000!important;}
+    .log-wrap{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;}
+    .log-header{background:#f0f0f0!important;color:#555!important;font-size:8pt!important;padding:7px 10px!important;grid-template-columns:130px 1fr 70px 80px 80px!important;}
+    .log-row{padding:8px 10px!important;border-top:1px solid #eee!important;font-size:8.5pt!important;grid-template-columns:130px 1fr 70px 80px 80px!important;}
+    .log-target{color:#222!important;}
+    .log-field{background:#f5f5f5!important;border:1px dashed #ccc!important;}
+    .step-item{break-inside:avoid!important;page-break-inside:avoid!important;margin-bottom:10px!important;gap:10px!important;}
+    .step-num{width:26px!important;height:26px!important;background:#e0faff!important;border:1px solid #208090!important;color:#004048!important;font-size:9pt!important;}
+    .step-content h4{color:#1a1a1a!important;font-size:10pt!important;margin-bottom:2px!important;}
+    .step-content p{color:#444!important;font-size:9pt!important;line-height:1.5!important;}
+    .step-tip{background:#fffbea!important;border-right:3px solid #d4a820!important;color:#5a3800!important;font-size:8.5pt!important;padding:7px 11px!important;margin-top:5px!important;border-radius:0 5px 5px 0!important;}
+    .facts-strip{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:8px!important;}
+    .fact-card{background:#fafafa!important;border:1px solid #e0e0e0!important;border-radius:6px!important;padding:10px!important;break-inside:avoid!important;}
+    .fact-emoji{font-size:1.1rem!important;margin-bottom:5px!important;}
+    .fact-text{color:#444!important;font-size:8.5pt!important;line-height:1.5!important;}
+    .qa-item{border-bottom:1px solid #eee!important;padding:10px 0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .q-num{width:24px!important;height:24px!important;background:#e0faff!important;border:1px solid #208090!important;color:#004048!important;font-size:9pt!important;}
+    .qa-item p{color:#444!important;font-size:9.5pt!important;line-height:1.55!important;}
+    .tools-row{display:grid!important;grid-template-columns:repeat(2,1fr)!important;gap:7px!important;margin-bottom:14px!important;}
+    .tool-pill{background:#fafafa!important;border:1px solid #ddd!important;border-radius:6px!important;padding:8px 12px!important;break-inside:avoid!important;}
+    .t-name{color:#222!important;font-size:9.5pt!important;}
+    .t-use{color:#555!important;font-size:8.5pt!important;}
+    .prompt-box{background:#f5f5f5!important;border:1px solid #ccc!important;color:#333!important;font-size:8pt!important;line-height:1.6!important;white-space:pre-wrap!important;word-break:break-word!important;padding:12px!important;border-radius:6px!important;}
+    .homework-box{background:#fffbea!important;border:1.5px solid #d4a820!important;border-radius:8px!important;padding:14px 18px!important;margin-bottom:0!important;break-inside:avoid!important;page-break-inside:avoid!important;}
+    .hw-icon{font-size:1.6rem!important;}
+    .hw-content h3{color:#7a5800!important;font-size:10.5pt!important;margin-bottom:5px!important;}
+    .hw-content p{color:#444!important;font-size:9pt!important;line-height:1.6!important;}
+    h2,h3,.sec-title{break-after:avoid!important;page-break-after:avoid!important;}
+    section:has(.obs-box){break-before:page!important;page-break-before:always!important;}
+    .content-section{break-before:auto!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--white)">الحصة العاشرة</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🔭 الحصة العاشرة من ١٢</div>
+    <h1>التلسكوب — عين على الكون</h1>
+    <p class="subtitle">
+      الليلة ننظر. نقلّب العدسة نحو السماء ونرى ما لم يره العين المجردة — فوّهات القمر، حلقات زحل، مجموعات النجوم. لكن أولاً نتعلم كيف يعمل التلسكوب، وأي نوع يناسب مبتدئاً، وكيف نستعد لجلسة رصد حقيقية.
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--cyan)"></div>المدة: ٨٠ دقيقة نهاراً + رصد ليلي</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--obs)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>النوع: مفهوم + رصد ليلي حقيقي</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>المكان: القاعة (نهاراً) + الخارج (ليلاً)</div>
+    </div>
+  </div>
+
+  <!-- OBJECTIVES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎯 أهداف الحصة</div>
+    <div class="objectives-grid">
+      <div class="obj-card">
+        <span class="obj-icon">🔭</span>
+        <div class="obj-title">أعرف أنواع التلاسكيب</div>
+        <div class="obj-desc">يُميّز الطفل بين الكاسر والعاكس والمركّب ويُحدّد أنسبها لمبتدئ بميزانية محدودة.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">⚙️</span>
+        <div class="obj-title">أفهم كيف يعمل التلسكوب</div>
+        <div class="obj-desc">يشرح الطفل مفهومَي الفتحة والتكبير ويُفسّر لماذا الفتحة أهم من التكبير.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">🌙</span>
+        <div class="obj-title">أُجري جلسة رصد</div>
+        <div class="obj-desc">يستخدم الطفل التلسكوب ويُوجّهه نحو هدف ويُسجّل ملاحظاته في سجل الرصد.</div>
+      </div>
+      <div class="obj-card">
+        <span class="obj-icon">📓</span>
+        <div class="obj-title">أملأ سجل الرصد</div>
+        <div class="obj-desc">يُكمل الطفل سجل ملاحظات كامل بالوصف والرسم التخطيطي لكل جسم رصده.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة الحصة — ٨٠ دقيقة نهاراً + جلسة ليلية</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot gold"></div>
+        <div class="tl-time gold">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🌌 مقدمة التشويق</h3>
+          <p>يعرض المدرّب صورتَين متجاورتَين: القمر بالعين المجردة وبالتلسكوب. ردود فعل الأطفال تعبّر عن نفسها.</p>
+          <ul>
+            <li><em style="color:var(--white)">"ما الذي ستكون أول شيء تُوجّه إليه التلسكوب هذه الليلة؟"</em></li>
+            <li>مراجعة خاطفة: حزام جرجرة بسمائها الجبلية الصافية — ميزتنا الفريدة!</li>
+            <li>غاليليو ١٦٠٩: أول تلسكوب يُوجَّه للسماء — ماذا رأى؟</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--cyan)"></div>
+        <div class="tl-time">١٠–٣٥ د</div>
+        <div class="tl-content">
+          <h3>📖 أنواع التلاسكيب وكيف تعمل</h3>
+          <p>شرح الأنواع الثلاثة مع المفاهيم الأساسية: الفتحة، البعد البؤري، التكبير.</p>
+          <ul>
+            <li>الكاسر (Refractor): يكسر الضوء بالعدسة — أجمل للبصريات</li>
+            <li>العاكس (Reflector): يعكس الضوء بالمرآة — الأفضل للمبتدئ</li>
+            <li>المركّب (Catadioptric): يجمع بينهما — محمول وقوي لكن أغلى</li>
+            <li>لماذا الفتحة أهم من التكبير؟ — جمع الضوء مقابل التضخيم</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-time cyan">٣٥–٤٨ د</div>
+        <div class="tl-content">
+          <h3>⚙️ أجزاء التلسكوب والتوجيه</h3>
+          <p>التعريف بأجزاء التلسكوب النادي عملياً — كل طفل يُمسك بجزء ويُعرّفه.</p>
+          <ul>
+            <li>الأنبوب الرئيسي، العدسة العينية، الحامل الثلاثي، الباحث</li>
+            <li>كيف توجّه التلسكوب نحو هدف — المحاذاة بالباحث أولاً</li>
+            <li>تكيّف العين للظلام — لماذا يجب انتظار ٢٠ دقيقة قبل الرصد</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot obs"></div>
+        <div class="tl-time obs">ليلاً</div>
+        <div class="tl-content">
+          <h3>🌙 جلسة الرصد الليلي — الحدث الأهم!</h3>
+          <p>الجلسة الرئيسية التي انتظر لها الأطفال ١٠ حصص — رصد حقيقي بالتلسكوب.</p>
+          <ul>
+            <li>القمر أولاً: فوّهات وجبال وبحار القمر</li>
+            <li>كوكب مضيء (المشتري أو زحل حسب الموسم)</li>
+            <li>عنقود نجمي أو سديم إن سمح الطقس والتلسكوب</li>
+            <li>كل طفل يُوجّه التلسكوب بنفسه ويملأ سجله</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">٤٨–٨٠ د</div>
+        <div class="tl-content">
+          <h3>📊 كيف تختار تلسكوبك؟ + تحضير للرصد</h3>
+          <p>دليل اختيار التلسكوب حسب الميزانية والهدف، وشرح كامل لبروتوكول جلسة الرصد الليلي.</p>
+          <ul>
+            <li>جدول مقارنة: ميزانية × نوع التلسكوب × الاستخدام المثالي</li>
+            <li>تكيّف العين للظلام وأهمية الضوء الأحمر</li>
+            <li>قراءة سجل الرصد وتوزيع الأدوار الليلية</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TELESCOPE TYPES -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🔭 أنواع التلاسكيب الثلاثة</div>
+    <div class="scope-grid" id="scope-grid"></div>
+  </section>
+
+  <!-- CONTENT -->
+  <section class="content-section">
+    <div class="sec-title">📚 محتوى الشرح التفصيلي</div>
+
+    <!-- How telescopes work -->
+    <div class="content-block">
+      <h3 style="color:var(--cyan)"><span class="icon">💡</span> كيف يعمل التلسكوب؟ — المفاهيم الأساسية</h3>
+      <p>
+        التلسكوب لا يُكبّر الأجسام فحسب — وظيفته الأولى <strong style="color:var(--white)">جمع أكبر قدر من الضوء</strong> من الجسم البعيد. العين البشرية بؤبؤها لا يتجاوز ٧ مم في الظلام — التلسكوب بفتحة ١٠٠ مم يجمع ضوءاً أكثر بـ ٢٠٠ مرة!
+      </p>
+      <div class="hl">
+        🔑 <strong>المفاهيم الثلاثة:</strong><br>
+        <strong style="color:var(--white)">الفتحة (Aperture)</strong> — قطر العدسة أو المرآة. كلما كبرت، رأيت أشياء أخفت وتفاصيل أدق.<br>
+        <strong style="color:var(--white)">البعد البؤري (Focal Length)</strong> — المسافة التي يتجمع عندها الضوء. يؤثر على زاوية الرؤية والتكبير.<br>
+        <strong style="color:var(--white)">التكبير (Magnification)</strong> = البعد البؤري للتلسكوب ÷ البعد البؤري للعدسة العينية.
+      </div>
+      <div class="hl-gold">
+        ⚠️ <strong>خطأ شائع — احذر منه:</strong> بعض التلاسكيب الرخيصة في المتاجر تُعلن تكبيراً خيالياً (٥٠٠× أو ١٠٠٠×) لكن فتحتها ٣٠-٤٠ مم فقط! التكبير العالي مع فتحة صغيرة يُنتج صورة ضبابية مُغبّشة لا قيمة لها. <strong>دائماً ابدأ بالفتحة.</strong>
+      </div>
+
+      <!-- Parts diagram -->
+      <div style="margin-top:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px">🔧 أجزاء التلسكوب العاكس</div>
+        <div class="parts-wrap">
+          <div class="parts-svg-box">
+            <svg id="scope-parts-svg" viewBox="0 0 220 280" xmlns="http://www.w3.org/2000/svg" style="width:220px;height:280px"></svg>
+          </div>
+          <div class="parts-legend" id="parts-legend"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div class="content-block">
+      <h3 style="color:var(--obs)"><span class="icon">📊</span> مقارنة الأنواع — أيها لك؟</h3>
+      <div style="overflow-x:auto">
+        <table class="specs-table" id="specs-table"></table>
+      </div>
+    </div>
+
+    <!-- Buying guide -->
+    <div class="content-block">
+      <h3 style="color:var(--green)"><span class="icon">💰</span> دليل الشراء — أي تلسكوب يناسب ميزانيتك؟</h3>
+      <p>السوق مليء بالخيارات — هذه توصيات عملية لكل فئة:</p>
+      <div class="buy-grid" id="buy-grid"></div>
+    </div>
+
+    <!-- Dark adaptation -->
+    <div class="content-block">
+      <h3 style="color:var(--obs)"><span class="icon">🌑</span> تكيّف العين للظلام — سرّ الرصد الناجح</h3>
+      <p>
+        في الظلام يتمدد بؤبؤ عينك تدريجياً ليجمع أكبر قدر من الضوء — هذا "التكيّف للظلام" يستغرق <strong style="color:var(--white)">٢٠–٣٠ دقيقة</strong> ليكتمل. أي ضوء أبيض ساطع يُتلفه فوراً ويحتاج البدء من الصفر.
+      </p>
+      <div class="dark-box">
+        <div class="dark-title">🔴 بروتوكول الرصد الليلي — قواعد الظلام</div>
+        <div class="dark-steps" id="dark-steps"></div>
+      </div>
+      <div class="hl-obs" style="margin-top:14px">
+        🔴 <strong>لماذا الضوء الأحمر فقط؟</strong> العين البشرية أقل حساسية للضوء الأحمر — يمكنك رؤية خريطة النجوم بمصباح أحمر دون إتلاف تكيّف عينك! هذا سرّ الفلكيين المحترفين.
+      </div>
+    </div>
+
+    <!-- Fun facts -->
+    <div style="margin-top:24px">
+      <div class="sec-title">⚡ حقائق مذهلة عن التلاسكيب</div>
+      <div class="facts-strip">
+        <div class="fact-card">
+          <span class="fact-emoji">🌌</span>
+          <div class="fact-text">تلسكوب جيمس ويب الفضائي رأى مجرات تبعد <strong>١٣.٤ مليار سنة ضوئية</strong> — نظرة على الكون قبل أن يبلغ ٤٠٠ مليون سنة من عمره!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">🔭</span>
+          <div class="fact-text">أكبر تلسكوب أرضي في العالم (ELT) يُبنى الآن في تشيلي — قطر مرآته <strong>٣٩ متراً</strong>! أكبر من غرفة الصف بأضعاف.</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">👁️</span>
+          <div class="fact-text">غاليليو في ١٦٠٩ اكتشف بتلسكوبه الأوليّ أقماراً للمشتري — نفس هذه الأقمار يمكن رؤيتها بتلسكوب مبتدئ صغير <strong>بأقل من ٣٠٠٠ دينار</strong> جزائري!</div>
+        </div>
+        <div class="fact-card">
+          <span class="fact-emoji">📡</span>
+          <div class="fact-text">التلاسكيب الراديوية ترصد موجات راديوية لا يُرى منها شيء — بعضها كبير كقرية! وقد اكتشف بها <strong>النجوم النيوترونية والنقطة الكونية الميكروية</strong>.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NIGHT OBSERVATION SESSION -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🌙 جلسة الرصد الليلي</div>
+    <div class="obs-box">
+
+      <div class="obs-header">
+        <div class="obs-badge">رصد ليلي حقيقي</div>
+        <div class="obs-title">🔭 جلسة الرصد الحقيقية — الحدث الأهم في البرنامج</div>
+      </div>
+      <p class="obs-subtitle">
+        هذه الليلة هي التتويج — الحصص التسع السابقة كانت مقدمة لهذه اللحظة: عين طفل تتطلع عبر عدسة تلسكوب نحو أسرار الكون. كل ما تعلّمناه يجتمع هنا.
+      </p>
+
+      <!-- Target cards -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:12px">🎯 أهداف الرصد — حسب الصعوبة</div>
+      <div class="targets-grid" id="targets-grid"></div>
+
+      <!-- Steps -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin-bottom:14px">📋 بروتوكول الجلسة خطوة بخطوة</div>
+      <ol class="steps-list">
+
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>🌅 التحضير قبل الغروب (في القاعة)</h4>
+            <p>يراجع المدرّب خريطة السماء لهذه الليلة على Stellarium — أين القمر؟ أي الكواكب مرئية؟ ما العنقود النجمي الأنسب؟ يُوزّع سجلات الرصد ويشرح طريقة الملء.</p>
+            <div class="step-tip">💡 اطبع خريطة السماء ليلة الرصد بالضبط من Stellarium وسلّمها لكل طفل — ستكون "خريطة الكنز" الخاصة به.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>🌑 التكيّف للظلام (٢٠ دقيقة)</h4>
+            <p>يخرج الجميع ويُطفئ أي إضاءة بيضاء. الأطفال يجلسون ويُراقبون السماء بالعين المجردة — يبدأون بتعديد النجوم المرئية وتحديد المجموعات النجمية التي درسوها في الحصة السادسة.</p>
+            <div class="step-tip">🔴 وزّع مصابيح حمراء صغيرة (أو ضعوا نايلوناً أحمر على المصابيح) — الضوء الأحمر فقط طوال الجلسة.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>🔭 توجيه التلسكوب وضبطه</h4>
+            <p>يُجهّز المدرّب التلسكوب بالعدسة العينية الأقل تكبيراً أولاً (مثلاً ٢٥ مم) ويُوجّهه نحو الهدف الأول. كل طفل بدوره يُحاذي عينه ويُعدّل البؤرة حتى تظهر الصورة حادة.</p>
+            <div class="step-tip">⏱ أعط لكل طفل دقيقتين كاملتين على التلسكوب — لا تستعجل. هذه اللحظة ستبقى في ذاكرته سنوات.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٤</div>
+          <div class="step-content">
+            <h4>📓 تسجيل الملاحظات</h4>
+            <p>بعد مشاهدة كل هدف، يُسجّل الطفل فوراً: ما رأى، الوصف اللوني، أي تفاصيل لاحظها، ورسم تخطيطي سريع. لا وقت للكمال — الرصد أولاً ثم التسجيل.</p>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٥</div>
+          <div class="step-content">
+            <h4>💫 التأمل الجماعي قبل النهاية</h4>
+            <p>آخر ١٠ دقائق: يستلقي الجميع على حصير أو أرض نظيفة وينظرون بالعين المجردة. المدرّب يُشير إلى الكواكب والنجوم الساطعة واحداً بواحداً ويربط بما درسوه. صمت مؤثّر.</p>
+            <div class="step-tip">🌟 هذه اللحظة الأخيرة — الصمت تحت السماء — هي الذكرى التي ستبقى. لا تُقصّرها.</div>
+          </div>
+        </div>
+
+      </ol>
+
+      <!-- Observation log table -->
+      <div style="font-size:11px;font-weight:700;letter-spacing:2px;color:var(--muted);margin:20px 0 10px">📝 سجل الرصد الليلي — للطباعة</div>
+      <div class="log-wrap">
+        <div class="log-header">
+          <span>الهدف</span>
+          <span>الوصف والملاحظات</span>
+          <span>السطوع</span>
+          <span>الوقت</span>
+          <span>الرسم</span>
+        </div>
+        <div id="log-rows"></div>
+      </div>
+      <p style="font-size:12px;color:var(--muted);margin-top:8px">* اسم الراصد: _________________ | التاريخ: _________________ | مكان الرصد: _________________</p>
+
+    </div>
+  </section>
+
+  <!-- ASSESSMENT -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة التقييم والخلاصة</div>
+    <div class="content-block" style="padding:20px 24px">
+      <ul class="qa-list">
+        <div class="qa-item">
+          <div class="q-num">١</div>
+          <p><strong style="color:var(--white)">ما الفرق بين الكاسر والعاكس في طريقة عملهما؟</strong><br>الهدف: تمييز آلية كسر الضوء مقابل عكسه.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٢</div>
+          <p><strong style="color:var(--white)">لماذا تلسكوب بفتحة ١٠٠ مم وتكبير ٥٠× أفضل من تلسكوب بفتحة ٤٠ مم وتكبير ٢٠٠×؟</strong><br>الهدف: فهم أهمية الفتحة على التكبير.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٣</div>
+          <p><strong style="color:var(--white)">لماذا ننتظر ٢٠ دقيقة قبل الرصد؟ وما الذي يحدث لعيننا في هذا الوقت؟</strong><br>الهدف: فهم آلية التكيّف للظلام ودوره في الرصد.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٤</div>
+          <p><strong style="color:var(--white)">ما أول شيء رأيته بالتلسكوب الليلة؟ صفه بجملتين.</strong><br>الهدف: ترسيخ تجربة الرصد بالوصف اللغوي.</p>
+        </div>
+        <div class="qa-item">
+          <div class="q-num">٥</div>
+          <p><strong style="color:var(--white)">لو كان بإمكانك اختيار هدف رصد للحصة القادمة — ماذا ستختار ولماذا؟</strong><br>الهدف: تعزيز الفضول والإرادة لمواصلة الرصد.</p>
+        </div>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي المقترحة</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🌐 Stellarium Web</div>
+          <div class="t-use">خريطة السماء التفاعلية — حدّد أهداف الرصد ليلة الجلسة بالضبط</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📡 SkySafari / Star Walk</div>
+          <div class="t-use">توجيه التلسكوب بالهاتف — يُعرّف النجوم فور توجيه الكاميرا</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد صور تلسكوبية للقمر وزحل والمشتري لمقارنة ما رأى الأطفال</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">طباعة سجل الرصد المخصص وخريطة السماء الأسبوعية بالعربية</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(64,212,232,.2)">
+      <h3 style="color:var(--cyan)"><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد خريطة أهداف الرصد ليلة معينة:</p>
+      <div class="prompt-box" id="ready-prompt">أنت فلكي متخصص في مساعدة مبتدئين على الرصد.
+
+للتاريخ: [أدخل تاريخ جلسة الرصد]
+الموقع: تيزي وزو، الجزائر (خط عرض ٣٦.٧°)
+التلسكوب: عاكس ١١٤ مم
+
+أعطني قائمة بـ ٦ أهداف رصد مثالية لهذه الليلة بالترتيب من الأسهل للأصعب.
+
+لكل هدف:
+- الاسم بالعربية والإنجليزية
+- وقت أفضل رؤية (الساعة تقريباً)
+- موقعه في السماء (شمال/جنوب/شرق/غرب + ارتفاعه)
+- ما ستراه بالضبط بهذا التلسكوب
+- درجة الصعوبة (سهل/متوسط/صعب)
+- نصيحة واحدة للتوجيه الصحيح
+
+الأسلوب: عملي ومباشر، مناسب لمدرّب فلك للأطفال.</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- HOMEWORK -->
+  <div class="homework-box">
+    <div class="hw-icon">🌠</div>
+    <div class="hw-content">
+      <h3>واجب البيت — راصد مستقل</h3>
+      <p>
+        خلال الأسبوع القادم، اختر ليلة صافية وأجرِ جلسة رصد مستقلة بالعين المجردة فقط (بدون تلسكوب). حاول تعديد أكبر عدد من النجوم في منطقة محددة من السماء. سجّل: التاريخ، الوقت، المنطقة التي رصدت فيها، وعدد النجوم التي عددتها في ٥ دقائق.
+      </p>
+      <p style="margin-top:10px;color:var(--gold)">
+        🌟 <strong>تحدي الفلكي الصغير:</strong> حاول إيجاد الدبّ الأكبر والجبّار والنجم القطبي بدون مساعدة التطبيق — ثم تحقق بالتطبيق. هل أصبت؟
+      </p>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()">🖨️ طباعة الحصة وسجل الرصد</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-09-rawwad-alffada.html'">← الحصة التاسعة</button>
+    <button class="nav-btn" onclick="window.location.href='astronomy-kids-guide.html'" style="color:var(--muted)">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn primary" onclick="window.location.href='session-11-almajarrra-darb-altabana.html'">الحصة الحادية عشرة: المجرة درب التبانة ←</button>
+  </div>
+
+</div>
+
+<script>
+/* ── STARS (dense) ── */
+(function(){
+  var c=document.getElementById('stars');
+  var cols=['#ffffff','#e8f0ff','#c8e0ff','#fff8d0','#ffd0b0','#b0d8ff'];
+  for(var i=0;i<250;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2.4+.2;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px',
+      'background:'+cols[Math.floor(Math.random()*cols.length)],
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(1.5+Math.random()*5)+'s','--delay:'+(-Math.random()*6)+'s',
+      '--min-op:'+(0.05+Math.random()*.4)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+var NS='http://www.w3.org/2000/svg';
+function mk(t,a,p){var e=document.createElementNS(NS,t);Object.keys(a).forEach(function(k){e.setAttribute(k,a[k]);});if(p)p.appendChild(e);return e;}
+function tx(s,a,p){var t=document.createElementNS(NS,'text');Object.keys(a).forEach(function(k){t.setAttribute(k,a[k]);});t.textContent=s;if(p)p.appendChild(t);return t;}
+
+/* ── TELESCOPE TYPE CARDS ── */
+(function(){
+  var types=[
+    {
+      id:'refractor',cls:'refractor',
+      typeLabel:'REFRACTOR — الكاسر',color:'var(--cyan)',
+      name:'التلسكوب الكاسر',
+      desc:'يستخدم عدستَين لكسر وتركيز الضوء. صورته حادة ومريحة — مثالي لرصد القمر والكواكب.',
+      pros:['صورة حادة وعالية التباين','لا يحتاج معايرة','متين وسهل الاستخدام'],
+      cons:['أثقل وأطول لنفس الفتحة','الفتحات الكبيرة غالية'],
+      drawFn:function(svg){
+        mk('rect',{x:0,y:0,width:280,height:140,fill:'#010208'},svg);
+        for(var i=0;i<15;i++)mk('circle',{cx:Math.random()*280,cy:Math.random()*140,r:Math.random()*.6+.2,fill:'rgba(255,255,255,'+(0.1+Math.random()*.3)+')'},svg);
+        /* tube */
+        mk('rect',{x:30,y:55,width:180,height:30,fill:'#2a3a4a',rx:'4'},svg);
+        mk('rect',{x:210,y:50,width:40,height:40,fill:'#1a2a3a',rx:'4'},svg);
+        /* lens */
+        var defs=mk('defs',{},svg);
+        var lg=mk('radialGradient',{id:'lg-r',cx:'50%',cy:'50%',r:'50%'},defs);
+        mk('stop',{offset:'0%','stop-color':'#a0e0f0','stop-opacity':'.9'},lg);
+        mk('stop',{offset:'100%','stop-color':'#204060','stop-opacity':'.8'},lg);
+        mk('ellipse',{cx:210,cy:70,rx:6,ry:14,fill:'url(#lg-r)'},svg);
+        /* eyepiece */
+        mk('rect',{x:28,y:63,width:12,height:14,fill:'#3a4a5a',rx:'3'},svg);
+        mk('ellipse',{cx:34,cy:70,rx:5,ry:8,fill:'#102030',opacity:'.8'},svg);
+        /* tripod */
+        mk('line',{x1:110,y1:85,x2:90,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:120,y1:85,x2:120,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:130,y1:85,x2:150,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        /* light path */
+        mk('line',{x1:250,y1:62,x2:210,y2:65,stroke:'rgba(64,212,232,.4)','stroke-width':'1.5'},svg);
+        mk('line',{x1:250,y1:78,x2:210,y2:75,stroke:'rgba(64,212,232,.4)','stroke-width':'1.5'},svg);
+        mk('line',{x1:210,y1:65,x2:35,y2:68,stroke:'rgba(64,212,232,.3)','stroke-width':'1'},svg);
+        mk('line',{x1:210,y1:75,x2:35,y2:72,stroke:'rgba(64,212,232,.3)','stroke-width':'1'},svg);
+        tx('عدسة موضوعية',{x:222,y:45,'text-anchor':'start','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(64,212,232,.6)'},svg);
+        tx('عدسة عينية',{x:20,y:50,'text-anchor':'end','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(64,212,232,.6)'},svg);
+      }
+    },
+    {
+      id:'reflector',cls:'reflector',
+      typeLabel:'REFLECTOR — العاكس',color:'var(--obs)',
+      name:'التلسكوب العاكس (نيوتن)',
+      desc:'يستخدم مرآة مقعّرة لعكس وتركيز الضوء. الأفضل قيمةً مقابل السعر — توصية رقم ١ للمبتدئين.',
+      pros:['أفضل فتحة لكل دينار','مثالي للأجسام الخافتة','متوفر ومتعدد الأحجام'],
+      cons:['يحتاج معايرة دورية','الجانبية تعطي صورة معكوسة'],
+      drawFn:function(svg){
+        mk('rect',{x:0,y:0,width:280,height:140,fill:'#010208'},svg);
+        for(var i=0;i<15;i++)mk('circle',{cx:Math.random()*280,cy:Math.random()*140,r:Math.random()*.6+.2,fill:'rgba(255,255,255,'+(0.1+Math.random()*.3)+')'},svg);
+        /* tube */
+        mk('rect',{x:60,y:40,width:150,height:60,fill:'#2a2a3a',rx:'4'},svg);
+        /* primary mirror */
+        var defs=mk('defs',{},svg);
+        var mg=mk('radialGradient',{id:'mg-r',cx:'50%',cy:'50%',r:'50%'},defs);
+        mk('stop',{offset:'0%','stop-color':'#d0e0f0','stop-opacity':'.9'},mg);
+        mk('stop',{offset:'100%','stop-color':'#4060a0','stop-opacity':'.7'},mg);
+        mk('ellipse',{cx:200,cy:70,rx:6,ry:25,fill:'url(#mg-r)'},svg);
+        /* diagonal mirror */
+        mk('line',{x1:100,y1:55,x2:115,y2:65,stroke:'#90a0b0','stroke-width':'5'},svg);
+        /* eyepiece (top) */
+        mk('rect',{x:95,y:28,width:14,height:18,fill:'#3a3a4a',rx:'3'},svg);
+        mk('ellipse',{cx:102,cy:40,rx:5,ry:7,fill:'#080810',opacity:'.9'},svg);
+        /* tripod */
+        mk('line',{x1:130,y1:100,x2:110,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:140,y1:100,x2:140,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:150,y1:100,x2:170,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        /* light path */
+        mk('line',{x1:65,y1:52,x2:196,y2:52,stroke:'rgba(167,139,250,.4)','stroke-width':'1.2'},svg);
+        mk('line',{x1:65,y1:88,x2:196,y2:88,stroke:'rgba(167,139,250,.4)','stroke-width':'1.2'},svg);
+        mk('line',{x1:196,y1:52,x2:110,y2:60,stroke:'rgba(167,139,250,.35)','stroke-width':'1'},svg);
+        mk('line',{x1:196,y1:88,x2:110,y2:60,stroke:'rgba(167,139,250,.35)','stroke-width':'1'},svg);
+        mk('line',{x1:110,y1:60,x2:102,y2:45,stroke:'rgba(167,139,250,.35)','stroke-width':'1'},svg);
+        tx('مرآة رئيسية',{x:208,y:46,'text-anchor':'start','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(167,139,250,.6)'},svg);
+        tx('عدسة عينية',{x:95,y:24,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(167,139,250,.6)'},svg);
+      }
+    },
+    {
+      id:'catadioptric',cls:'catadioptric',
+      typeLabel:'CATADIOPTRIC — المركّب',color:'var(--gold)',
+      name:'التلسكوب المركّب (SCT/MAK)',
+      desc:'يجمع العدسة والمرآة معاً في أنبوب مضغوط. محمول ومتعدد الاستخدامات — لكن أغلى سعراً.',
+      pros:['مضغوط ومحمول','متعدد الاستخدامات','ممتاز للتصوير'],
+      cons:['الأغلى سعراً','يحتاج وقتاً للتسخين الحراري'],
+      drawFn:function(svg){
+        mk('rect',{x:0,y:0,width:280,height:140,fill:'#010208'},svg);
+        for(var i=0;i<15;i++)mk('circle',{cx:Math.random()*280,cy:Math.random()*140,r:Math.random()*.6+.2,fill:'rgba(255,255,255,'+(0.1+Math.random()*.3)+')'},svg);
+        /* short fat tube */
+        mk('rect',{x:80,y:45,width:100,height:50,fill:'#2a2a3a',rx:'6'},svg);
+        /* corrector plate */
+        var defs=mk('defs',{},svg);
+        var cp=mk('linearGradient',{id:'cp',x1:'0%',y1:'0%',x2:'100%',y2:'0%'},defs);
+        mk('stop',{offset:'0%','stop-color':'#60a0c0','stop-opacity':'.8'},cp);
+        mk('stop',{offset:'100%','stop-color':'#203040','stop-opacity':'.6'},cp);
+        mk('ellipse',{cx:80,cy:70,rx:6,ry:22,fill:'url(#cp)'},svg);
+        /* primary mirror */
+        mk('ellipse',{cx:175,cy:70,rx:6,ry:20,fill:'#8090a0',opacity:'.7'},svg);
+        /* secondary mirror (front) */
+        mk('ellipse',{cx:88,cy:70,rx:3,ry:10,fill:'#9090a8',opacity:'.8'},svg);
+        /* eyepiece back */
+        mk('rect',{x:176,y:62,width:18,height:16,fill:'#3a3a4a',rx:'3'},svg);
+        mk('ellipse',{cx:188,cy:70,rx:5,ry:7,fill:'#080810',opacity:'.9'},svg);
+        /* computerised mount */
+        mk('rect',{x:115,y:95,width:50,height:12,fill:'#1a2a3a',rx:'3'},svg);
+        mk('circle',{cx:125,cy:101,r:'4',fill:'#40c080',opacity:'.7'},svg);
+        mk('circle',{cx:140,cy:101,r:'3',fill:'#4080ff',opacity:'.5'},svg);
+        mk('line',{x1:120,y1:107,x2:105,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:140,y1:107,x2:140,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        mk('line',{x1:160,y1:107,x2:175,y2:130,stroke:'#607080','stroke-width':'2'},svg);
+        tx('لوح مصحّح',{x:72,y:40,'text-anchor':'end','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(245,200,66,.6)'},svg);
+        tx('قاعدة محوسبة',{x:140,y:135,'text-anchor':'middle','font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(245,200,66,.5)'},svg);
+      }
+    }
+  ];
+
+  var grid=document.getElementById('scope-grid');
+  types.forEach(function(t){
+    var card=document.createElement('div');
+    card.className='scope-card '+t.cls;
+
+    var svg=document.createElementNS(NS,'svg');
+    svg.setAttribute('viewBox','0 0 280 140');
+    svg.setAttribute('class','scope-svg');
+    svg.setAttribute('xmlns',NS);
+    t.drawFn(svg);
+    card.appendChild(svg);
+
+    var proHtml=t.pros.map(function(p){return '<span class="stag pro">'+p+'</span>';}).join('');
+    var conHtml=t.cons.map(function(c){return '<span class="stag con">'+c+'</span>';}).join('');
+
+    var info=document.createElement('div');info.className='scope-info';
+    info.innerHTML='<div class="scope-type-lbl" style="color:'+t.color+'">'+t.typeLabel+'</div>'+
+      '<div class="scope-name" style="color:'+t.color+'">'+t.name+'</div>'+
+      '<div class="scope-desc">'+t.desc+'</div>'+
+      '<div class="scope-tags">'+proHtml+conHtml+'</div>';
+    card.appendChild(info);
+    grid.appendChild(card);
+  });
+})();
+
+/* ── PARTS SVG ── */
+(function(){
+  var svg=document.getElementById('scope-parts-svg');
+  mk('rect',{x:0,y:0,width:220,height:280,fill:'rgba(0,0,0,0)'},svg);
+
+  /* tube */
+  mk('rect',{x:30,y:60,width:150,height:55,fill:'#1a2030',rx:'5'},svg);
+  /* primary mirror */
+  var defs=mk('defs',{},svg);
+  var mg=mk('radialGradient',{id:'mg-p',cx:'50%',cy:'50%',r:'50%'},defs);
+  mk('stop',{offset:'0%','stop-color':'#c0d0e0','stop-opacity':'.9'},mg);
+  mk('stop',{offset:'100%','stop-color':'#3050a0','stop-opacity':'.7'},mg);
+  mk('ellipse',{cx:170,cy:87,rx:6,ry:22,fill:'url(#mg-p)'},svg);
+  /* secondary / diagonal */
+  mk('line',{x1:95,y1:72,x2:110,y2:80,stroke:'#8090a0','stroke-width':'5'},svg);
+  /* eyepiece */
+  mk('rect',{x:86,y:42,width:18,height:22,fill:'#2a3040',rx:'3'},svg);
+  mk('ellipse',{cx:95,cy:53,rx:6,ry:9,fill:'#050810',opacity:'.95'},svg);
+  /* finder scope */
+  mk('rect',{x:55,y:52,width:60,height:10,fill:'#1a2838',rx:'3'},svg);
+  mk('ellipse',{cx:55,cy:57,rx:3,ry:5,fill:'#203040',opacity:'.7'},svg);
+  /* tripod */
+  mk('line',{x1:90,y1:115,x2:70,y2:210,stroke:'#4a5a6a','stroke-width':'3'},svg);
+  mk('line',{x1:100,y1:115,x2:100,y2:210,stroke:'#4a5a6a','stroke-width':'3'},svg);
+  mk('line',{x1:110,y1:115,x2:135,y2:210,stroke:'#4a5a6a','stroke-weight':'3'},svg);
+  mk('rect',{x:70,y:108,width:55,height:14,fill:'#2a3a4a',rx:'4'},svg);
+  /* focus knob */
+  mk('circle',{cx:30,cy:87,r:'7',fill:'#3a4a5a'},svg);
+  mk('circle',{cx:30,cy:87,r:'4',fill:'#1a2a3a'},svg);
+
+  /* label dots */
+  var labels=[
+    {cx:55,cy:57,lx:8,ly:55,txt:'باحث الاتجاه'},
+    {cx:95,cy:53,lx:95,ly:32,txt:'العدسة العينية'},
+    {cx:102,cy:76,lx:145,ly:72,txt:'المرآة الثانوية'},
+    {cx:170,cy:87,lx:188,ly:87,txt:'المرآة الرئيسية'},
+    {cx:30,cy:87,lx:8,ly:87,txt:'مسمار التبئير'},
+    {cx:100,cy:114,lx:100,ly:235,txt:'الحامل الثلاثي'},
+  ];
+  labels.forEach(function(l){
+    mk('circle',{cx:l.cx,cy:l.cy,r:'3',fill:'var(--gold)',opacity:'.75'},svg);
+    var anchor=l.lx<100?'end':'start';
+    tx(l.txt,{x:l.lx,y:l.ly,'text-anchor':anchor,'font-family':'Cairo,sans-serif','font-size':'7.5','fill':'rgba(200,220,255,.7)'},svg);
+  });
+})();
+
+/* ── PARTS LEGEND ── */
+var parts=[
+  {color:'#c0d0e0',name:'المرآة الرئيسية',desc:'تجمع الضوء وتعكسه نحو المرآة الثانوية — قطرها هو "الفتحة"'},
+  {color:'#8090a0',name:'المرآة الثانوية',desc:'توجّه الضوء للعدسة العينية الجانبية'},
+  {color:'#60a0e8',name:'العدسة العينية',desc:'تُكبّر الصورة — تبديلها يُغيّر التكبير'},
+  {color:'#3a5060',name:'باحث الاتجاه',desc:'تلسكوب صغير لتحديد الهدف قبل الرصد بالعدسة الكبيرة'},
+  {color:'#3a4a5a',name:'مسمار التبئير',desc:'يُقرّب ويُبعد العدسة العينية لضبط حدّة الصورة'},
+  {color:'#4a5a6a',name:'الحامل الثلاثي',desc:'يُثبّت التلسكوب ويسمح بالتوجيه السلس نحو الأهداف'},
+];
+var pl=document.getElementById('parts-legend');
+parts.forEach(function(p){
+  var d=document.createElement('div');d.className='part-row';
+  d.innerHTML='<div class="part-dot" style="background:'+p.color+'"></div>'+
+    '<div><div class="part-name" style="color:'+p.color+'">'+p.name+'</div><div class="part-desc">'+p.desc+'</div></div>';
+  pl.appendChild(d);
+});
+
+/* ── SPECS TABLE ── */
+(function(){
+  var rows=[
+    ['المعيار','الكاسر','العاكس','المركّب'],
+    ['آلية العمل','عدسة زجاجية','مرآة مقعّرة','مرآة + عدسة مصحّحة'],
+    ['الفتحة المثالية','٦٠–١٠٠ مم','٧٦–٢٠٠ مم','٩٠–٢٥٠ مم'],
+    ['أفضل استخدام','القمر والكواكب','الأجسام الخافتة','متعدد الاستخدامات'],
+    ['السعر التقريبي','متوسط','الأوفر','الأغلى'],
+    ['المعايرة','لا يحتاج','دورية (كوليميشن)','دورية'],
+    ['التوصية للمبتدئ','جيد','الأفضل ★★★','ممتاز لكن غالٍ'],
+  ];
+  var tbl=document.getElementById('specs-table');
+  var thead=document.createElement('thead'),tbody=document.createElement('tbody');
+  rows.forEach(function(r,ri){
+    var tr=document.createElement('tr');
+    if(ri===0){
+      r.forEach(function(c){var th=document.createElement('th');th.style.cssText='font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;padding:0 12px 10px;text-align:right;font-weight:600';th.textContent=c;tr.appendChild(th);});
+      thead.appendChild(tr);
+    } else {
+      tr.className='s-row';
+      r.forEach(function(c,ci){
+        var td=document.createElement('td');
+        if(ci===0){td.style.cssText='font-weight:700;color:var(--white)';}
+        else if(c.includes('★')){td.style.color='var(--gold)';td.textContent=c;}
+        else{td.textContent=c;}
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    }
+  });
+  tbl.appendChild(thead);tbl.appendChild(tbody);
+})();
+
+/* ── BUYING GUIDE ── */
+var buys=[
+  {price:'< ١٥٠$',label:'مبتدئ محدود الميزانية',name:'عاكس ٧٦ مم',
+   desc:'Celestron FirstScope أو مماثل — كافٍ لرصد القمر وحلقات زحل وأقمار المشتري.',badge:'للبداية مثالي'},
+  {price:'١٥٠–٣٠٠$',label:'مبتدئ جادّ',name:'عاكس ١١٤–١٣٠ مم',
+   desc:'Celestron AstroMaster 130 أو Skywatcher 130 — يُري تفاصيل رائعة على القمر والكواكب.',badge:'الأكثر مبيعاً'},
+  {price:'٣٠٠–٦٠٠$',label:'متوسط متقدم',name:'دوبسونيان ٦" أو ٨"',
+   desc:'Skywatcher Dobsonian — أقصى فتحة لهذا السعر. رائع للمجرات والسدم الخافتة.',badge:'للجادّين'},
+];
+var bg=document.getElementById('buy-grid');
+buys.forEach(function(b){
+  var d=document.createElement('div');d.className='buy-card';
+  d.innerHTML='<span class="buy-price" style="color:var(--green)">'+b.price+'</span>'+
+    '<div class="buy-label">'+b.label+'</div>'+
+    '<div class="buy-name">'+b.name+'</div>'+
+    '<div class="buy-desc">'+b.desc+'</div>'+
+    '<span class="buy-tag">'+b.badge+'</span>';
+  bg.appendChild(d);
+});
+
+/* ── DARK ADAPTATION STEPS ── */
+var darkSteps=[
+  {icon:'🌆',lbl:'قبل المغرب بساعة',time:'T-60 دقيقة',desc:'ابتعد عن الشاشات'},
+  {icon:'🌙',lbl:'انتظر في الظلام',time:'٢٠–٣٠ دقيقة',desc:'العين تتكيّف تدريجياً'},
+  {icon:'🔴',lbl:'استخدم الضوء الأحمر',time:'طوال الجلسة',desc:'وحده الآمن للعين'},
+  {icon:'📵',lbl:'الهاتف على الوضع الليلي',time:'قبل البدء',desc:'سطوع منخفض وفلتر أحمر'},
+];
+var ds=document.getElementById('dark-steps');
+darkSteps.forEach(function(s){
+  var d=document.createElement('div');d.className='dark-step';
+  d.innerHTML='<span class="dark-icon">'+s.icon+'</span>'+
+    '<div class="dark-lbl">'+s.desc+'</div>'+
+    '<div class="dark-time">'+s.lbl+'</div>';
+  ds.appendChild(d);
+});
+
+/* ── TARGET CARDS ── */
+var targets=[
+  {emoji:'🌙',name:'القمر',type:'قمر طبيعي',diff:'easy',diffLbl:'سهل',note:'الأكثر إدهاشاً دائماً'},
+  {emoji:'🪐',name:'زحل وحلقاته',type:'كوكب',diff:'easy',diffLbl:'سهل',note:'يُري الحلقات!'},
+  {emoji:'🔵',name:'المشتري وأقماره',type:'كوكب',diff:'easy',diffLbl:'سهل',note:'٤ أقمار مرئية'},
+  {emoji:'⭐',name:'عنقود الثريا',type:'عنقود نجمي',diff:'med',diffLbl:'متوسط',note:'نجوم زرقاء رائعة'},
+  {emoji:'🌫️',name:'سديم الجبّار',type:'سديم انبعاث',diff:'med',diffLbl:'متوسط',note:'مصنع نجوم!'},
+  {emoji:'🌌',name:'مجرة أندروميدا',type:'مجرة',diff:'hard',diffLbl:'صعب',note:'أبعد ما تراه بالعين'},
+  {emoji:'🌙',name:'أطوار الزهرة',type:'كوكب',diff:'med',diffLbl:'متوسط',note:'تشبه أطوار القمر'},
+  {emoji:'✨',name:'عنقود نجمي كروي',type:'عنقود كروي',diff:'hard',diffLbl:'صعب',note:'آلاف النجوم معاً'},
+];
+var tg=document.getElementById('targets-grid');
+targets.forEach(function(t){
+  var d=document.createElement('div');d.className='target-card';
+  d.innerHTML='<span class="target-emoji">'+t.emoji+'</span>'+
+    '<div class="target-name">'+t.name+'</div>'+
+    '<div class="target-type">'+t.type+'</div>'+
+    '<span class="target-diff diff-'+t.diff+'">'+t.diffLbl+'</span>';
+  tg.appendChild(d);
+});
+
+/* ── LOG ROWS ── */
+var logTargets=[
+  {name:'القمر 🌙',cls:'diff-easy'},
+  {name:'زحل 🪐',cls:'diff-easy'},
+  {name:'المشتري 🔵',cls:'diff-easy'},
+  {name:'نجم ساطع ⭐',cls:'diff-med'},
+  {name:'عنقود الثريا ✨',cls:'diff-med'},
+  {name:'هدف حر 🌌',cls:'diff-hard'},
+];
+var lr=document.getElementById('log-rows');
+logTargets.forEach(function(t){
+  var row=document.createElement('div');row.className='log-row';
+  row.innerHTML='<div class="log-target"><span class="log-type-badge '+t.cls+'">'+t.name+'</span></div>'+
+    '<div class="log-field"></div>'+
+    '<div class="log-field"></div>'+
+    '<div class="log-field"></div>'+
+    '<div class="log-field"></div>';
+  lr.appendChild(row);
+});
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>

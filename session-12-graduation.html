@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الحصة ١٢ – الفلكي الصغير يتخرج! | آفاق جرجرة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#04060f;--deep:#080d1f;--cosmos:#0d1535;
+    --gold:#f5c842;--amber:#e8a020;
+    --grad1:#ffd700;--grad2:#ffa500;
+    --cyan:#40d4e8;--green:#34d399;
+    --violet:#8b5cf6;--rose:#f472b6;
+    --white:#f0f4ff;--muted:#8899cc;
+    --silver:#c8d4e8;--confetti1:#f472b6;--confetti2:#34d399;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{font-family:'Cairo',sans-serif;background:var(--night);color:var(--white);min-height:100vh;}
+  @media screen{body{overflow-x:hidden;}}
+
+  /* ── STARS ── */
+  #stars{position:fixed;inset:0;pointer-events:none;z-index:0;}
+  .star{position:absolute;border-radius:50%;animation:twinkle var(--dur,3s) ease-in-out infinite var(--delay,0s);}
+  @keyframes twinkle{0%,100%{opacity:var(--min-op,.12);transform:scale(1);}50%{opacity:1;transform:scale(1.7);}}
+
+  /* golden radiant hero glow */
+  #hero-glow{
+    position:fixed;top:-120px;left:50%;transform:translateX(-50%);
+    width:700px;height:400px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(245,200,66,.15) 0%,rgba(255,160,60,.06) 40%,transparent 70%);
+    pointer-events:none;z-index:0;
+    animation:hg 8s ease-in-out infinite;
+  }
+  @keyframes hg{0%,100%{opacity:.7;transform:translateX(-50%) scale(1);}50%{opacity:1;transform:translateX(-50%) scale(1.08);}}
+
+  /* confetti pieces */
+  .confetti-piece{position:fixed;width:8px;height:8px;opacity:0;pointer-events:none;z-index:999;animation:fall linear infinite;}
+  @keyframes fall{0%{transform:translateY(-20px) rotate(0deg);opacity:1;}100%{transform:translateY(110vh) rotate(720deg);opacity:0;}}
+
+  /* ── LAYOUT ── */
+  .page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:0 20px 80px;}
+
+  /* ── BREADCRUMB ── */
+  .breadcrumb{display:flex;align-items:center;gap:8px;padding:20px 0 0;font-size:12px;color:var(--muted);letter-spacing:1px;}
+  .breadcrumb a{color:var(--gold);text-decoration:none;}
+  .breadcrumb a:hover{text-decoration:underline;}
+
+  /* ── HERO ── */
+  .session-hero{padding:44px 0 40px;border-bottom:1px solid rgba(245,200,66,.2);margin-bottom:48px;text-align:center;}
+  .session-num-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.45);
+    border-radius:50px;padding:8px 24px;font-size:13px;color:var(--gold);letter-spacing:1.5px;margin-bottom:24px;
+  }
+  .session-hero h1{
+    font-family:'Amiri',serif;font-size:clamp(2.2rem,6vw,4rem);font-weight:700;
+    background:linear-gradient(135deg,#fff 0%,var(--gold) 35%,var(--grad2) 60%,var(--rose) 85%,var(--cyan) 100%);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    line-height:1.2;margin-bottom:18px;
+  }
+  .hero-subtitle{color:var(--silver);font-size:16px;max-width:620px;line-height:1.8;margin:0 auto 28px;}
+  .hero-stars-row{display:flex;justify-content:center;gap:6px;margin-bottom:32px;}
+  .hero-star{color:var(--gold);font-size:1.6rem;animation:star-pop .4s ease both;}
+  @keyframes star-pop{0%{transform:scale(0);opacity:0;}70%{transform:scale(1.3);}100%{transform:scale(1);opacity:1;}}
+  .meta-row{display:flex;flex-wrap:wrap;gap:18px;margin-top:10px;justify-content:center;}
+  .meta-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+  .meta-dot{width:8px;height:8px;border-radius:50%;}
+
+  /* ── SEC TITLE ── */
+  .sec-title{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .sec-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(245,200,66,.3),transparent);}
+
+  /* ── TIMELINE ── */
+  .timeline{position:relative;margin-bottom:56px;}
+  .timeline::before{content:'';position:absolute;right:19px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,rgba(245,200,66,.6),rgba(52,211,153,.2),transparent);}
+  .tl-item{display:flex;gap:24px;align-items:flex-start;margin-bottom:28px;padding-right:48px;position:relative;}
+  .tl-dot{position:absolute;right:11px;top:14px;width:17px;height:17px;border-radius:50%;border:2px solid var(--gold);background:var(--night);flex-shrink:0;}
+  .tl-dot.green{border-color:var(--green);}
+  .tl-dot.rose{border-color:var(--rose);}
+  .tl-dot.cyan{border-color:var(--cyan);}
+  .tl-dot.violet{border-color:var(--violet);}
+  .tl-time{font-size:11px;color:var(--gold);font-weight:700;letter-spacing:1px;white-space:nowrap;padding-top:2px;width:58px;flex-shrink:0;}
+  .tl-time.green{color:var(--green);}
+  .tl-time.rose{color:var(--rose);}
+  .tl-time.cyan{color:var(--cyan);}
+  .tl-time.violet{color:var(--violet);}
+  .tl-content{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px 20px;flex:1;}
+  .tl-content h3{font-size:15px;font-weight:700;margin-bottom:8px;}
+  .tl-content p{font-size:13px;color:var(--muted);line-height:1.75;}
+  .tl-content ul{list-style:none;margin-top:10px;}
+  .tl-content ul li{font-size:13px;color:var(--muted);line-height:1.7;padding-right:14px;position:relative;margin-bottom:4px;}
+  .tl-content ul li::before{content:'›';position:absolute;right:0;color:var(--gold);}
+
+  /* ── REVIEW GRID ── */
+  .review-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;margin-bottom:56px;}
+  .review-card{
+    background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);
+    border-radius:16px;padding:20px;transition:transform .3s,border-color .3s;
+    cursor:default;
+  }
+  .review-card:hover{transform:translateY(-3px);}
+  .rc-num{font-size:11px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:8px;}
+  .rc-title{font-size:14px;font-weight:700;margin-bottom:8px;}
+  .rc-questions{list-style:none;}
+  .rc-questions li{font-size:12px;color:var(--muted);line-height:1.65;padding-right:12px;position:relative;margin-bottom:4px;}
+  .rc-questions li::before{content:'?';position:absolute;right:0;color:rgba(245,200,66,.5);font-weight:700;font-size:10px;}
+
+  /* ── QUIZ SECTION ── */
+  .quiz-box{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:28px 32px;margin-bottom:56px;}
+  .quiz-header{display:flex;align-items:center;gap:16px;margin-bottom:22px;}
+  .quiz-icon{font-size:2rem;}
+  .quiz-title{font-size:18px;font-weight:700;}
+  .quiz-subtitle{font-size:13px;color:var(--muted);line-height:1.6;}
+  .quiz-rounds{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:20px;}
+  .qround{background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;}
+  .qr-num{font-size:9px;font-weight:700;letter-spacing:2px;color:var(--gold);margin-bottom:5px;}
+  .qr-title{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .qr-desc{font-size:12px;color:var(--muted);line-height:1.55;}
+  .qr-pts{font-size:10px;color:var(--cyan);font-weight:700;margin-top:6px;}
+
+  /* ── CONTENT BLOCKS ── */
+  .content-block{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:28px 32px;margin-bottom:16px;}
+  .content-block h3{font-size:17px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+  .content-block h3 .icon{font-size:1.4rem;}
+  .content-block p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;}
+  .content-block p:last-child{margin-bottom:0;}
+  .hl-gold{background:rgba(245,200,66,.08);border-right:3px solid var(--gold);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#d4c07a;line-height:1.8;}
+  .hl-green{background:rgba(52,211,153,.07);border-right:3px solid var(--green);border-radius:0 8px 8px 0;padding:13px 17px;margin:14px 0;font-size:14px;color:#99f6e4;line-height:1.8;}
+
+  /* ── PROJECTS EXHIBITION ── */
+  .projects-box{background:linear-gradient(135deg,rgba(245,200,66,.08),rgba(52,211,153,.04));border:1px solid rgba(245,200,66,.22);border-radius:20px;padding:32px;margin-bottom:56px;}
+  .pb-header{display:flex;align-items:center;gap:14px;margin-bottom:10px;}
+  .pb-badge{background:rgba(245,200,66,.18);border:1px solid rgba(245,200,66,.4);border-radius:50px;padding:6px 16px;font-size:11px;font-weight:700;color:var(--gold);letter-spacing:1px;}
+  .pb-title{font-size:18px;font-weight:700;}
+  .pb-subtitle{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:24px;}
+
+  /* project showcase grid */
+  .showcase-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:22px;}
+  .showcase-card{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:16px;text-align:center;transition:transform .3s;}
+  .showcase-card:hover{transform:translateY(-3px);}
+  .sc-emoji{font-size:2.2rem;display:block;margin-bottom:8px;}
+  .sc-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+  .sc-session{font-size:10.5px;color:var(--muted);}
+  .sc-desc{font-size:11.5px;color:var(--muted);line-height:1.6;margin-top:6px;}
+
+  /* steps */
+  .steps-list{list-style:none;}
+  .step-item{display:flex;gap:16px;align-items:flex-start;margin-bottom:18px;}
+  .step-num{width:32px;height:32px;border-radius:50%;flex-shrink:0;background:rgba(245,200,66,.13);border:1px solid rgba(245,200,66,.35);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--gold);}
+  .step-content h4{font-size:14px;font-weight:700;margin-bottom:4px;}
+  .step-content p{font-size:13px;color:var(--muted);line-height:1.7;}
+  .step-tip{background:rgba(52,211,153,.06);border-right:3px solid var(--green);border-radius:0 8px 8px 0;padding:9px 13px;font-size:12px;color:#99f6e4;line-height:1.65;margin-top:8px;}
+
+  /* ── CERTIFICATE ── */
+  .cert-section{margin-bottom:56px;}
+  .cert-preview{
+    background:linear-gradient(135deg,#080d1f 0%,#0d1535 50%,#080d1f 100%);
+    border:2px solid rgba(245,200,66,.4);
+    border-radius:20px;
+    padding:48px 40px;
+    text-align:center;
+    position:relative;
+    overflow:hidden;
+    max-width:700px;
+    margin:0 auto;
+  }
+  .cert-preview::before{
+    content:'';position:absolute;inset:6px;
+    border:1px solid rgba(245,200,66,.18);border-radius:15px;pointer-events:none;
+  }
+  .cert-corners{position:absolute;inset:16px;pointer-events:none;}
+  .cert-stars-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none;}
+  .cert-logo{font-size:3.5rem;margin-bottom:12px;display:block;}
+  .cert-club{font-size:11px;font-weight:700;letter-spacing:3px;color:var(--gold);margin-bottom:4px;}
+  .cert-org{font-size:12px;color:var(--muted);margin-bottom:28px;}
+  .cert-title{font-family:'Amiri',serif;font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:var(--gold);margin-bottom:6px;}
+  .cert-subtitle{font-size:13px;color:var(--silver);margin-bottom:28px;}
+  .cert-name-line{
+    border-bottom:1px solid rgba(245,200,66,.35);
+    min-width:260px;display:inline-block;
+    font-family:'Amiri',serif;font-size:1.6rem;color:var(--white);
+    padding-bottom:4px;margin-bottom:6px;
+  }
+  .cert-name-label{font-size:11px;color:var(--muted);margin-bottom:24px;}
+  .cert-body{font-size:13px;color:var(--silver);line-height:1.85;max-width:480px;margin:0 auto 28px;}
+  .cert-badge-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:28px;}
+  .cert-badge{
+    background:rgba(245,200,66,.1);border:1px solid rgba(245,200,66,.3);
+    border-radius:50px;padding:5px 14px;font-size:11px;color:var(--gold);
+  }
+  .cert-footer{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;}
+  .cert-sig{text-align:center;}
+  .cert-sig-line{width:120px;border-top:1px solid rgba(200,212,232,.3);margin-bottom:4px;}
+  .cert-sig-name{font-size:11px;color:var(--muted);}
+  .cert-seal{
+    width:60px;height:60px;border-radius:50%;
+    background:rgba(245,200,66,.12);border:2px solid rgba(245,200,66,.35);
+    display:flex;align-items:center;justify-content:center;font-size:1.8rem;
+  }
+  .cert-date{font-size:11px;color:var(--muted);text-align:center;}
+  .cert-date-line{width:120px;border-top:1px solid rgba(200,212,232,.3);margin-bottom:4px;}
+
+  /* print cert button */
+  .cert-print-btn{
+    display:block;margin:20px auto 0;
+    background:linear-gradient(135deg,var(--gold),var(--amber));
+    border:none;border-radius:12px;padding:14px 32px;
+    color:var(--night);font-family:'Cairo',sans-serif;
+    font-size:14px;font-weight:800;cursor:pointer;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .cert-print-btn:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(245,200,66,.35);}
+
+  /* ── FINAL MESSAGE ── */
+  .final-box{
+    background:radial-gradient(ellipse at 50% 0%,rgba(245,200,66,.1) 0%,transparent 70%);
+    border:1px solid rgba(245,200,66,.2);border-radius:20px;
+    padding:48px 32px;margin-bottom:56px;text-align:center;
+  }
+  .final-icon{font-size:3rem;margin-bottom:16px;display:block;}
+  .final-title{font-family:'Amiri',serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;color:var(--gold);margin-bottom:16px;}
+  .final-text{font-size:15px;color:var(--silver);line-height:1.9;max-width:620px;margin:0 auto 24px;}
+  .quote-box{
+    background:rgba(0,0,0,.25);border-right:4px solid var(--gold);
+    border-radius:0 12px 12px 0;padding:18px 24px;
+    max-width:540px;margin:0 auto;
+    font-family:'Amiri',serif;font-size:1.1rem;color:var(--white);
+    line-height:1.8;font-style:italic;
+  }
+  .quote-attr{font-size:12px;color:var(--muted);margin-top:8px;font-style:normal;}
+
+  /* ── ASSESSMENT (final) ── */
+  .final-qa{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:56px;}
+  .fqa-card{background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:18px;}
+  .fqa-session{font-size:10px;font-weight:700;letter-spacing:1.5px;color:var(--muted);margin-bottom:5px;}
+  .fqa-q{font-size:13px;color:var(--white);font-weight:700;margin-bottom:5px;line-height:1.5;}
+  .fqa-hint{font-size:11.5px;color:var(--muted);line-height:1.5;}
+
+  /* ── TOOLS ── */
+  .tools-row{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px;}
+  .tool-pill{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:14px 20px;transition:border-color .3s;}
+  .tool-pill:hover{border-color:rgba(245,200,66,.3);}
+  .t-name{font-size:14px;font-weight:700;}
+  .t-use{font-size:12px;color:var(--muted);margin-top:2px;}
+
+  .prompt-box{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px;font-family:monospace;font-size:13px;color:#b0c8e8;line-height:1.8;white-space:pre-wrap;}
+  .copy-btn{margin-top:14px;background:rgba(245,200,66,.12);border:1px solid rgba(245,200,66,.3);border-radius:10px;padding:9px 20px;color:var(--gold);font-family:'Cairo',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .copy-btn:hover{background:rgba(245,200,66,.24);}
+
+  .print-bar{text-align:center;margin-bottom:16px;}
+  .bottom-nav{display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,.06);padding-top:32px;flex-wrap:wrap;gap:12px;}
+  .nav-btn{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.09);border-radius:12px;padding:10px 20px;font-size:13px;color:var(--muted);cursor:pointer;font-family:'Cairo',sans-serif;transition:background .2s,color .2s;}
+  .nav-btn:hover{background:rgba(245,200,66,.1);color:var(--gold);}
+  .nav-btn.primary{background:rgba(245,200,66,.14);border-color:rgba(245,200,66,.38);color:var(--gold);}
+  .nav-btn.primary:hover{background:rgba(245,200,66,.28);color:#ffe880;}
+
+  /* ══════════════ PRINT ══════════════ */
+  @media print{
+    @page{size:A4 landscape;margin:10mm;}
+    *,*::before,*::after{box-sizing:border-box!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;}
+    html{font-size:10pt!important;overflow:visible!important;}
+    body{font-family:'Cairo','Arial',sans-serif!important;background:white!important;color:#1a1a1a!important;margin:0!important;padding:0!important;overflow:visible!important;}
+    #stars,#hero-glow,.confetti-piece,.breadcrumb,.bottom-nav,.print-bar,.copy-btn,
+    .timeline,.review-grid,.quiz-box,.projects-box,.final-box,.final-qa,.tools-row,
+    .session-hero,.sec-title,.cert-print-btn{display:none!important;}
+    .page{position:static!important;max-width:100%!important;width:100%!important;margin:0!important;padding:0!important;}
+    .cert-section{margin:0!important;}
+    .cert-preview{
+      background:white!important;border:3px solid #d4a820!important;
+      border-radius:12px!important;padding:36px 32px!important;
+      max-width:100%!important;margin:0!important;
+      box-shadow:none!important;
+    }
+    .cert-preview::before{border-color:#d4a82040!important;}
+    .cert-stars-bg,.cert-corners{display:none!important;}
+    .cert-logo{font-size:2.8rem!important;margin-bottom:8px!important;}
+    .cert-club{color:#7a5800!important;font-size:10pt!important;}
+    .cert-org{color:#555!important;font-size:9.5pt!important;margin-bottom:20px!important;}
+    .cert-title{font-size:22pt!important;color:#7a5800!important;-webkit-text-fill-color:#7a5800!important;background:none!important;margin-bottom:4px!important;}
+    .cert-subtitle{color:#444!important;font-size:10pt!important;margin-bottom:20px!important;}
+    .cert-name-line{border-color:#d4a820!important;color:#1a1a1a!important;font-size:18pt!important;}
+    .cert-name-label{color:#555!important;}
+    .cert-body{color:#333!important;font-size:10pt!important;margin-bottom:20px!important;}
+    .cert-badge-row{margin-bottom:20px!important;}
+    .cert-badge{background:#fff5d0!important;border-color:#d4a820!important;color:#7a5800!important;font-size:9pt!important;}
+    .cert-footer{margin-top:20px!important;}
+    .cert-sig-line,.cert-date-line{border-color:#ccc!important;}
+    .cert-sig-name,.cert-date{color:#555!important;font-size:9pt!important;}
+    .cert-seal{background:#fff5d0!important;border-color:#d4a820!important;}
+  }
+</style>
+</head>
+<body>
+<div id="stars"></div>
+<div id="hero-glow"></div>
+
+<div class="page">
+
+  <!-- BREADCRUMB -->
+  <div class="breadcrumb">
+    <a href="astronomy-kids-guide.html">آفاق جرجرة</a>
+    <span>›</span>
+    <a href="astronomy-kids-guide.html">برنامج الفلك للأطفال</a>
+    <span>›</span>
+    <span style="color:var(--gold)">الحصة الثانية عشرة — التخرج 🎓</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="session-hero">
+    <div class="session-num-badge">🎓 الحصة الأخيرة — التخرج الكوني</div>
+    <div class="hero-stars-row" id="star-row"></div>
+    <h1>الفلكي الصغير يتخرج!</h1>
+    <p class="hero-subtitle">
+      قبل ١٢ حصة سألنا: "ما هو الفضاء؟" — اليوم لدينا الإجابة. رحلة من الانفجار الكبير إلى المجرة، من القمر إلى التلسكوب، من الديناصورات للمحطة الدولية. الفلكي الصغير يحتفل بما أنجزه ويحمل شهادته نحو السماء!
+    </p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="meta-dot" style="background:var(--gold)"></div>المدة: ٩٠ دقيقة احتفالية</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--green)"></div>الفئة العمرية: ٨ – ١٤ سنة</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--cyan)"></div>النوع: مراجعة + عروض + احتفال تخرج</div>
+      <div class="meta-item"><div class="meta-dot" style="background:var(--rose)"></div>المكان: القاعة + الأولياء مدعوّون</div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">⏱ خطة حفل التخرج — ٩٠ دقيقة</div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot" style="border-color:var(--gold)"></div>
+        <div class="tl-time">٠–١٠ د</div>
+        <div class="tl-content">
+          <h3>🎊 الاستقبال والافتتاح</h3>
+          <p>استقبال الأطفال والأولياء — كل طفل يحضر مشروعه الختامي (لوحة المجرة، بدلة الفضاء، أي عمل من الحصص). يُعلَّق كل شيء على الجدران كمعرض.</p>
+          <ul>
+            <li>تشغيل موسيقى هادئة وصور فضاء على شاشة العرض</li>
+            <li>المدرّب يرحّب ويُقدّم ملخصاً مؤثّراً للرحلة الكاملة</li>
+            <li>عرض صورة جماعية من أول حصة مقارنةً باليوم</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot green"></div>
+        <div class="tl-time green">١٠–٣٠ د</div>
+        <div class="tl-content">
+          <h3>📚 المراجعة الكبرى — رحلة في ١٢ حصة</h3>
+          <p>مراجعة سريعة لكل حصة بسؤال واحد — الأطفال يجيبون من الذاكرة والمدرّب يُكمل ويُبهج.</p>
+          <ul>
+            <li>كل حصة = ٩٠ ثانية (سؤال + إجابة + تعليق ممتع)</li>
+            <li>الأطفال يتنافسون على الإجابة الأسرع</li>
+            <li>المدرّب يُشير إلى المشاريع المعلّقة كلما ذُكرت الحصة</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot rose"></div>
+        <div class="tl-time rose">٣٠–٥٠ د</div>
+        <div class="tl-content">
+          <h3>🎤 عروض المشاريع — كل فلكي يُقدّم</h3>
+          <p>كل طفل لديه دقيقتان يشرح فيهما مشروعه المفضّل من البرنامج أمام الأولياء والزملاء.</p>
+          <ul>
+            <li>يُمسك بعمله ويُجيب على سؤال واحد من الجمهور</li>
+            <li>تصفيق وتشجيع بعد كل عرض</li>
+            <li>المدرّب يُضيف ملاحظة إيجابية خاصة لكل طفل</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot cyan"></div>
+        <div class="tl-time cyan">٥٠–٦٥ د</div>
+        <div class="tl-content">
+          <h3>🏆 المسابقة الختامية — من هو الفلكي الأعظم؟</h3>
+          <p>مسابقة سريعة ٥ جولات — أسئلة من كل الحصص، الفائز يحصل على لقب "الفلكي الأعظم" هذا الموسم.</p>
+          <ul>
+            <li>٣ مجموعات، كل جولة سؤال واحد + سؤال سرعة</li>
+            <li>الأسئلة تُعرض على الشاشة — من يرفع يده أولاً</li>
+            <li>جائزة رمزية للفائز (شهادة مميزة أو قلم فضائي)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot violet"></div>
+        <div class="tl-time violet">٦٥–٩٠ د</div>
+        <div class="tl-content">
+          <h3>🎓 حفل توزيع الشهادات</h3>
+          <p>اللحظة الأهم — كل فلكي يُستدعى بالاسم ويتسلّم شهادته من يد المدرّب أمام الجميع.</p>
+          <ul>
+            <li>المدرّب يقول جملة خاصة لكل طفل عند تسليم الشهادة</li>
+            <li>تصوير فردي وجماعي مع الشهادة</li>
+            <li>كلمة ختام مؤثّرة: "الرحلة لم تنتهِ — بل بدأت للتو"</li>
+            <li>تشغيل أغنية أو موسيقى احتفالية + شاشة بأسماء الجميع</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REVIEW CARDS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">📚 المراجعة الكاملة — سؤال واحد من كل حصة</div>
+    <div class="review-grid" id="review-grid"></div>
+  </section>
+
+  <!-- QUIZ SECTION -->
+  <div class="quiz-box">
+    <div class="quiz-header">
+      <div class="quiz-icon">🏆</div>
+      <div>
+        <div class="quiz-title">المسابقة الختامية — من هو الفلكي الأعظم؟</div>
+        <div class="quiz-subtitle">٥ جولات تنافسية تغطي كل مواضيع البرنامج. كل جولة لها نقاط دقة + نقطة سرعة.</div>
+      </div>
+    </div>
+    <div class="quiz-rounds" id="quiz-rounds"></div>
+    <div class="hl-gold">
+      🎮 <strong>قواعد المسابقة:</strong> كل مجموعة (٣–٤ أطفال) تختار ناطقاً. المدرّب يقرأ السؤال ببطء مرة واحدة. أول مجموعة ترفع يدها تُجيب. الإجابة الصحيحة = ٣ نقاط، الخاطئة = ٠ والسؤال ينتقل لمجموعة أخرى. في سؤال السرعة: أول إجابة فردية صحيحة = نقطتان.
+    </div>
+  </div>
+
+  <!-- PROJECTS EXHIBITION -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🎨 معرض المشاريع — ما أنجزناه عبر ١٢ حصة</div>
+    <div class="projects-box">
+
+      <div class="pb-header">
+        <div class="pb-badge">معرض ختامي</div>
+        <div class="pb-title">🌌 مشاريع الفلكيين الصغار</div>
+      </div>
+      <p class="pb-subtitle">
+        هذه ليست مجرد أعمال يدوية — كل واحدة منها تعكس معرفة حقيقية اكتسبها الطفل. حين يشرح الطفل لوالديه ما رسمه أو صنعه — يُثبّت فهمه للأبد.
+      </p>
+
+      <div class="showcase-grid" id="showcase-grid"></div>
+
+      <ol class="steps-list">
+        <div class="step-item">
+          <div class="step-num">١</div>
+          <div class="step-content">
+            <h4>🎨 تجهيز المعرض قبل وصول الأولياء</h4>
+            <p>يُعلَّق كل مشروع على الجدار مع بطاقة تحمل اسم الطفل وعنوان المشروع. يُرتَّب بحسب تسلسل الحصص. الأطفال يقفون بجانب أعمالهم لاستقبال الأولياء.</p>
+            <div class="step-tip">✨ إضافة جميلة: اطبع صورة صغيرة من المفهوم العلمي بجانب كل مشروع — كرسم مذنب حقيقي بجانب نموذج المذنب الجليدي.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٢</div>
+          <div class="step-content">
+            <h4>🎤 عرض كل طفل لمشروعه (دقيقتان)</h4>
+            <p>يقف الطفل أمام الجمهور ويُقدّم مشروعه بثقة: "أنا صنعت..." و"هذا يُمثّل..." و"تعلّمت منه أن..." ثم يُجيب على سؤال واحد من الأولياء أو المدرّب.</p>
+            <div class="step-tip">💬 للأطفال الخجولين: يمكن العرض بجانب صديق أو أمام مجموعة صغيرة فقط — المهم المشاركة بأي شكل.</div>
+          </div>
+        </div>
+
+        <div class="step-item">
+          <div class="step-num">٣</div>
+          <div class="step-content">
+            <h4>🏅 تصويت الجمهور — المشروع الأجمل والأدق</h4>
+            <p>كل ولي يُعطى ملصقة ذهبية صغيرة يضعها على المشروع الذي أعجبه أكثر. المدرّب يُعلن في النهاية: "جائزة الجمهور" لصاحب أكثر الملصقات.</p>
+          </div>
+        </div>
+      </ol>
+
+    </div>
+  </section>
+
+  <!-- CERTIFICATE -->
+  <section class="cert-section">
+    <div class="sec-title">🎓 شهادة الفلكي الصغير — نموذج للطباعة</div>
+
+    <div class="cert-preview" id="cert-preview">
+      <div class="cert-stars-bg" id="cert-stars-bg"></div>
+
+      <!-- Corner ornaments -->
+      <svg style="position:absolute;top:18px;right:18px;width:40px;height:40px;opacity:.4" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 L40,0 L40,10 M0,0 L0,40 L10,40" fill="none" stroke="#f5c842" stroke-width="2"/>
+      </svg>
+      <svg style="position:absolute;top:18px;left:18px;width:40px;height:40px;opacity:.4" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40,0 L0,0 L0,10 M40,0 L40,40 L30,40" fill="none" stroke="#f5c842" stroke-width="2"/>
+      </svg>
+      <svg style="position:absolute;bottom:18px;right:18px;width:40px;height:40px;opacity:.4" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,40 L40,40 L40,30 M0,40 L0,0 L10,0" fill="none" stroke="#f5c842" stroke-width="2"/>
+      </svg>
+      <svg style="position:absolute;bottom:18px;left:18px;width:40px;height:40px;opacity:.4" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
+        <path d="M40,40 L0,40 L0,30 M40,40 L40,0 L30,0" fill="none" stroke="#f5c842" stroke-width="2"/>
+      </svg>
+
+      <span class="cert-logo">🔭</span>
+      <div class="cert-club">نادي آفاق جرجرة للفلك</div>
+      <div class="cert-org">برنامج الفلك للناشئين — الموسم الأول</div>
+
+      <div class="cert-title">شهادة الفلكي الصغير</div>
+      <div class="cert-subtitle">Certificate of Young Astronomer</div>
+
+      <div>
+        <div class="cert-name-line" id="cert-name">اسم المتدرب</div>
+      </div>
+      <div class="cert-name-label">الفلكي / الفلكية</div>
+
+      <div class="cert-body">
+        أتمّ بنجاح جميع حصص برنامج الفلك للناشئين المكوّن من ١٢ حصة، وأظهر فضولاً علمياً وتفوقاً في استيعاب مفاهيم علم الفلك ومشاركة نشطة في الأنشطة والتجارب.
+      </div>
+
+      <div class="cert-badge-row">
+        <div class="cert-badge">🌌 الكون والانفجار الكبير</div>
+        <div class="cert-badge">☀️ الشمس والكواكب</div>
+        <div class="cert-badge">🌙 القمر والأطوار</div>
+        <div class="cert-badge">⭐ النجوم والمجموعات</div>
+        <div class="cert-badge">🔭 الرصد الحقيقي</div>
+      </div>
+
+      <div class="cert-footer">
+        <div class="cert-sig">
+          <div class="cert-sig-line"></div>
+          <div class="cert-sig-name">مدرب البرنامج</div>
+        </div>
+        <div class="cert-seal">🌟</div>
+        <div style="text-align:center">
+          <div class="cert-date-line"></div>
+          <div class="cert-date" id="cert-date-display">التاريخ: ____________</div>
+        </div>
+      </div>
+    </div>
+
+    <button class="cert-print-btn" onclick="window.print()">🖨️ طباعة الشهادة</button>
+  </section>
+
+  <!-- FINAL MESSAGE -->
+  <div class="final-box">
+    <span class="final-icon">🌠</span>
+    <div class="final-title">الرحلة لم تنتهِ — بل بدأت للتو</div>
+    <p class="final-text">
+      قبل ١٢ حصة، نظرتم للسماء ورأيتم نجوماً. الآن تنظرون وترون — مجرات وكواكب وأذرع حلزونية وثقوباً سوداء وأسراراً لا تزال تنتظر من يكشفها. أنتم جيل الفلكيين القادمين — وجرجرة بسمائها الجبلية الصافية تنتظر أعيناً فضولية مثل أعيونكم.
+    </p>
+    <div class="quote-box">
+      "في مكانٍ ما، شيء عجيب ينتظر أن يُعرَف"
+      <div class="quote-attr">— كارل ساغان، عالم فلك وكاتب</div>
+    </div>
+  </div>
+
+  <!-- FINAL QA GRID -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">💬 أسئلة المراجعة الشاملة</div>
+    <div class="final-qa" id="final-qa"></div>
+  </section>
+
+  <!-- TOOLS -->
+  <section style="margin-bottom:56px">
+    <div class="sec-title">🤖 أدوات الذكاء الاصطناعي للحفل</div>
+    <div class="tools-row">
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🎨 Canva AI</div>
+          <div class="t-use">تصميم الشهادات والبوسترات الاحتفالية بالأسماء قابلة للطباعة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🔵 Google Gemini</div>
+          <div class="t-use">توليد أسئلة المسابقة الختامية بمستويات مختلفة وتعليقات مرحة</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">🟣 Claude</div>
+          <div class="t-use">كتابة جملة مخصصة لكل طفل بناء على أبرز ما أظهره من تميّز</div>
+        </div>
+      </div>
+      <div class="tool-pill">
+        <div>
+          <div class="t-name">📓 NotebookLM</div>
+          <div class="t-use">إنتاج بودكاست ختامي يلخّص رحلة البرنامج بصوت الأطفال أنفسهم</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-block" style="border-color:rgba(245,200,66,.2)">
+      <h3 style="color:var(--gold)"><span class="icon">✨</span> برومبت جاهز للاستخدام</h3>
+      <p style="margin-bottom:16px">لتوليد جملة تخصيصية لكل طفل عند تسليم الشهادة:</p>
+      <div class="prompt-box" id="ready-prompt">أنت مدرّب فلك متحمس وملهِم يُودّع مجموعته في نهاية برنامج من ١٢ حصة.
+
+لكل طفل في القائمة أدناه، اكتب جملة تخصيصية دافئة ومُلهِمة (٢٠–٣٠ كلمة) بالعربية تُلقى بصوت عالٍ عند تسليم الشهادة.
+
+كل جملة يجب أن:
+- تذكر الطفل بالاسم
+- تُشير لشيء تميّز به (فضول، تجربة، سؤال ذكي، مشروع مميز)
+- تُطلق حلمه الفلكي بنبرة مُلهِمة
+- تنتهي بجملة عن المستقبل
+
+قائمة الأطفال:
+[أضف أسماء الأطفال هنا مع ملاحظة مميزة عن كل منهم]
+
+الأسلوب: حار، فخور، مُحفّز — كالمدرّب الذي يعرف كل طفل جيداً.</div>
+      <button onclick="copyPrompt()" class="copy-btn" id="copy-btn">📋 نسخ البرومبت</button>
+    </div>
+  </section>
+
+  <!-- NAV -->
+  <div class="print-bar">
+    <button class="nav-btn" onclick="window.print()" style="background:rgba(245,200,66,.14);border-color:rgba(245,200,66,.35);color:var(--gold)">🖨️ طباعة الشهادة</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="window.location.href='session-11-almajarrra-darb-altabana.html'">← الحصة الحادية عشرة</button>
+    <button class="nav-btn primary" onclick="window.location.href='astronomy-kids-guide.html'">🏠 الدليل الرئيسي</button>
+    <button class="nav-btn" style="color:var(--gold);border-color:rgba(245,200,66,.3);background:rgba(245,200,66,.08)" onclick="launchConfetti()">🎊 احتفل!</button>
+  </div>
+
+</div>
+
+<script>
+/* ── STARS ── */
+(function(){
+  var c=document.getElementById('stars');
+  var cols=['#ffffff','#fff8d0','#ffd0a0','#e8e0ff','#a0d8ff','#ffd0e0'];
+  for(var i=0;i<220;i++){
+    var s=document.createElement('div');s.className='star';
+    var sz=Math.random()*2.5+.2;
+    s.style.cssText=['width:'+sz+'px','height:'+sz+'px',
+      'background:'+cols[Math.floor(Math.random()*cols.length)],
+      'top:'+Math.random()*100+'%','left:'+Math.random()*100+'%',
+      '--dur:'+(1.8+Math.random()*5)+'s','--delay:'+(-Math.random()*6)+'s',
+      '--min-op:'+(0.06+Math.random()*.42)].join(';');
+    c.appendChild(s);
+  }
+})();
+
+/* ── HERO STARS ROW ── */
+(function(){
+  var row=document.getElementById('star-row');
+  for(var i=0;i<12;i++){
+    var s=document.createElement('span');
+    s.className='hero-star';
+    s.textContent='★';
+    s.style.animationDelay=(i*0.08)+'s';
+    row.appendChild(s);
+  }
+})();
+
+/* ── CERT STARS BG ── */
+(function(){
+  var bg=document.getElementById('cert-stars-bg');
+  for(var i=0;i<40;i++){
+    var s=document.createElement('div');
+    s.style.cssText='position:absolute;width:'+(Math.random()*2+.5)+'px;height:'+(Math.random()*2+.5)+'px;'+
+      'background:rgba(255,255,255,'+(0.1+Math.random()*.3)+');border-radius:50%;'+
+      'top:'+Math.random()*100+'%;left:'+Math.random()*100+'%';
+    bg.appendChild(s);
+  }
+})();
+
+/* ── SET CERT DATE ── */
+(function(){
+  var months=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  var now=new Date();
+  document.getElementById('cert-date-display').textContent='التاريخ: '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+})();
+
+/* ── REVIEW GRID ── */
+var sessions=[
+  {num:'الحصة ١',title:'مرحباً أيها الكون!',color:'#a0c8ff',q:'ما الفرق بين النجم والكوكب؟',q2:'كم عمر الكون؟',q3:'ما معنى السنة الضوئية؟'},
+  {num:'الحصة ٢',title:'شمسنا الرائعة',color:'#ffd090',q:'ما اسم طبقات الشمس الأربع؟',q2:'كم دقيقة يستغرق ضوء الشمس لبلوغ الأرض؟',q3:'ماذا يحدث في نواة الشمس؟'},
+  {num:'الحصة ٣',title:'جيراننا الكواكب',color:'#98d4a0',q:'رتّب الكواكب من الأقرب للشمس.',q2:'ما أكبر كوكب في المجموعة الشمسية؟',q3:'ما الفرق بين الكوكب الصخري والغازي؟'},
+  {num:'الحصة ٤',title:'القمر رفيق الليل',color:'#c8d4e8',q:'لماذا يتغير شكل القمر؟',q2:'من أول إنسان مشى على القمر؟',q3:'كيف نحدد الشمال بالنجم القطبي؟'},
+  {num:'الحصة ٥',title:'النجوم لا تُعدّ',color:'#ffc0d0',q:'أيها أشد حرارة: النجم الأزرق أم الأحمر؟',q2:'ما السنة الضوئية؟',q3:'ما الفرق بين القزم الأبيض والعملاق الأحمر؟'},
+  {num:'الحصة ٦',title:'المجموعات النجمية',color:'#c4b5fd',q:'كيف تجد النجم القطبي بالدبّ الأكبر؟',q2:'لماذا لا يظهر الجبّار والعقرب معاً؟',q3:'أعطِ اسماً عربياً لنجم مشهور.'},
+  {num:'الحصة ٧',title:'الكسوف والخسوف',color:'#ffd0a0',q:'ما الفرق بين الكسوف والخسوف؟',q2:'لماذا يتحوّل القمر للأحمر؟',q3:'لماذا لا يحدث الكسوف كل شهر؟'},
+  {num:'الحصة ٨',title:'المذنبات والنيازك',color:'#a0e8d8',q:'ما الفرق بين الشهاب والنيزكة؟',q2:'لماذا يملك المذنب ذيلاً؟',q3:'من أين تأتي المذنبات؟'},
+  {num:'الحصة ٩',title:'رواد الفضاء',color:'#b0d0ff',q:'كم عدد الوكالات التي تُشغّل المحطة الدولية؟',q2:'لماذا يمارس الرواد التمرين يومياً؟',q3:'ما الوظيفة الأساسية لبدلة الفضاء؟'},
+  {num:'الحصة ١٠',title:'التلسكوب',color:'#d0f0e0',q:'ما أهم عامل في التلسكوب: الفتحة أم التكبير؟',q2:'لماذا ننتظر ٢٠ دقيقة قبل الرصد؟',q3:'ما الفرق بين الكاسر والعاكس؟'},
+  {num:'الحصة ١١',title:'المجرة درب التبانة',color:'#e0d0ff',q:'أين موضع شمسنا في المجرة؟',q2:'لماذا نرى درب التبانة كشريط؟',q3:'ما الذي يوجد في مركز المجرة؟'},
+];
+
+var rg=document.getElementById('review-grid');
+sessions.forEach(function(s){
+  var d=document.createElement('div');d.className='review-card';
+  d.style.borderColor=s.color+'44';
+  d.innerHTML='<div class="rc-num" style="color:'+s.color+'">'+s.num+'</div>'+
+    '<div class="rc-title">'+s.title+'</div>'+
+    '<ul class="rc-questions">'+
+    '<li>'+s.q+'</li>'+
+    '<li>'+s.q2+'</li>'+
+    '<li>'+s.q3+'</li>'+
+    '</ul>';
+  rg.appendChild(d);
+});
+
+/* ── QUIZ ROUNDS ── */
+var quizRounds=[
+  {title:'الأجسام الكونية',desc:'أسئلة عن الشمس والقمر والكواكب والنجوم',pts:'٣ نقاط / سؤال'},
+  {title:'الظواهر الفلكية',desc:'الكسوف والخسوف والمذنبات والشهب',pts:'٣ نقاط / سؤال'},
+  {title:'الاستكشاف البشري',desc:'محطة الفضاء والتلسكوب ورواد الفضاء',pts:'٣ نقاط / سؤال'},
+  {title:'الكون الواسع',desc:'المجرات والأذرع الحلزونية والمسافات الكونية',pts:'٣ نقاط / سؤال'},
+  {title:'جولة السرعة ⚡',desc:'١٠ أسئلة سريعة — من يجيب أولاً يفوز',pts:'٢ نقطة / سؤال'},
+];
+var qr=document.getElementById('quiz-rounds');
+quizRounds.forEach(function(r,i){
+  var d=document.createElement('div');d.className='qround';
+  d.innerHTML='<div class="qr-num">ROUND '+(i+1)+'</div>'+
+    '<div class="qr-title">'+r.title+'</div>'+
+    '<div class="qr-desc">'+r.desc+'</div>'+
+    '<div class="qr-pts">'+r.pts+'</div>';
+  qr.appendChild(d);
+});
+
+/* ── SHOWCASE GRID ── */
+var projects=[
+  {emoji:'🗺️',title:'خريطة الكون',session:'الحصة ١',desc:'رسم خريطة الكون بالورق الملوّن'},
+  {emoji:'☀️',title:'تجربة الشمس',session:'الحصة ٢',desc:'محاكاة أشعة الشمس بالمصباح والكرة'},
+  {emoji:'🪐',title:'نموذج الكواكب',session:'الحصة ٣',desc:'المجموعة الشمسية بالعجين الملوّن'},
+  {emoji:'📓',title:'سجل رصد القمر',session:'الحصة ٤',desc:'تتبع القمر لأسبوع ورسم أطواره'},
+  {emoji:'🃏',title:'بطاقات النجوم',session:'الحصة ٥',desc:'لعبة تصنيف النجوم حسب اللون'},
+  {emoji:'🗺️',title:'خارطة النجوم',session:'الحصة ٦',desc:'الأبراج بالشاشة السوداء والنقاط الفضية'},
+  {emoji:'🌑',title:'مخطط الكسوف',session:'الحصة ٧',desc:'محاكاة الكسوف بالكرات والمصباح'},
+  {emoji:'❄️',title:'نموذج المذنب',session:'الحصة ٨',desc:'مذنب بالثلج الجاف (محاكاة)'},
+  {emoji:'👔',title:'بدلة الفضاء',session:'الحصة ٩',desc:'تصميم بدلة فضاء على الورق'},
+  {emoji:'📋',title:'سجل الرصد الليلي',session:'الحصة ١٠',desc:'ملاحظات جلسة التلسكوب الحقيقية'},
+  {emoji:'🌌',title:'لوحة المجرة',session:'الحصة ١١',desc:'رسم المجرة بالملح والغراء'},
+];
+var sg=document.getElementById('showcase-grid');
+projects.forEach(function(p){
+  var d=document.createElement('div');d.className='showcase-card';
+  d.innerHTML='<span class="sc-emoji">'+p.emoji+'</span>'+
+    '<div class="sc-title">'+p.title+'</div>'+
+    '<div class="sc-session">'+p.session+'</div>'+
+    '<div class="sc-desc">'+p.desc+'</div>';
+  sg.appendChild(d);
+});
+
+/* ── FINAL QA ── */
+var finalQA=[
+  {session:'شاملة',q:'اذكر ٥ حقائق مدهشة تعلّمتها في هذا البرنامج.',hint:'إجابات حرة — لا إجابة خاطئة!'},
+  {session:'الحصة ١',q:'كيف بدأ الكون؟ وكم عمره؟',hint:'الانفجار الكبير — ١٣.٨ مليار سنة'},
+  {session:'الحصة ٢',q:'اشرح كيف تُولّد الشمس طاقتها.',hint:'الاندماج النووي في القلب'},
+  {session:'الحصة ٣',q:'ما الكوكب الأكبر وكم مرة يفوق الأرض حجماً؟',hint:'المشتري — ١,٣٠٠ مرة'},
+  {session:'الحصة ٤',q:'ما عدد شروق الشمس التي يراها رائد الفضاء يومياً؟',hint:'١٦ مرة في اليوم الواحد'},
+  {session:'الحصة ٥',q:'لماذا الضوء الأزرق القادم من نجم يعني أنه أشد حرارة؟',hint:'قانون وين: اللون يكشف الحرارة'},
+  {session:'الحصة ٦',q:'كيف تعثر على الشمال بدون بوصلة ليلاً؟',hint:'الدبّ الأكبر ← النجم القطبي'},
+  {session:'الحصة ٧',q:'ماذا يمكن رؤيته خلال الكسوف الكلي للشمس فقط؟',hint:'الهالة الشمسية (الكورونا)'},
+  {session:'الحصة ٨',q:'لماذا تتوهّج الشهب في السماء؟',hint:'احتكاك الهواء لا حرارة الجسم'},
+  {session:'الحصة ٩',q:'ما الوقت الذي يحتاجه جسم رائد الفضاء للتكيّف بعد العودة؟',hint:'أشهر للعضلات والعظام'},
+  {session:'الحصة ١٠',q:'ما الفرق بين فتحة التلسكوب وتكبيره؟ أيهما أهم؟',hint:'الفتحة — تجمع الضوء'},
+  {session:'الحصة ١١',q:'كم سنة ضوئية تبعد شمسنا عن مركز مجرتنا؟',hint:'٢٦,٠٠٠ سنة ضوئية'},
+];
+var fqa=document.getElementById('final-qa');
+finalQA.forEach(function(q){
+  var d=document.createElement('div');d.className='fqa-card';
+  d.innerHTML='<div class="fqa-session">'+q.session+'</div>'+
+    '<div class="fqa-q">'+q.q+'</div>'+
+    '<div class="fqa-hint">💡 '+q.hint+'</div>';
+  fqa.appendChild(d);
+});
+
+/* ── CONFETTI ── */
+function launchConfetti(){
+  var colors=['#f5c842','#34d399','#f472b6','#60a5fa','#a78bfa','#fb923c'];
+  for(var i=0;i<80;i++){
+    var el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText='left:'+Math.random()*100+'vw;'+
+      'background:'+colors[Math.floor(Math.random()*colors.length)]+';'+
+      'border-radius:'+(Math.random()>.5?'50%':'2px')+';'+
+      'animation-duration:'+(2+Math.random()*3)+'s;'+
+      'animation-delay:'+Math.random()*1+'s;'+
+      'width:'+(6+Math.random()*6)+'px;height:'+(6+Math.random()*6)+'px';
+    document.body.appendChild(el);
+    setTimeout(function(e){document.body.removeChild(e);},(5000),el);
+  }
+}
+
+/* ── COPY PROMPT ── */
+function copyPrompt(){
+  var t=document.getElementById('ready-prompt').textContent;
+  navigator.clipboard.writeText(t).then(function(){
+    var b=document.getElementById('copy-btn');b.textContent='✅ تم النسخ!';
+    setTimeout(function(){b.textContent='📋 نسخ البرومبت';},2500);
+  });
+}
+</script>
+</body>
+</html>
