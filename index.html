@@ -698,7 +698,7 @@ sessions.forEach(function(s) {
   card.className = 'session-card ' + (hasFile ? 'available' : 'soon');
   if (hasFile) {
     card.href = sessionFiles[s.num];
-    card.target = '_self';
+    card.target = '_blank';
   }
 
   card.innerHTML =
